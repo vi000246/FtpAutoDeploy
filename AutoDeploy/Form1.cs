@@ -26,7 +26,13 @@ namespace AutoDeploy
         // 啟動按鈕Click
         private void btnStart_Click(object sender, EventArgs e)
         {
-
+            //取得檔案listBox中的所有檔案
+            foreach (string path in lbFileList.Items)
+            {
+                var files = new file().getAllFiles(path);
+            }
+            
+            
         }
 
         #region ========================檔案清單相關===============================
@@ -67,6 +73,7 @@ namespace AutoDeploy
 
         #endregion
         #region Deploy 群組相關
+        //新增Deploy群組
         private void btnAdd_Click(object sender, EventArgs e)
         {
             string name = dialog.ShowAddGroup();
@@ -74,5 +81,12 @@ namespace AutoDeploy
                 lbDeployGroup.Items.Add("["+DateTime.Now.ToString("MM/dd")+"]"+name);
         }
         #endregion
+
+        //點擊Menu的伺服器設定時
+        private void deploy伺服器設定ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form FormServer = new FormServer();
+            FormServer.Show();
+        }
     }
 }
