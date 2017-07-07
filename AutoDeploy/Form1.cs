@@ -62,10 +62,17 @@ namespace AutoDeploy
         {
             lbFileList.Items.Clear();
         }
+
+
+
         #endregion
-
-
-
-
+        #region Deploy 群組相關
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            string name = dialog.ShowAddGroup();
+            if(!string.IsNullOrEmpty(name))
+                lbDeployGroup.Items.Add("["+DateTime.Now.ToString("MM/dd")+"]"+name);
+        }
+        #endregion
     }
 }

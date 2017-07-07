@@ -39,13 +39,13 @@
             this.lbProgress = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnClear = new System.Windows.Forms.Button();
             this.deploy伺服器設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbDeployGroup = new System.Windows.Forms.ListBox();
             this.gbUploadList.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -100,10 +100,10 @@
             // 
             this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.btnCopy);
-            this.groupBox1.Controls.Add(this.listBox1);
+            this.groupBox1.Controls.Add(this.lbDeployGroup);
             this.groupBox1.Location = new System.Drawing.Point(12, 33);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(189, 430);
+            this.groupBox1.Size = new System.Drawing.Size(206, 430);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deploy群組";
@@ -154,6 +154,7 @@
             this.btnAdd.TabIndex = 9;
             this.btnAdd.Text = "新增";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnCopy
             // 
@@ -163,15 +164,6 @@
             this.btnCopy.TabIndex = 10;
             this.btnCopy.Text = "複製";
             this.btnCopy.UseVisualStyleBackColor = true;
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(7, 22);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(172, 352);
-            this.listBox1.TabIndex = 0;
             // 
             // menuStrip1
             // 
@@ -202,7 +194,7 @@
             // test2ToolStripMenuItem
             // 
             this.test2ToolStripMenuItem.Name = "test2ToolStripMenuItem";
-            this.test2ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.test2ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.test2ToolStripMenuItem.Text = "說明";
             // 
             // btnClear
@@ -220,6 +212,15 @@
             this.deploy伺服器設定ToolStripMenuItem.Name = "deploy伺服器設定ToolStripMenuItem";
             this.deploy伺服器設定ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.deploy伺服器設定ToolStripMenuItem.Text = "Deploy伺服器設定";
+            // 
+            // lbDeployGroup
+            // 
+            this.lbDeployGroup.FormattingEnabled = true;
+            this.lbDeployGroup.ItemHeight = 12;
+            this.lbDeployGroup.Location = new System.Drawing.Point(7, 22);
+            this.lbDeployGroup.Name = "lbDeployGroup";
+            this.lbDeployGroup.Size = new System.Drawing.Size(193, 352);
+            this.lbDeployGroup.TabIndex = 0;
             // 
             // Form1
             // 
@@ -258,13 +259,13 @@
         private System.Windows.Forms.Label lbProgress;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnCopy;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem test2ToolStripMenuItem;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.ToolStripMenuItem deploy伺服器設定ToolStripMenuItem;
+        private System.Windows.Forms.ListBox lbDeployGroup;
     }
 }
 
