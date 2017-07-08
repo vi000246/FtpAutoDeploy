@@ -125,12 +125,12 @@ namespace AutoDeploy
         private void gridList_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             model.FTP_D item = new model.FTP_D();
-            item.ID = (int)gridList.Rows[e.RowIndex].Cells[0].Value;
-            item.ClientIP = (string)gridList.Rows[e.RowIndex].Cells[1].Value;
-            item.UserName = (string)gridList.Rows[e.RowIndex].Cells[2].Value;
-            item.Password = (string)gridList.Rows[e.RowIndex].Cells[3].Value;
+            item.ID = (int)gridList.Rows[e.RowIndex].Cells[(int)columnIndex.FTP_D.ID].Value;
+            item.ClientIP = (string)gridList.Rows[e.RowIndex].Cells[(int)columnIndex.FTP_D.ClientIP].Value;
+            item.UserName = (string)gridList.Rows[e.RowIndex].Cells[(int)columnIndex.FTP_D.UserName].Value;
+            item.Password = (string)gridList.Rows[e.RowIndex].Cells[(int)columnIndex.FTP_D.Password].Value;
             db.UpdateDataToDB(item);
-            ShowDetailData();
+            this.BeginInvoke(new MethodInvoker(ShowDetailData));
         }
         //重整detail view的資料 依據選擇的FTP群組
         private void ShowDetailData() {

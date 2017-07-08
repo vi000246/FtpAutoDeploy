@@ -30,4 +30,15 @@ namespace AutoDeploy
 
         }
     }
+    /// <summary>
+    /// 用來設置GridView的Clumn Index 這樣改變排序時就不用改程式
+    /// </summary>
+    public class columnIndex {
+        public enum FTP_D {
+            ID,
+            ClientIP,
+            UserName,
+            Password
+        }
+    }
 }
