@@ -41,8 +41,10 @@ namespace AutoDeploy
             {
                 if (MessageBox.Show("確定刪除此FTP群組及底下的FTP列表?", "關閉", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    new ListBox().deleteListBoxItem<model.FTP_M>(lbGroup, db.DeleteDataFromDB<model.FTP_M>);
+                    new ListBox().deleteListBoxItem<model.FTP_M>(lbGroup, db.DeleteFtpMasterAndDetail);
+                    //重新整理master和detail
                     ShowGroupData();
+                    ShowDetailData();
                 }
 
             }

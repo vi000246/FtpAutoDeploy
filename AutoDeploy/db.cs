@@ -43,6 +43,19 @@ namespace AutoDeploy
             return newId;
         }
 
+        //刪除FTP的主表和明細表
+        public void DeleteFtpMasterAndDetail(model.FTP_M item) {
+            //刪除主表的資料
+            DeleteDataFromDB(item);
+            //刪除明細表的資料  where GroupID=主表ID的資料
+            using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
+            {
+                cnn.Open();
+                cnn.DeleteList<model.FTP_D>(new { GroupID = item.ID });
+            }
+
+        }
+
         /// <summary>
         /// 更新資料到DB 傳進資料的class instance 用simpleCRUD更新資料
         /// </summary>
