@@ -58,5 +58,65 @@ namespace AutoDeploy
 
             return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : "";
         }
+        /// <summary>
+        /// FTP Detail的彈出視窗
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public static model.FTP_D ShowFtpDetailDialog(string title="新增FTP伺服器") {
+
+            model.FTP_D item = new model.FTP_D();
+
+            Form prompt = new Form()
+            {
+                Width = 270,
+                Height = 200,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = title,
+                StartPosition = FormStartPosition.CenterParent
+            };
+            Label lbIP = new Label() { Left = 10, Top = 20,Width=70, Text = "FTP IP" };
+            TextBox tbIP = new TextBox() { Left = 80, Top = 20, Width = 150 };
+            Label lbName = new Label() { Left = 10, Top = 50, Width = 70, Text = "使用者名稱" };
+            TextBox tbName = new TextBox() { Left = 80, Top = 50, Width = 150 };
+            Label lbPassword = new Label() { Left = 10, Top = 80, Width = 70, Text = "密碼" };
+            TextBox tbPassword = new TextBox() { Left = 80, Top = 80, Width = 150 };
+            Button confirmation = new Button() { Text = "確定", Left = 100, Width = 50, Top = 120, DialogResult = DialogResult.OK };
+            Button cancelation = new Button() { Text = "取消", Left = 160, Width = 50, Top = 120, DialogResult = DialogResult.Cancel };
+            confirmation.Click += (sender, e) => {
+                prompt.Close();
+            };
+            cancelation.Click += (sender, e) => {
+                prompt.Close();
+            };
+            prompt.FormClosing += (sender, e) => {
+                if (prompt.DialogResult == DialogResult.OK)
+                {
+                    if (string.IsNullOrEmpty(tbIP.Text)|| string.IsNullOrEmpty(tbName.Text)|| string.IsNullOrEmpty(tbPassword.Text))
+                    {
+                        MessageBox.Show("欄位不得為空");
+                        e.Cancel = true;
+                    }
+                    item.ClientIP = tbIP.Text;
+                    item.UserName = tbName.Text;
+                    item.Password = tbPassword.Text;
+                }
+            };
+
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(cancelation);
+            prompt.Controls.Add(lbIP);
+            prompt.Controls.Add(tbIP);
+            prompt.Controls.Add(lbName);
+            prompt.Controls.Add(tbName);
+            prompt.Controls.Add(lbPassword);
+            prompt.Controls.Add(tbPassword);
+            prompt.AcceptButton = confirmation;
+            prompt.CancelButton = cancelation;
+
+
+
+            return prompt.ShowDialog() == DialogResult.OK ? item : null;
+        }
     }
 }

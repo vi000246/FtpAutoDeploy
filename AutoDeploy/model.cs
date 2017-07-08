@@ -17,13 +17,14 @@ namespace AutoDeploy
             public int ID { get; }
             public string Name { get; set; }
         }
-
+        [Table("FTP_D")]
         public class FTP_D {
+            [Key]
             public int ID { get; }
             public string ClientIP { get; set; }
             public string UserName { get; set; }
             public string Password { get; set; }
-            public int GroudID { get; set; }
+            public int GroupID { get; set; }
 
 
         }

@@ -29,6 +29,19 @@ namespace AutoDeploy
             }
             return newId;
         }
+        //新增FTP列表
+        public int? AddFtpDetail(model.FTP_D item)
+        {
+            int? newId = 0;
+            using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
+            {
+                cnn.Open();
+                var result = cnn.Execute(@"Insert into FTP_D (ClientIP,UserName,Password,GroupID) 
+                                            values(@ip,@name,@password,@groupid)",
+                    new { ip= item.ClientIP,name=item.UserName,password=item.Password,groupid=item.GroupID});
+            }
+            return newId;
+        }
 
         /// <summary>
         /// 更新資料到DB 傳進資料的class instance 用simpleCRUD更新資料
@@ -54,6 +67,23 @@ namespace AutoDeploy
             {
                 cnn.Open();
                 list = cnn.GetList<T>().ToList();
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// 依據where條件 從資料庫取得此class的資料
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="whereConditions">where條件 ex. new{Age=12}</param>
+        /// <returns></returns>
+        public List<T> GetDataFromDBByCondition<T>(object whereConditions)
+        {
+            List<T> list = new List<T>();
+            using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
+            {
+                cnn.Open();
+                list = cnn.GetList<T>(whereConditions).ToList<T>();
             }
             return list;
         }
