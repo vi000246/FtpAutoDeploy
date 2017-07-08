@@ -77,7 +77,7 @@ namespace AutoDeploy
         //新增Deploy群組
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string name = dialog.ShowAddGroup();
+            string name = dialog.ShowInputGroupNameForm();
             if(!string.IsNullOrEmpty(name))
                 lbDeployGroup.Items.Add("["+DateTime.Now.ToString("MM/dd")+"]"+name);
         }

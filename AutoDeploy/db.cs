@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Linq;
@@ -29,6 +30,19 @@ namespace AutoDeploy
             return newId;
         }
 
+        /// <summary>
+        /// 更新資料到DB 傳進資料的class instance 用simpleCRUD更新資料
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="item"></param>
+        public void UpdateDataToDB<T>(T item)
+        {
+            using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
+            {
+                cnn.Open();
+                (cnn as IDbConnection).Update(item);
+            }
+        }
         /// <summary>
         /// 從資料庫取得此class的所有資料
         /// </summary>

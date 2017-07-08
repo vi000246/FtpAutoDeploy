@@ -79,6 +79,7 @@
             this.lbGroup.Name = "lbGroup";
             this.lbGroup.Size = new System.Drawing.Size(334, 124);
             this.lbGroup.TabIndex = 1;
+            this.lbGroup.DoubleClick += new System.EventHandler(this.lbGroup_DoubleClick);
             this.lbGroup.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbGroup_KeyDown);
             // 
             // fTPMBindingSource

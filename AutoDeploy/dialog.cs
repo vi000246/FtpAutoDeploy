@@ -11,18 +11,22 @@ namespace AutoDeploy
 {
     public class dialog
     {
-        //新增Deploy群組的dialog
-        public static string ShowAddGroup()
+        /// <summary>
+        /// 顯示單個input box的dialog
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns>回傳input的名稱</returns>
+        public static string ShowInputGroupNameForm(string title = "新增群組",string message = "請輸入群組名稱")
         {
             Form prompt = new Form()
             {
                 Width = 220,
                 Height = 150,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
-                Text = "新增群組",
+                Text = title,
                 StartPosition = FormStartPosition.CenterParent
             };
-            Label textLabel = new Label() { Left = 30, Top = 20, Text = "請輸入群組名稱" };
+            Label textLabel = new Label() { Left = 30, Top = 20, Text = message };
             TextBox textBox = new TextBox() { Left = 30, Top = 50, Width = 150 };
             Button confirmation = new Button() { Text = "確定", Left = 70, Width = 50, Top = 80, DialogResult = DialogResult.OK };
             Button cancelation = new Button() { Text = "取消", Left = 130, Width = 50, Top = 80, DialogResult = DialogResult.Cancel };
