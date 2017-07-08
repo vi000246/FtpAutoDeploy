@@ -28,21 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnAddGroup = new System.Windows.Forms.Button();
+            this.lbGroup = new System.Windows.Forms.ListBox();
+            this.gridList = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnAddList = new System.Windows.Forms.Button();
+            this.dbDataSet = new AutoDeploy.dbDataSet();
+            this.fTPMBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fTP_MTableAdapter = new AutoDeploy.dbDataSetTableAdapters.FTP_MTableAdapter();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridList)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dbDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fTPMBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.listBox1);
+            this.groupBox1.Controls.Add(this.btnAddGroup);
+            this.groupBox1.Controls.Add(this.lbGroup);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(363, 189);
@@ -50,37 +56,43 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "FTP群組:";
             // 
-            // listBox1
+            // btnAddGroup
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(14, 27);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(334, 124);
-            this.listBox1.TabIndex = 1;
+            this.btnAddGroup.Location = new System.Drawing.Point(273, 157);
+            this.btnAddGroup.Name = "btnAddGroup";
+            this.btnAddGroup.Size = new System.Drawing.Size(75, 23);
+            this.btnAddGroup.TabIndex = 2;
+            this.btnAddGroup.Text = "新增";
+            this.btnAddGroup.UseVisualStyleBackColor = true;
+            this.btnAddGroup.Click += new System.EventHandler(this.btnAddGroup_Click);
             // 
-            // button1
+            // lbGroup
             // 
-            this.button1.Location = new System.Drawing.Point(273, 157);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "新增";
-            this.button1.UseVisualStyleBackColor = true;
+            this.lbGroup.DataBindings.Add(new System.Windows.Forms.Binding("SelectedIndex", this.fTPMBindingSource, "ID", true));
+            this.lbGroup.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.fTPMBindingSource, "ID", true));
+            this.lbGroup.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.fTPMBindingSource, "Name", true));
+            this.lbGroup.DataSource = this.fTPMBindingSource;
+            this.lbGroup.DisplayMember = "Name";
+            this.lbGroup.FormattingEnabled = true;
+            this.lbGroup.ItemHeight = 12;
+            this.lbGroup.Location = new System.Drawing.Point(14, 27);
+            this.lbGroup.Name = "lbGroup";
+            this.lbGroup.Size = new System.Drawing.Size(334, 124);
+            this.lbGroup.TabIndex = 1;
             // 
-            // dataGridView1
+            // gridList
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(23, 21);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(343, 135);
-            this.dataGridView1.TabIndex = 3;
+            this.gridList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridList.Location = new System.Drawing.Point(23, 21);
+            this.gridList.Name = "gridList";
+            this.gridList.RowTemplate.Height = 24;
+            this.gridList.Size = new System.Drawing.Size(343, 135);
+            this.gridList.TabIndex = 3;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.btnAddList);
+            this.groupBox2.Controls.Add(this.gridList);
             this.groupBox2.Location = new System.Drawing.Point(3, 207);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(372, 188);
@@ -88,14 +100,28 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "FTP列表";
             // 
-            // button2
+            // btnAddList
             // 
-            this.button2.Location = new System.Drawing.Point(282, 159);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "新增";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnAddList.Location = new System.Drawing.Point(282, 159);
+            this.btnAddList.Name = "btnAddList";
+            this.btnAddList.Size = new System.Drawing.Size(75, 23);
+            this.btnAddList.TabIndex = 4;
+            this.btnAddList.Text = "新增";
+            this.btnAddList.UseVisualStyleBackColor = true;
+            // 
+            // dbDataSet
+            // 
+            this.dbDataSet.DataSetName = "dbDataSet";
+            this.dbDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // fTPMBindingSource
+            // 
+            this.fTPMBindingSource.DataMember = "FTP_M";
+            this.fTPMBindingSource.DataSource = this.dbDataSet;
+            // 
+            // fTP_MTableAdapter
+            // 
+            this.fTP_MTableAdapter.ClearBeforeFill = true;
             // 
             // FormServer
             // 
@@ -106,9 +132,12 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "FormServer";
             this.Text = "FTP列表";
+            this.Load += new System.EventHandler(this.FormServer_Load);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridList)).EndInit();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dbDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fTPMBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -116,10 +145,13 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btnAddGroup;
+        private System.Windows.Forms.ListBox lbGroup;
+        private System.Windows.Forms.DataGridView gridList;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnAddList;
+        private dbDataSet dbDataSet;
+        private System.Windows.Forms.BindingSource fTPMBindingSource;
+        private dbDataSetTableAdapters.FTP_MTableAdapter fTP_MTableAdapter;
     }
 }
