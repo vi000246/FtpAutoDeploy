@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
 namespace AutoDeploy
@@ -101,11 +102,39 @@ namespace AutoDeploy
                 }
             }
         }
+        //按下delete鍵 刪除row
+        private void gridList_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (MessageBox.Show("確定刪除此筆資料?", "關閉", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    foreach (DataGridViewRow item in this.gridList.SelectedRows)
+                    {
+                        model.FTP_D obj = (model.FTP_D)item.DataBoundItem;
+                        db.DeleteDataFromDB(obj);
+                    }
+                    ShowDetailData();
+                }
 
+            }
+        }
+        //當編輯單元格時 存檔至資料庫
+        private void gridList_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            model.FTP_D item = new model.FTP_D();
+            item.ID = (int)gridList.Rows[e.RowIndex].Cells[0].Value;
+            item.ClientIP = (string)gridList.Rows[e.RowIndex].Cells[1].Value;
+            item.UserName = (string)gridList.Rows[e.RowIndex].Cells[2].Value;
+            item.Password = (string)gridList.Rows[e.RowIndex].Cells[3].Value;
+            db.UpdateDataToDB(item);
+            ShowDetailData();
+        }
         //重整detail view的資料 依據選擇的FTP群組
         private void ShowDetailData() {
             if (lbGroup.SelectedItem != null)
             {
+                gridList.AutoGenerateColumns = false;
                 gridList.DataSource = db.
                     GetDataFromDBByCondition<model.FTP_D>(new { GroupID = (lbGroup.SelectedItem as model.FTP_M).ID });
             }
@@ -113,7 +142,23 @@ namespace AutoDeploy
                 gridList.DataSource = null;
             }
         }
+
+
+
         #endregion
+
+        //點擊menu時跳出操作說明
+        private void 說明ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(@"
+FTP群組操作說明:
+直接按delete可刪除群組及底下的FTP站台列表
+
+FTP站台列表操作說明:
+選中一列按delete可刪除單筆資料
+選中一個單元格直接輸入文字能編輯該單元格資料
+");
+        }
 
 
     }

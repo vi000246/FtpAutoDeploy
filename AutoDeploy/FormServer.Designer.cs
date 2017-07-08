@@ -38,27 +38,34 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnAddList = new System.Windows.Forms.Button();
             this.fTP_MTableAdapter = new AutoDeploy.dbDataSetTableAdapters.FTP_MTableAdapter();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientIP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Password = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.說明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fTPMBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridList)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnAddGroup);
             this.groupBox1.Controls.Add(this.lbGroup);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(7, 27);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(363, 189);
+            this.groupBox1.Size = new System.Drawing.Size(376, 189);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "FTP群組:";
             // 
             // btnAddGroup
             // 
-            this.btnAddGroup.Location = new System.Drawing.Point(273, 157);
+            this.btnAddGroup.Location = new System.Drawing.Point(282, 157);
             this.btnAddGroup.Name = "btnAddGroup";
             this.btnAddGroup.Size = new System.Drawing.Size(75, 23);
             this.btnAddGroup.TabIndex = 2;
@@ -77,7 +84,7 @@
             this.lbGroup.ItemHeight = 12;
             this.lbGroup.Location = new System.Drawing.Point(14, 27);
             this.lbGroup.Name = "lbGroup";
-            this.lbGroup.Size = new System.Drawing.Size(334, 124);
+            this.lbGroup.Size = new System.Drawing.Size(343, 124);
             this.lbGroup.TabIndex = 1;
             this.lbGroup.SelectedIndexChanged += new System.EventHandler(this.lbGroup_SelectedIndexChanged);
             this.lbGroup.DoubleClick += new System.EventHandler(this.lbGroup_DoubleClick);
@@ -96,26 +103,35 @@
             // gridList
             // 
             this.gridList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridList.Location = new System.Drawing.Point(23, 21);
+            this.gridList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.ClientIP,
+            this.UserName,
+            this.Password});
+            this.gridList.Location = new System.Drawing.Point(9, 21);
+            this.gridList.MultiSelect = false;
             this.gridList.Name = "gridList";
             this.gridList.RowTemplate.Height = 24;
+            this.gridList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridList.Size = new System.Drawing.Size(343, 135);
             this.gridList.TabIndex = 3;
+            this.gridList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridList_CellEndEdit);
+            this.gridList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridList_KeyDown);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnAddList);
             this.groupBox2.Controls.Add(this.gridList);
-            this.groupBox2.Location = new System.Drawing.Point(3, 207);
+            this.groupBox2.Location = new System.Drawing.Point(7, 225);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(372, 188);
+            this.groupBox2.Size = new System.Drawing.Size(371, 188);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "FTP列表";
+            this.groupBox2.Text = "FTP站台列表";
             // 
             // btnAddList
             // 
-            this.btnAddList.Location = new System.Drawing.Point(282, 159);
+            this.btnAddList.Location = new System.Drawing.Point(277, 162);
             this.btnAddList.Name = "btnAddList";
             this.btnAddList.Size = new System.Drawing.Size(75, 23);
             this.btnAddList.TabIndex = 4;
@@ -127,13 +143,60 @@
             // 
             this.fTP_MTableAdapter.ClearBeforeFill = true;
             // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.Visible = false;
+            // 
+            // ClientIP
+            // 
+            this.ClientIP.DataPropertyName = "ClientIP";
+            this.ClientIP.HeaderText = "IP";
+            this.ClientIP.Name = "ClientIP";
+            // 
+            // UserName
+            // 
+            this.UserName.DataPropertyName = "UserName";
+            this.UserName.HeaderText = "使用者名稱";
+            this.UserName.Name = "UserName";
+            // 
+            // Password
+            // 
+            this.Password.DataPropertyName = "Password";
+            this.Password.HeaderText = "密碼";
+            this.Password.Name = "Password";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.Menu;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.說明ToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(390, 24);
+            this.menuStrip1.TabIndex = 5;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // 說明ToolStripMenuItem
+            // 
+            this.說明ToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.說明ToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
+            this.說明ToolStripMenuItem.Name = "說明ToolStripMenuItem";
+            this.說明ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.說明ToolStripMenuItem.Text = "說明";
+            this.說明ToolStripMenuItem.Click += new System.EventHandler(this.說明ToolStripMenuItem_Click);
+            // 
             // FormServer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(386, 397);
+            this.ClientSize = new System.Drawing.Size(390, 425);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormServer";
             this.Text = "FTP列表";
             this.groupBox1.ResumeLayout(false);
@@ -141,7 +204,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dbDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridList)).EndInit();
             this.groupBox2.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -156,5 +222,11 @@
         private dbDataSet dbDataSet;
         private System.Windows.Forms.BindingSource fTPMBindingSource;
         private dbDataSetTableAdapters.FTP_MTableAdapter fTP_MTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientIP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Password;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 說明ToolStripMenuItem;
     }
 }
