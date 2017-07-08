@@ -60,7 +60,8 @@ namespace AutoDeploy
         {
             if (e.KeyCode == Keys.Delete)
             {
-                new ListBox().deleteListBoxItem(lbFileList);
+                //從DB刪除資料
+                //new ListBox().deleteListBoxItem(lbFileList);
             }
         }
         //清除所有檔案清單的路徑

@@ -32,17 +32,17 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAddGroup = new System.Windows.Forms.Button();
             this.lbGroup = new System.Windows.Forms.ListBox();
+            this.fTPMBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dbDataSet = new AutoDeploy.dbDataSet();
             this.gridList = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnAddList = new System.Windows.Forms.Button();
-            this.dbDataSet = new AutoDeploy.dbDataSet();
-            this.fTPMBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fTP_MTableAdapter = new AutoDeploy.dbDataSetTableAdapters.FTP_MTableAdapter();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fTPMBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridList)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dbDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fTPMBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -79,6 +79,17 @@
             this.lbGroup.Name = "lbGroup";
             this.lbGroup.Size = new System.Drawing.Size(334, 124);
             this.lbGroup.TabIndex = 1;
+            this.lbGroup.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbGroup_KeyDown);
+            // 
+            // fTPMBindingSource
+            // 
+            this.fTPMBindingSource.DataMember = "FTP_M";
+            this.fTPMBindingSource.DataSource = this.dbDataSet;
+            // 
+            // dbDataSet
+            // 
+            this.dbDataSet.DataSetName = "dbDataSet";
+            this.dbDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // gridList
             // 
@@ -109,16 +120,6 @@
             this.btnAddList.Text = "新增";
             this.btnAddList.UseVisualStyleBackColor = true;
             // 
-            // dbDataSet
-            // 
-            this.dbDataSet.DataSetName = "dbDataSet";
-            this.dbDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // fTPMBindingSource
-            // 
-            this.fTPMBindingSource.DataMember = "FTP_M";
-            this.fTPMBindingSource.DataSource = this.dbDataSet;
-            // 
             // fTP_MTableAdapter
             // 
             this.fTP_MTableAdapter.ClearBeforeFill = true;
@@ -132,12 +133,11 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "FormServer";
             this.Text = "FTP列表";
-            this.Load += new System.EventHandler(this.FormServer_Load);
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fTPMBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridList)).EndInit();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dbDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fTPMBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

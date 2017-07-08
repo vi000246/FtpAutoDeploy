@@ -11,16 +11,23 @@ namespace AutoDeploy
 {
     public class ListBox
     {
-        //刪除listBox選中的Item
-        public void deleteListBoxItem(System.Windows.Forms.ListBox listBox)
+        /// <summary>
+        /// loop listBox裡被選中的值 呼叫委派deleteFromdb把值刪掉
+        /// </summary>
+        /// <typeparam name="T">此listBox用的Class</typeparam>
+        /// <param name="listBox">listBox的控制項</param>
+        /// <param name="deleteFromDb">從DB刪除資料的委派</param>
+        public void deleteListBoxItem<T>(System.Windows.Forms.ListBox listBox,Action<T> deleteFromDb)
         {
             System.Windows.Forms.ListBox.SelectedObjectCollection selectedItems = new System.Windows.Forms.ListBox.SelectedObjectCollection(listBox);
             selectedItems = listBox.SelectedItems;
 
             if (listBox.SelectedIndex != -1)
             {
-                for (int i = selectedItems.Count - 1; i >= 0; i--)
-                    listBox.Items.Remove(selectedItems[i]);
+                foreach (T item in selectedItems)
+                {
+                    deleteFromDb(item);
+                }
             }
         }
     }

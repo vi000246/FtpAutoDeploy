@@ -12,25 +12,45 @@ namespace AutoDeploy
 {
     public partial class FormServer : Form
     {
+        public db db = new db();
+
         public FormServer()
         {
             InitializeComponent();
+            ShowGroupData();
         }
+        #region FTP群組相關操作
+
         //新增群組按鈕點擊
         private void btnAddGroup_Click(object sender, EventArgs e)
         {
             string name = dialog.ShowAddGroup();
             if (!string.IsNullOrEmpty(name)) {
-                int? newID = new db().AddFtpGroup(name);
+                int? newID = db.AddFtpGroup(name);
             }
-            lbGroup.Refresh();
+            ShowGroupData();
         }
 
-        private void FormServer_Load(object sender, EventArgs e)
+
+        //按下delete鍵 刪除群組
+        private void lbGroup_KeyDown(object sender, KeyEventArgs e)
         {
-            // TODO: 這行程式碼會將資料載入 'dbDataSet.FTP_M' 資料表。您可以視需要進行移動或移除。
-            this.fTP_MTableAdapter.Fill(this.dbDataSet.FTP_M);
-
+            if (e.KeyCode == Keys.Delete)
+            {
+                new ListBox().deleteListBoxItem<model.FTP_M>(lbGroup, db.DeleteDataFromDB<model.FTP_M>);
+                ShowGroupData();
+            }
         }
+        //取得伺服器群組資料  用來Refresh
+        private void ShowGroupData()
+        {
+            lbGroup.DataSource = db.GetDataFromDB<model.FTP_M>();
+            lbGroup.DisplayMember = "Name";
+            lbGroup.ValueMember = "ID";
+        }
+        #endregion
+
+
+
     }
 }
