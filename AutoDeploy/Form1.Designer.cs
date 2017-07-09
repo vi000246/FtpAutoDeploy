@@ -35,6 +35,7 @@
             this.testToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbDeployGroup = new System.Windows.Forms.CheckedListBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
             this.gbUploadList = new System.Windows.Forms.GroupBox();
@@ -45,7 +46,9 @@
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.lbLog = new System.Windows.Forms.ListBox();
-            this.lbDeployGroup = new System.Windows.Forms.CheckedListBox();
+            this.btnSelectAll = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnCancelSelect = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbUploadList.SuspendLayout();
@@ -54,9 +57,10 @@
             // lbProgress
             // 
             this.lbProgress.AutoSize = true;
-            this.lbProgress.Location = new System.Drawing.Point(230, 389);
+            this.lbProgress.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbProgress.Location = new System.Drawing.Point(10, 337);
             this.lbProgress.Name = "lbProgress";
-            this.lbProgress.Size = new System.Drawing.Size(56, 12);
+            this.lbProgress.Size = new System.Drawing.Size(73, 19);
             this.lbProgress.TabIndex = 8;
             this.lbProgress.Text = "目前進度:";
             // 
@@ -66,7 +70,7 @@
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(685, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(703, 24);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -103,19 +107,31 @@
             // groupBox1
             // 
             this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.btnCancelSelect);
+            this.groupBox1.Controls.Add(this.btnDelete);
+            this.groupBox1.Controls.Add(this.btnSelectAll);
             this.groupBox1.Controls.Add(this.lbDeployGroup);
             this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.btnCopy);
             this.groupBox1.Location = new System.Drawing.Point(0, 24);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(206, 458);
+            this.groupBox1.Size = new System.Drawing.Size(210, 504);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deploy群組";
             // 
+            // lbDeployGroup
+            // 
+            this.lbDeployGroup.FormattingEnabled = true;
+            this.lbDeployGroup.Location = new System.Drawing.Point(6, 21);
+            this.lbDeployGroup.Name = "lbDeployGroup";
+            this.lbDeployGroup.Size = new System.Drawing.Size(188, 361);
+            this.lbDeployGroup.TabIndex = 11;
+            this.lbDeployGroup.DoubleClick += new System.EventHandler(this.lbDeployGroup_DoubleClick);
+            // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(6, 390);
+            this.btnAdd.Location = new System.Drawing.Point(10, 391);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 9;
@@ -125,7 +141,7 @@
             // 
             // btnCopy
             // 
-            this.btnCopy.Location = new System.Drawing.Point(108, 390);
+            this.btnCopy.Location = new System.Drawing.Point(112, 391);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(75, 23);
             this.btnCopy.TabIndex = 10;
@@ -135,6 +151,7 @@
             // gbUploadList
             // 
             this.gbUploadList.AutoSize = true;
+            this.gbUploadList.Controls.Add(this.lbProgress);
             this.gbUploadList.Controls.Add(this.btnClear);
             this.gbUploadList.Controls.Add(this.lbFileList);
             this.gbUploadList.Controls.Add(this.label1);
@@ -143,7 +160,7 @@
             this.gbUploadList.Controls.Add(this.cbIsBackUp);
             this.gbUploadList.Location = new System.Drawing.Point(216, 24);
             this.gbUploadList.Name = "gbUploadList";
-            this.gbUploadList.Size = new System.Drawing.Size(469, 458);
+            this.gbUploadList.Size = new System.Drawing.Size(469, 494);
             this.gbUploadList.TabIndex = 1;
             this.gbUploadList.TabStop = false;
             this.gbUploadList.Text = "上傳清單";
@@ -213,25 +230,46 @@
             // 
             this.lbLog.FormattingEnabled = true;
             this.lbLog.ItemHeight = 12;
-            this.lbLog.Location = new System.Drawing.Point(230, 407);
+            this.lbLog.Location = new System.Drawing.Point(230, 383);
             this.lbLog.Name = "lbLog";
-            this.lbLog.Size = new System.Drawing.Size(449, 52);
+            this.lbLog.Size = new System.Drawing.Size(449, 124);
             this.lbLog.TabIndex = 7;
             // 
-            // lbDeployGroup
+            // btnSelectAll
             // 
-            this.lbDeployGroup.FormattingEnabled = true;
-            this.lbDeployGroup.Location = new System.Drawing.Point(6, 21);
-            this.lbDeployGroup.Name = "lbDeployGroup";
-            this.lbDeployGroup.Size = new System.Drawing.Size(188, 361);
-            this.lbDeployGroup.TabIndex = 11;
+            this.btnSelectAll.Location = new System.Drawing.Point(10, 429);
+            this.btnSelectAll.Name = "btnSelectAll";
+            this.btnSelectAll.Size = new System.Drawing.Size(75, 23);
+            this.btnSelectAll.TabIndex = 12;
+            this.btnSelectAll.Text = "全選";
+            this.btnSelectAll.UseVisualStyleBackColor = true;
+            this.btnSelectAll.Click += new System.EventHandler(this.btnSelectAll_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(52, 460);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(91, 23);
+            this.btnDelete.TabIndex = 13;
+            this.btnDelete.Text = "刪除勾選項目";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnCancelSelect
+            // 
+            this.btnCancelSelect.Location = new System.Drawing.Point(112, 429);
+            this.btnCancelSelect.Name = "btnCancelSelect";
+            this.btnCancelSelect.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelSelect.TabIndex = 14;
+            this.btnCancelSelect.Text = "取消全選";
+            this.btnCancelSelect.UseVisualStyleBackColor = true;
+            this.btnCancelSelect.Click += new System.EventHandler(this.btnCancelSelect_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 482);
-            this.Controls.Add(this.lbProgress);
+            this.ClientSize = new System.Drawing.Size(703, 530);
             this.Controls.Add(this.lbLog);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbUploadList);
@@ -269,6 +307,9 @@
         private System.Windows.Forms.ComboBox cbServerList;
         private System.Windows.Forms.CheckBox cbIsBackUp;
         private System.Windows.Forms.CheckedListBox lbDeployGroup;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnSelectAll;
+        private System.Windows.Forms.Button btnCancelSelect;
     }
 }
 

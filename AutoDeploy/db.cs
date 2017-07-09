@@ -56,6 +56,18 @@ namespace AutoDeploy
 
         }
 
+        //新增Deploy群組
+        public int? AddDeployGroup(string name)
+        {
+            int? newId = 0;
+            using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
+            {
+                cnn.Open();
+                var result = cnn.Execute(@"Insert into Deploy_M (Name) values(@name)", new { name });
+            }
+            return newId;
+        }
+
         /// <summary>
         /// 更新資料到DB 傳進資料的class instance 用simpleCRUD更新資料
         /// </summary>

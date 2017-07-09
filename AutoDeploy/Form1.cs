@@ -13,9 +13,12 @@ namespace AutoDeploy
 {
     public partial class Form1 : Form
     {
+        public db db = new db();
+
         public Form1()
         {
             InitializeComponent();
+            ShowGroupData();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -78,8 +81,58 @@ namespace AutoDeploy
         private void btnAdd_Click(object sender, EventArgs e)
         {
             string name = dialog.ShowInputGroupNameForm();
-            if(!string.IsNullOrEmpty(name))
-                lbDeployGroup.Items.Add("["+DateTime.Now.ToString("MM/dd")+"]"+name);
+            if (!string.IsNullOrEmpty(name))
+            {
+                int? newID = db.AddDeployGroup(name);
+            }
+            ShowGroupData();
+        }
+
+
+        //全選按鈕
+        private void btnSelectAll_Click(object sender, EventArgs e)
+        {
+            for(int i = 0; i < lbDeployGroup.Items.Count; i++)
+                lbDeployGroup.SetItemChecked(i, true);
+        }
+        //取消全選按鈕
+        private void btnCancelSelect_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lbDeployGroup.Items.Count; i++)
+                lbDeployGroup.SetItemChecked(i, false);
+        }
+        //刪除勾選項目
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("確定刪除選中的Deploy群組及底下的上傳清單?", "關閉", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                //new ListBox().deleteListBoxItem<model.Deploy_M>(lbDeployGroup, db.DeleteFtpMasterAndDetail);
+                //重新整理master和detail
+                ShowGroupData();
+            }
+        }
+        //點擊兩下 修改名稱
+        private void lbDeployGroup_DoubleClick(object sender, EventArgs e)
+        {
+            if (lbDeployGroup.SelectedItem != null)
+            {
+                //取得修改後的名稱
+                string name = dialog.ShowInputGroupNameForm("重新命名");
+                if (!string.IsNullOrEmpty(name))
+                {
+                    model.Deploy_M item = (lbDeployGroup.SelectedItem as model.Deploy_M);
+                    item.Name = name;
+                    db.UpdateDataToDB(item);
+                }
+            }
+            ShowGroupData();
+        }
+        //取得Deploy群組資料  用來Refresh或一開始的init
+        private void ShowGroupData()
+        {
+            lbDeployGroup.DataSource = db.GetDataFromDB<model.Deploy_M>();
+            lbDeployGroup.DisplayMember = "Name";
+            lbDeployGroup.ValueMember = "ID";
         }
         #endregion
 
@@ -89,5 +142,7 @@ namespace AutoDeploy
             Form FormServer = new FormServer();
             FormServer.Show();
         }
+
+
     }
 }

@@ -29,6 +29,22 @@ namespace AutoDeploy
 
 
         }
+        [Table("Deploy_M")]
+        public class Deploy_M
+        {
+            [Key]
+            public int ID { get; set; }
+            public string Name { get; set; }
+        }
+        [Table("Deploy_D")]
+        public class Deploy_D
+        {
+            [Key]
+            public int ID { get; set; }
+            [Editable(false)]
+            public int GroupID { get; set; }
+            public string Path { get; set; }
+        }
     }
     /// <summary>
     /// 用來設置GridView的Clumn Index 這樣改變排序時就不用改程式
