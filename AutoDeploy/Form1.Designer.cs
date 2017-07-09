@@ -35,17 +35,17 @@
             this.testToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.gbUploadList = new System.Windows.Forms.GroupBox();
-            this.cbIsBackUp = new System.Windows.Forms.CheckBox();
-            this.cbServerList = new System.Windows.Forms.ComboBox();
-            this.btnStart = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lbFileList = new System.Windows.Forms.ListBox();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.lbDeployGroup = new System.Windows.Forms.ListBox();
-            this.lbLog = new System.Windows.Forms.ListBox();
-            this.btnCopy = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.btnCopy = new System.Windows.Forms.Button();
+            this.gbUploadList = new System.Windows.Forms.GroupBox();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.lbFileList = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.cbServerList = new System.Windows.Forms.ComboBox();
+            this.cbIsBackUp = new System.Windows.Forms.CheckBox();
+            this.lbLog = new System.Windows.Forms.ListBox();
+            this.lbDeployGroup = new System.Windows.Forms.CheckedListBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbUploadList.SuspendLayout();
@@ -89,6 +89,7 @@
             // 
             // testToolStripMenuItem1
             // 
+            this.testToolStripMenuItem1.Enabled = false;
             this.testToolStripMenuItem1.Name = "testToolStripMenuItem1";
             this.testToolStripMenuItem1.Size = new System.Drawing.Size(175, 22);
             this.testToolStripMenuItem1.Text = "Deploy歷史紀錄";
@@ -102,15 +103,34 @@
             // groupBox1
             // 
             this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.lbDeployGroup);
             this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.btnCopy);
-            this.groupBox1.Controls.Add(this.lbDeployGroup);
             this.groupBox1.Location = new System.Drawing.Point(0, 24);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(206, 458);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deploy群組";
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(6, 390);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.TabIndex = 9;
+            this.btnAdd.Text = "新增";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnCopy
+            // 
+            this.btnCopy.Location = new System.Drawing.Point(108, 390);
+            this.btnCopy.Name = "btnCopy";
+            this.btnCopy.Size = new System.Drawing.Size(75, 23);
+            this.btnCopy.TabIndex = 10;
+            this.btnCopy.Text = "複製";
+            this.btnCopy.UseVisualStyleBackColor = true;
             // 
             // gbUploadList
             // 
@@ -128,42 +148,15 @@
             this.gbUploadList.TabStop = false;
             this.gbUploadList.Text = "上傳清單";
             // 
-            // cbIsBackUp
+            // btnClear
             // 
-            this.cbIsBackUp.AutoSize = true;
-            this.cbIsBackUp.Location = new System.Drawing.Point(20, 301);
-            this.cbIsBackUp.Name = "cbIsBackUp";
-            this.cbIsBackUp.Size = new System.Drawing.Size(132, 16);
-            this.cbIsBackUp.TabIndex = 5;
-            this.cbIsBackUp.Text = "是否備份遠端原始檔";
-            this.cbIsBackUp.UseVisualStyleBackColor = true;
-            // 
-            // cbServerList
-            // 
-            this.cbServerList.FormattingEnabled = true;
-            this.cbServerList.Location = new System.Drawing.Point(20, 275);
-            this.cbServerList.Name = "cbServerList";
-            this.cbServerList.Size = new System.Drawing.Size(132, 20);
-            this.cbServerList.TabIndex = 2;
-            // 
-            // btnStart
-            // 
-            this.btnStart.Location = new System.Drawing.Point(388, 260);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 57);
-            this.btnStart.TabIndex = 6;
-            this.btnStart.Text = "開始上傳";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 256);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "選擇伺服器";
+            this.btnClear.Location = new System.Drawing.Point(295, 260);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 7;
+            this.btnClear.Text = "清除所有";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // lbFileList
             // 
@@ -178,24 +171,43 @@
             this.lbFileList.DragEnter += new System.Windows.Forms.DragEventHandler(this.lbFileList_DragEnter);
             this.lbFileList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbFileList_KeyDown);
             // 
-            // btnClear
+            // label1
             // 
-            this.btnClear.Location = new System.Drawing.Point(295, 260);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
-            this.btnClear.TabIndex = 7;
-            this.btnClear.Text = "清除所有";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 256);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "選擇伺服器";
             // 
-            // lbDeployGroup
+            // btnStart
             // 
-            this.lbDeployGroup.FormattingEnabled = true;
-            this.lbDeployGroup.ItemHeight = 12;
-            this.lbDeployGroup.Location = new System.Drawing.Point(7, 22);
-            this.lbDeployGroup.Name = "lbDeployGroup";
-            this.lbDeployGroup.Size = new System.Drawing.Size(193, 352);
-            this.lbDeployGroup.TabIndex = 0;
+            this.btnStart.Location = new System.Drawing.Point(388, 260);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(75, 57);
+            this.btnStart.TabIndex = 6;
+            this.btnStart.Text = "開始上傳";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // cbServerList
+            // 
+            this.cbServerList.FormattingEnabled = true;
+            this.cbServerList.Location = new System.Drawing.Point(20, 275);
+            this.cbServerList.Name = "cbServerList";
+            this.cbServerList.Size = new System.Drawing.Size(132, 20);
+            this.cbServerList.TabIndex = 2;
+            // 
+            // cbIsBackUp
+            // 
+            this.cbIsBackUp.AutoSize = true;
+            this.cbIsBackUp.Enabled = false;
+            this.cbIsBackUp.Location = new System.Drawing.Point(20, 301);
+            this.cbIsBackUp.Name = "cbIsBackUp";
+            this.cbIsBackUp.Size = new System.Drawing.Size(132, 16);
+            this.cbIsBackUp.TabIndex = 5;
+            this.cbIsBackUp.Text = "是否備份遠端原始檔";
+            this.cbIsBackUp.UseVisualStyleBackColor = true;
             // 
             // lbLog
             // 
@@ -203,27 +215,16 @@
             this.lbLog.ItemHeight = 12;
             this.lbLog.Location = new System.Drawing.Point(230, 407);
             this.lbLog.Name = "lbLog";
-            this.lbLog.Size = new System.Drawing.Size(457, 52);
+            this.lbLog.Size = new System.Drawing.Size(449, 52);
             this.lbLog.TabIndex = 7;
             // 
-            // btnCopy
+            // lbDeployGroup
             // 
-            this.btnCopy.Location = new System.Drawing.Point(108, 390);
-            this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(75, 23);
-            this.btnCopy.TabIndex = 10;
-            this.btnCopy.Text = "複製";
-            this.btnCopy.UseVisualStyleBackColor = true;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(6, 390);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 9;
-            this.btnAdd.Text = "新增";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.lbDeployGroup.FormattingEnabled = true;
+            this.lbDeployGroup.Location = new System.Drawing.Point(6, 21);
+            this.lbDeployGroup.Name = "lbDeployGroup";
+            this.lbDeployGroup.Size = new System.Drawing.Size(188, 361);
+            this.lbDeployGroup.TabIndex = 11;
             // 
             // Form1
             // 
@@ -260,7 +261,6 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnCopy;
         private System.Windows.Forms.ListBox lbLog;
-        private System.Windows.Forms.ListBox lbDeployGroup;
         private System.Windows.Forms.GroupBox gbUploadList;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.ListBox lbFileList;
@@ -268,6 +268,7 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.ComboBox cbServerList;
         private System.Windows.Forms.CheckBox cbIsBackUp;
+        private System.Windows.Forms.CheckedListBox lbDeployGroup;
     }
 }
 
