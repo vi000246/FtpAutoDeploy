@@ -21,6 +21,18 @@ namespace AutoDeploy
             ShowGroupData();
             ShowDetailData();
             LoadServerCombobox();
+            toolTip.SetToolTip(lbChooseServerGroup,"選擇FTP伺服器群組，會Deploy至此群組底下的FTP列表");
+            toolTip.SetToolTip(lbFTPDirectory, @"輸入要上傳至FTP的目標目錄，有子目錄就用斜線分隔，開頭跟後面不要有斜線 
+如果為空代表是FTP的根目錄
+格式: someDirectory/childDirectory");
+            toolTip.SetToolTip(lbFileRoot, @"請選擇本機要Deploy的專案的根目錄 
+此根目錄後的路徑都會複製到FTP
+Example: 
+要傳的檔:C:/Projects/Build/DemoWebSite/Script/jquery.js
+Deploy專案根目錄:C:/Projects/Build/DemoWebSite
+則會將Script/jquery.js傳到FTP目標目錄");
+            toolTip.SetToolTip(lbBackUp, "請選擇備份檔放置的目錄");
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)

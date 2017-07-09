@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbProgress = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,22 +44,23 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
             this.gbUploadList = new System.Windows.Forms.GroupBox();
+            this.btnPreView = new System.Windows.Forms.Button();
+            this.btnBrowseRoot = new System.Windows.Forms.Button();
+            this.lbFileRoot = new System.Windows.Forms.Label();
+            this.tbFileRoot = new System.Windows.Forms.TextBox();
+            this.tbFtpRoot = new System.Windows.Forms.TextBox();
+            this.lbFTPDirectory = new System.Windows.Forms.Label();
             this.btnBrowseBackUp = new System.Windows.Forms.Button();
             this.tbBackUpPath = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbBackUp = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.lbFileList = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbChooseServerGroup = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.lbLog = new System.Windows.Forms.ListBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnBrowseRoot = new System.Windows.Forms.Button();
-            this.btnPreView = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbUploadList.SuspendLayout();
@@ -206,17 +208,17 @@
             this.gbUploadList.AutoSize = true;
             this.gbUploadList.Controls.Add(this.btnPreView);
             this.gbUploadList.Controls.Add(this.btnBrowseRoot);
-            this.gbUploadList.Controls.Add(this.label4);
-            this.gbUploadList.Controls.Add(this.textBox2);
-            this.gbUploadList.Controls.Add(this.textBox1);
-            this.gbUploadList.Controls.Add(this.label3);
+            this.gbUploadList.Controls.Add(this.lbFileRoot);
+            this.gbUploadList.Controls.Add(this.tbFileRoot);
+            this.gbUploadList.Controls.Add(this.tbFtpRoot);
+            this.gbUploadList.Controls.Add(this.lbFTPDirectory);
             this.gbUploadList.Controls.Add(this.btnBrowseBackUp);
             this.gbUploadList.Controls.Add(this.tbBackUpPath);
-            this.gbUploadList.Controls.Add(this.label2);
+            this.gbUploadList.Controls.Add(this.lbBackUp);
             this.gbUploadList.Controls.Add(this.lbProgress);
             this.gbUploadList.Controls.Add(this.btnClear);
             this.gbUploadList.Controls.Add(this.lbFileList);
-            this.gbUploadList.Controls.Add(this.label1);
+            this.gbUploadList.Controls.Add(this.lbChooseServerGroup);
             this.gbUploadList.Controls.Add(this.btnStart);
             this.gbUploadList.Controls.Add(this.cbServerList);
             this.gbUploadList.Controls.Add(this.cbIsBackUp);
@@ -226,6 +228,62 @@
             this.gbUploadList.TabIndex = 1;
             this.gbUploadList.TabStop = false;
             this.gbUploadList.Text = "上傳清單";
+            // 
+            // btnPreView
+            // 
+            this.btnPreView.Enabled = false;
+            this.btnPreView.Location = new System.Drawing.Point(277, 237);
+            this.btnPreView.Name = "btnPreView";
+            this.btnPreView.Size = new System.Drawing.Size(75, 39);
+            this.btnPreView.TabIndex = 17;
+            this.btnPreView.Text = "預覽";
+            this.btnPreView.UseVisualStyleBackColor = true;
+            // 
+            // btnBrowseRoot
+            // 
+            this.btnBrowseRoot.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnBrowseRoot.Enabled = false;
+            this.btnBrowseRoot.Location = new System.Drawing.Point(115, 289);
+            this.btnBrowseRoot.Name = "btnBrowseRoot";
+            this.btnBrowseRoot.Size = new System.Drawing.Size(46, 19);
+            this.btnBrowseRoot.TabIndex = 16;
+            this.btnBrowseRoot.Text = "瀏覽";
+            this.btnBrowseRoot.UseVisualStyleBackColor = false;
+            // 
+            // lbFileRoot
+            // 
+            this.lbFileRoot.AutoSize = true;
+            this.lbFileRoot.Cursor = System.Windows.Forms.Cursors.Help;
+            this.lbFileRoot.Location = new System.Drawing.Point(20, 296);
+            this.lbFileRoot.Name = "lbFileRoot";
+            this.lbFileRoot.Size = new System.Drawing.Size(89, 12);
+            this.lbFileRoot.TabIndex = 15;
+            this.lbFileRoot.Text = "檔案清單根目錄";
+            // 
+            // tbFileRoot
+            // 
+            this.tbFileRoot.Enabled = false;
+            this.tbFileRoot.Location = new System.Drawing.Point(113, 288);
+            this.tbFileRoot.Name = "tbFileRoot";
+            this.tbFileRoot.Size = new System.Drawing.Size(257, 22);
+            this.tbFileRoot.TabIndex = 14;
+            // 
+            // tbFtpRoot
+            // 
+            this.tbFtpRoot.Location = new System.Drawing.Point(113, 258);
+            this.tbFtpRoot.Name = "tbFtpRoot";
+            this.tbFtpRoot.Size = new System.Drawing.Size(132, 22);
+            this.tbFtpRoot.TabIndex = 13;
+            // 
+            // lbFTPDirectory
+            // 
+            this.lbFTPDirectory.AutoSize = true;
+            this.lbFTPDirectory.Cursor = System.Windows.Forms.Cursors.Help;
+            this.lbFTPDirectory.Location = new System.Drawing.Point(18, 264);
+            this.lbFTPDirectory.Name = "lbFTPDirectory";
+            this.lbFTPDirectory.Size = new System.Drawing.Size(75, 12);
+            this.lbFTPDirectory.TabIndex = 12;
+            this.lbFTPDirectory.Text = "FTP目標目錄:";
             // 
             // btnBrowseBackUp
             // 
@@ -246,15 +304,15 @@
             this.tbBackUpPath.Size = new System.Drawing.Size(258, 22);
             this.tbBackUpPath.TabIndex = 10;
             // 
-            // label2
+            // lbBackUp
             // 
-            this.label2.AutoSize = true;
-            this.label2.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label2.Location = new System.Drawing.Point(17, 330);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 12);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "備份原始檔路徑:";
+            this.lbBackUp.AutoSize = true;
+            this.lbBackUp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.lbBackUp.Location = new System.Drawing.Point(17, 330);
+            this.lbBackUp.Name = "lbBackUp";
+            this.lbBackUp.Size = new System.Drawing.Size(92, 12);
+            this.lbBackUp.TabIndex = 9;
+            this.lbBackUp.Text = "備份原始檔路徑:";
             // 
             // btnClear
             // 
@@ -280,15 +338,15 @@
             this.lbFileList.DragEnter += new System.Windows.Forms.DragEventHandler(this.lbFileList_DragEnter);
             this.lbFileList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbFileList_KeyDown);
             // 
-            // label1
+            // lbChooseServerGroup
             // 
-            this.label1.AutoSize = true;
-            this.label1.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label1.Location = new System.Drawing.Point(18, 235);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 12);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "選擇伺服器群組:";
+            this.lbChooseServerGroup.AutoSize = true;
+            this.lbChooseServerGroup.Cursor = System.Windows.Forms.Cursors.Help;
+            this.lbChooseServerGroup.Location = new System.Drawing.Point(18, 235);
+            this.lbChooseServerGroup.Name = "lbChooseServerGroup";
+            this.lbChooseServerGroup.Size = new System.Drawing.Size(92, 12);
+            this.lbChooseServerGroup.TabIndex = 3;
+            this.lbChooseServerGroup.Text = "選擇伺服器群組:";
             // 
             // btnStart
             // 
@@ -329,61 +387,11 @@
             this.lbLog.Size = new System.Drawing.Size(500, 112);
             this.lbLog.TabIndex = 7;
             // 
-            // label3
+            // toolTip
             // 
-            this.label3.AutoSize = true;
-            this.label3.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label3.Location = new System.Drawing.Point(18, 264);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 12);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "伺服器上傳目錄:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(113, 258);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(132, 22);
-            this.textBox1.TabIndex = 13;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(113, 288);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(257, 22);
-            this.textBox2.TabIndex = 14;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label4.Location = new System.Drawing.Point(20, 296);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 12);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "檔案清單根目錄";
-            // 
-            // btnBrowseRoot
-            // 
-            this.btnBrowseRoot.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnBrowseRoot.Enabled = false;
-            this.btnBrowseRoot.Location = new System.Drawing.Point(115, 289);
-            this.btnBrowseRoot.Name = "btnBrowseRoot";
-            this.btnBrowseRoot.Size = new System.Drawing.Size(46, 19);
-            this.btnBrowseRoot.TabIndex = 16;
-            this.btnBrowseRoot.Text = "瀏覽";
-            this.btnBrowseRoot.UseVisualStyleBackColor = false;
-            // 
-            // btnPreView
-            // 
-            this.btnPreView.Enabled = false;
-            this.btnPreView.Location = new System.Drawing.Point(277, 237);
-            this.btnPreView.Name = "btnPreView";
-            this.btnPreView.Size = new System.Drawing.Size(75, 39);
-            this.btnPreView.TabIndex = 17;
-            this.btnPreView.Text = "預覽";
-            this.btnPreView.UseVisualStyleBackColor = true;
+            this.toolTip.AutoPopDelay = 30000;
+            this.toolTip.InitialDelay = 500;
+            this.toolTip.ReshowDelay = 100;
             // 
             // Form1
             // 
@@ -422,7 +430,7 @@
         private System.Windows.Forms.GroupBox gbUploadList;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.ListBox lbFileList;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbChooseServerGroup;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.ComboBox cbServerList;
         private System.Windows.Forms.CheckBox cbIsBackUp;
@@ -433,13 +441,14 @@
         private System.Windows.Forms.Button btnRename;
         private System.Windows.Forms.Button btnBrowseBackUp;
         private System.Windows.Forms.TextBox tbBackUpPath;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbBackUp;
         private System.Windows.Forms.Button btnBrowseRoot;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbFileRoot;
+        private System.Windows.Forms.TextBox tbFileRoot;
+        private System.Windows.Forms.TextBox tbFtpRoot;
+        private System.Windows.Forms.Label lbFTPDirectory;
         private System.Windows.Forms.Button btnPreView;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
 
