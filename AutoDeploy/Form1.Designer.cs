@@ -50,6 +50,9 @@
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.lbLog = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbBackUpPath = new System.Windows.Forms.TextBox();
+            this.btnBrowse = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbUploadList.SuspendLayout();
@@ -195,6 +198,9 @@
             // gbUploadList
             // 
             this.gbUploadList.AutoSize = true;
+            this.gbUploadList.Controls.Add(this.btnBrowse);
+            this.gbUploadList.Controls.Add(this.tbBackUpPath);
+            this.gbUploadList.Controls.Add(this.label2);
             this.gbUploadList.Controls.Add(this.lbProgress);
             this.gbUploadList.Controls.Add(this.btnClear);
             this.gbUploadList.Controls.Add(this.lbFileList);
@@ -211,9 +217,9 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(295, 260);
+            this.btnClear.Location = new System.Drawing.Point(305, 260);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.Size = new System.Drawing.Size(75, 39);
             this.btnClear.TabIndex = 7;
             this.btnClear.Text = "清除所有";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -246,7 +252,7 @@
             // 
             this.btnStart.Location = new System.Drawing.Point(388, 260);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 57);
+            this.btnStart.Size = new System.Drawing.Size(75, 73);
             this.btnStart.TabIndex = 6;
             this.btnStart.Text = "開始上傳";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -255,7 +261,7 @@
             // cbServerList
             // 
             this.cbServerList.FormattingEnabled = true;
-            this.cbServerList.Location = new System.Drawing.Point(20, 279);
+            this.cbServerList.Location = new System.Drawing.Point(116, 257);
             this.cbServerList.Name = "cbServerList";
             this.cbServerList.Size = new System.Drawing.Size(132, 20);
             this.cbServerList.TabIndex = 2;
@@ -264,7 +270,7 @@
             // 
             this.cbIsBackUp.AutoSize = true;
             this.cbIsBackUp.Enabled = false;
-            this.cbIsBackUp.Location = new System.Drawing.Point(20, 305);
+            this.cbIsBackUp.Location = new System.Drawing.Point(20, 283);
             this.cbIsBackUp.Name = "cbIsBackUp";
             this.cbIsBackUp.Size = new System.Drawing.Size(132, 16);
             this.cbIsBackUp.TabIndex = 5;
@@ -279,6 +285,34 @@
             this.lbLog.Name = "lbLog";
             this.lbLog.Size = new System.Drawing.Size(449, 124);
             this.lbLog.TabIndex = 7;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(18, 314);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(92, 12);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "備份原始檔路徑:";
+            // 
+            // tbBackUpPath
+            // 
+            this.tbBackUpPath.Enabled = false;
+            this.tbBackUpPath.Location = new System.Drawing.Point(116, 311);
+            this.tbBackUpPath.Name = "tbBackUpPath";
+            this.tbBackUpPath.Size = new System.Drawing.Size(264, 22);
+            this.tbBackUpPath.TabIndex = 10;
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnBrowse.Enabled = false;
+            this.btnBrowse.Location = new System.Drawing.Point(117, 312);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(46, 19);
+            this.btnBrowse.TabIndex = 11;
+            this.btnBrowse.Text = "瀏覽";
+            this.btnBrowse.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
@@ -326,6 +360,9 @@
         private System.Windows.Forms.Button btnSelectAll;
         private System.Windows.Forms.Button btnCancelSelect;
         private System.Windows.Forms.Button btnRename;
+        private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.TextBox tbBackUpPath;
+        private System.Windows.Forms.Label label2;
     }
 }
 

@@ -31,20 +31,34 @@ namespace AutoDeploy
         // 啟動按鈕Click
         private void btnStart_Click(object sender, EventArgs e)
         {
+            btnStart.Enabled = false;
             if (cbServerList.SelectedItem != null)
             {
                 int serverGroupID = (cbServerList.SelectedItem as model.FTP_M).ID;
-                //取得檔案listBox中的所有檔案
-                foreach (model.Deploy_D item in lbFileList.Items)
+                //取得combobx選中的FTP群組的FTP列表
+                List<model.FTP_D> FTPList = db.GetDataFromDBByCondition<model.FTP_D>(new { GroupID = serverGroupID });
+
+                foreach (var FTPitem in FTPList)
                 {
-                    var files = new file().getAllFiles(item.Path);
+                    using (ftp ftp = new ftp(FTPitem.ClientIP, FTPitem.UserName, FTPitem.Password))
+                    {
+                        //取得檔案listBox中的所有檔案
+                        foreach (model.Deploy_D item in lbFileList.Items)
+                        {
+                            List<string> files = new file().getAllFiles(item.Path);
+                            ftp.UploadFileToFtp(files);
+                        }
+                        //ftp.testUpload();
+                    }
                 }
+
             }
-            else {
+            else
+            {
                 MessageBox.Show("請選擇一個伺服器群組");
             }
-            
-            
+
+            btnStart.Enabled = true;
         }
         //載入伺服器選單的combobox
         public void LoadServerCombobox() {
