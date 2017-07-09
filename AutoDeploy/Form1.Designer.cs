@@ -104,6 +104,7 @@
             this.test2ToolStripMenuItem.Name = "test2ToolStripMenuItem";
             this.test2ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.test2ToolStripMenuItem.Text = "說明";
+            this.test2ToolStripMenuItem.Click += new System.EventHandler(this.test2ToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
@@ -182,6 +183,7 @@
             // 
             // btnCopy
             // 
+            this.btnCopy.Enabled = false;
             this.btnCopy.Location = new System.Drawing.Point(112, 391);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(75, 23);

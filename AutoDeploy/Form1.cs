@@ -39,6 +39,15 @@ namespace AutoDeploy
         }
 
         #region ========================檔案清單相關===============================
+        //拖曳進入事件
+        private void lbFileList_DragEnter(object sender, DragEventArgs e)
+        {
+            // 判斷物件是否可以拖曳進入控件，EX：垃圾桶無法拖曳進入控件，
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.All;
+            else
+                e.Effect = DragDropEffects.None;
+        }
         // 檔案拖放
         private void lbFileList_DragDrop(object sender, DragEventArgs e)
         {
@@ -49,15 +58,7 @@ namespace AutoDeploy
                 lbFileList.Items.Add(entryPath);
             }
         }
-        //拖曳進入事件
-        private void lbFileList_DragEnter(object sender, DragEventArgs e)
-        {
-            // 判斷物件是否可以拖曳進入控件，EX：垃圾桶無法拖曳進入控件，
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.All;
-            else
-                e.Effect = DragDropEffects.None;
-        }
+
         //按下delete鍵 刪掉反白的路徑
         private void lbFileList_KeyDown(object sender, KeyEventArgs e)
         {
@@ -98,8 +99,8 @@ namespace AutoDeploy
         //取消全選按鈕
         private void btnCancelSelect_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < lbDeployGroup.Items.Count; i++)
-                lbDeployGroup.SetItemChecked(i, false);
+            //將所有項目unchecked
+            ListBoxUtility.unCheckAll(lbDeployGroup);
         }
         //刪除勾選項目
         private void btnDelete_Click(object sender, EventArgs e)
@@ -116,6 +117,11 @@ namespace AutoDeploy
         //修改名稱 loop checked的項目
         private void btnRename_Click(object sender, EventArgs e)
         {
+            if (lbDeployGroup.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("請至少勾選一個項目");
+                return;
+            }
             new ListBoxUtility().LoopListBoxItem<model.Deploy_M>(lbDeployGroup, ListBoxUtility.RenameDeployGroupItem);
             ShowGroupData();
             //將所有項目unchecked
@@ -137,6 +143,17 @@ namespace AutoDeploy
             FormServer.Show();
         }
 
+        //menu 說明 click
+        private void test2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(@"
+這是用來幫助快速部署網站的FTP上傳程式
 
+作者   ：Yich Lin
+Github：vi000246
+信箱   ：vi000246@hotmail.com
+
+","程式資訊");
+        }
     }
 }
