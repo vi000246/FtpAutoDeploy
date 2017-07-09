@@ -20,6 +20,7 @@ namespace AutoDeploy
             InitializeComponent();
             ShowGroupData();
             ShowDetailData();
+            LoadServerCombobox();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -30,13 +31,26 @@ namespace AutoDeploy
         // 啟動按鈕Click
         private void btnStart_Click(object sender, EventArgs e)
         {
-            //取得檔案listBox中的所有檔案
-            foreach (string path in lbFileList.Items)
+            if (cbServerList.SelectedItem != null)
             {
-                var files = new file().getAllFiles(path);
+                int serverGroupID = (cbServerList.SelectedItem as model.FTP_M).ID;
+                //取得檔案listBox中的所有檔案
+                foreach (model.Deploy_D item in lbFileList.Items)
+                {
+                    var files = new file().getAllFiles(item.Path);
+                }
+            }
+            else {
+                MessageBox.Show("請選擇一個伺服器群組");
             }
             
             
+        }
+        //載入伺服器選單的combobox
+        public void LoadServerCombobox() {
+            cbServerList.DataSource = db.GetDataFromDB<model.FTP_M>();
+            cbServerList.ValueMember = "ID";
+            cbServerList.DisplayMember = "Name";
         }
 
         #region ========================檔案清單相關===============================
@@ -191,10 +205,16 @@ namespace AutoDeploy
         }
         #endregion
 
+        #region ==================Menu相關==========================
         //點擊Menu的伺服器設定時
         private void deploy伺服器設定ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form FormServer = new FormServer();
+            //關閉Server設定時 重整combobox
+            FormServer.FormClosing += (formSender, Forme) =>
+            {
+                LoadServerCombobox();
+            };
             FormServer.Show();
         }
 
@@ -210,6 +230,7 @@ Github：vi000246
 
 ","程式資訊");
         }
+        #endregion
 
 
     }

@@ -236,11 +236,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 256);
+            this.label1.Location = new System.Drawing.Point(18, 260);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.Size = new System.Drawing.Size(92, 12);
             this.label1.TabIndex = 3;
-            this.label1.Text = "選擇伺服器";
+            this.label1.Text = "選擇伺服器群組:";
             // 
             // btnStart
             // 
@@ -255,7 +255,7 @@
             // cbServerList
             // 
             this.cbServerList.FormattingEnabled = true;
-            this.cbServerList.Location = new System.Drawing.Point(20, 275);
+            this.cbServerList.Location = new System.Drawing.Point(20, 279);
             this.cbServerList.Name = "cbServerList";
             this.cbServerList.Size = new System.Drawing.Size(132, 20);
             this.cbServerList.TabIndex = 2;
@@ -264,7 +264,7 @@
             // 
             this.cbIsBackUp.AutoSize = true;
             this.cbIsBackUp.Enabled = false;
-            this.cbIsBackUp.Location = new System.Drawing.Point(20, 301);
+            this.cbIsBackUp.Location = new System.Drawing.Point(20, 305);
             this.cbIsBackUp.Name = "cbIsBackUp";
             this.cbIsBackUp.Size = new System.Drawing.Size(132, 16);
             this.cbIsBackUp.TabIndex = 5;

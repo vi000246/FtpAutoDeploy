@@ -35,13 +35,13 @@
             this.fTPMBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dbDataSet = new AutoDeploy.dbDataSet();
             this.gridList = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnAddList = new System.Windows.Forms.Button();
-            this.fTP_MTableAdapter = new AutoDeploy.dbDataSetTableAdapters.FTP_MTableAdapter();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientIP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Password = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnAddList = new System.Windows.Forms.Button();
+            this.fTP_MTableAdapter = new AutoDeploy.dbDataSetTableAdapters.FTP_MTableAdapter();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.說明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
@@ -118,31 +118,6 @@
             this.gridList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridList_CellEndEdit);
             this.gridList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridList_KeyDown);
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btnAddList);
-            this.groupBox2.Controls.Add(this.gridList);
-            this.groupBox2.Location = new System.Drawing.Point(7, 225);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(371, 188);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "FTP站台列表";
-            // 
-            // btnAddList
-            // 
-            this.btnAddList.Location = new System.Drawing.Point(277, 162);
-            this.btnAddList.Name = "btnAddList";
-            this.btnAddList.Size = new System.Drawing.Size(75, 23);
-            this.btnAddList.TabIndex = 4;
-            this.btnAddList.Text = "新增";
-            this.btnAddList.UseVisualStyleBackColor = true;
-            this.btnAddList.Click += new System.EventHandler(this.btnAddList_Click);
-            // 
-            // fTP_MTableAdapter
-            // 
-            this.fTP_MTableAdapter.ClearBeforeFill = true;
-            // 
             // ID
             // 
             this.ID.DataPropertyName = "ID";
@@ -167,6 +142,31 @@
             this.Password.DataPropertyName = "Password";
             this.Password.HeaderText = "密碼";
             this.Password.Name = "Password";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnAddList);
+            this.groupBox2.Controls.Add(this.gridList);
+            this.groupBox2.Location = new System.Drawing.Point(7, 225);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(371, 188);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "FTP站台列表";
+            // 
+            // btnAddList
+            // 
+            this.btnAddList.Location = new System.Drawing.Point(277, 162);
+            this.btnAddList.Name = "btnAddList";
+            this.btnAddList.Size = new System.Drawing.Size(75, 23);
+            this.btnAddList.TabIndex = 4;
+            this.btnAddList.Text = "新增";
+            this.btnAddList.UseVisualStyleBackColor = true;
+            this.btnAddList.Click += new System.EventHandler(this.btnAddList_Click);
+            // 
+            // fTP_MTableAdapter
+            // 
+            this.fTP_MTableAdapter.ClearBeforeFill = true;
             // 
             // menuStrip1
             // 
