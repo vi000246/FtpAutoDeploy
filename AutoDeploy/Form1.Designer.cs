@@ -43,6 +43,9 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
             this.gbUploadList = new System.Windows.Forms.GroupBox();
+            this.btnBrowseBackUp = new System.Windows.Forms.Button();
+            this.tbBackUpPath = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.lbFileList = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,9 +53,12 @@
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.lbLog = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tbBackUpPath = new System.Windows.Forms.TextBox();
-            this.btnBrowse = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnBrowseRoot = new System.Windows.Forms.Button();
+            this.btnPreView = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbUploadList.SuspendLayout();
@@ -62,7 +68,7 @@
             // 
             this.lbProgress.AutoSize = true;
             this.lbProgress.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lbProgress.Location = new System.Drawing.Point(10, 337);
+            this.lbProgress.Location = new System.Drawing.Point(10, 349);
             this.lbProgress.Name = "lbProgress";
             this.lbProgress.Size = new System.Drawing.Size(73, 19);
             this.lbProgress.TabIndex = 8;
@@ -74,7 +80,7 @@
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(703, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(742, 24);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -198,7 +204,13 @@
             // gbUploadList
             // 
             this.gbUploadList.AutoSize = true;
-            this.gbUploadList.Controls.Add(this.btnBrowse);
+            this.gbUploadList.Controls.Add(this.btnPreView);
+            this.gbUploadList.Controls.Add(this.btnBrowseRoot);
+            this.gbUploadList.Controls.Add(this.label4);
+            this.gbUploadList.Controls.Add(this.textBox2);
+            this.gbUploadList.Controls.Add(this.textBox1);
+            this.gbUploadList.Controls.Add(this.label3);
+            this.gbUploadList.Controls.Add(this.btnBrowseBackUp);
             this.gbUploadList.Controls.Add(this.tbBackUpPath);
             this.gbUploadList.Controls.Add(this.label2);
             this.gbUploadList.Controls.Add(this.lbProgress);
@@ -210,14 +222,43 @@
             this.gbUploadList.Controls.Add(this.cbIsBackUp);
             this.gbUploadList.Location = new System.Drawing.Point(216, 24);
             this.gbUploadList.Name = "gbUploadList";
-            this.gbUploadList.Size = new System.Drawing.Size(469, 494);
+            this.gbUploadList.Size = new System.Drawing.Size(526, 494);
             this.gbUploadList.TabIndex = 1;
             this.gbUploadList.TabStop = false;
             this.gbUploadList.Text = "上傳清單";
             // 
+            // btnBrowseBackUp
+            // 
+            this.btnBrowseBackUp.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnBrowseBackUp.Enabled = false;
+            this.btnBrowseBackUp.Location = new System.Drawing.Point(115, 326);
+            this.btnBrowseBackUp.Name = "btnBrowseBackUp";
+            this.btnBrowseBackUp.Size = new System.Drawing.Size(46, 19);
+            this.btnBrowseBackUp.TabIndex = 11;
+            this.btnBrowseBackUp.Text = "瀏覽";
+            this.btnBrowseBackUp.UseVisualStyleBackColor = false;
+            // 
+            // tbBackUpPath
+            // 
+            this.tbBackUpPath.Enabled = false;
+            this.tbBackUpPath.Location = new System.Drawing.Point(112, 324);
+            this.tbBackUpPath.Name = "tbBackUpPath";
+            this.tbBackUpPath.Size = new System.Drawing.Size(258, 22);
+            this.tbBackUpPath.TabIndex = 10;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label2.Location = new System.Drawing.Point(17, 330);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(92, 12);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "備份原始檔路徑:";
+            // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(305, 260);
+            this.btnClear.Location = new System.Drawing.Point(358, 237);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 39);
             this.btnClear.TabIndex = 7;
@@ -233,7 +274,7 @@
             this.lbFileList.Location = new System.Drawing.Point(6, 21);
             this.lbFileList.Name = "lbFileList";
             this.lbFileList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbFileList.Size = new System.Drawing.Size(457, 232);
+            this.lbFileList.Size = new System.Drawing.Size(508, 208);
             this.lbFileList.TabIndex = 0;
             this.lbFileList.DragDrop += new System.Windows.Forms.DragEventHandler(this.lbFileList_DragDrop);
             this.lbFileList.DragEnter += new System.Windows.Forms.DragEventHandler(this.lbFileList_DragEnter);
@@ -242,7 +283,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 260);
+            this.label1.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label1.Location = new System.Drawing.Point(18, 235);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(92, 12);
             this.label1.TabIndex = 3;
@@ -250,7 +292,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(388, 260);
+            this.btnStart.Location = new System.Drawing.Point(439, 237);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 73);
             this.btnStart.TabIndex = 6;
@@ -261,7 +303,7 @@
             // cbServerList
             // 
             this.cbServerList.FormattingEnabled = true;
-            this.cbServerList.Location = new System.Drawing.Point(116, 257);
+            this.cbServerList.Location = new System.Drawing.Point(113, 232);
             this.cbServerList.Name = "cbServerList";
             this.cbServerList.Size = new System.Drawing.Size(132, 20);
             this.cbServerList.TabIndex = 2;
@@ -269,8 +311,9 @@
             // cbIsBackUp
             // 
             this.cbIsBackUp.AutoSize = true;
+            this.cbIsBackUp.Cursor = System.Windows.Forms.Cursors.Help;
             this.cbIsBackUp.Enabled = false;
-            this.cbIsBackUp.Location = new System.Drawing.Point(20, 283);
+            this.cbIsBackUp.Location = new System.Drawing.Point(388, 330);
             this.cbIsBackUp.Name = "cbIsBackUp";
             this.cbIsBackUp.Size = new System.Drawing.Size(132, 16);
             this.cbIsBackUp.TabIndex = 5;
@@ -281,44 +324,72 @@
             // 
             this.lbLog.FormattingEnabled = true;
             this.lbLog.ItemHeight = 12;
-            this.lbLog.Location = new System.Drawing.Point(230, 383);
+            this.lbLog.Location = new System.Drawing.Point(230, 395);
             this.lbLog.Name = "lbLog";
-            this.lbLog.Size = new System.Drawing.Size(449, 124);
+            this.lbLog.Size = new System.Drawing.Size(500, 112);
             this.lbLog.TabIndex = 7;
             // 
-            // label2
+            // label3
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 314);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 12);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "備份原始檔路徑:";
+            this.label3.AutoSize = true;
+            this.label3.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label3.Location = new System.Drawing.Point(18, 264);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(92, 12);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "伺服器上傳目錄:";
             // 
-            // tbBackUpPath
+            // textBox1
             // 
-            this.tbBackUpPath.Enabled = false;
-            this.tbBackUpPath.Location = new System.Drawing.Point(116, 311);
-            this.tbBackUpPath.Name = "tbBackUpPath";
-            this.tbBackUpPath.Size = new System.Drawing.Size(264, 22);
-            this.tbBackUpPath.TabIndex = 10;
+            this.textBox1.Location = new System.Drawing.Point(113, 258);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(132, 22);
+            this.textBox1.TabIndex = 13;
             // 
-            // btnBrowse
+            // textBox2
             // 
-            this.btnBrowse.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnBrowse.Enabled = false;
-            this.btnBrowse.Location = new System.Drawing.Point(117, 312);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(46, 19);
-            this.btnBrowse.TabIndex = 11;
-            this.btnBrowse.Text = "瀏覽";
-            this.btnBrowse.UseVisualStyleBackColor = false;
+            this.textBox2.Enabled = false;
+            this.textBox2.Location = new System.Drawing.Point(113, 288);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(257, 22);
+            this.textBox2.TabIndex = 14;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label4.Location = new System.Drawing.Point(20, 296);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(89, 12);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "檔案清單根目錄";
+            // 
+            // btnBrowseRoot
+            // 
+            this.btnBrowseRoot.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnBrowseRoot.Enabled = false;
+            this.btnBrowseRoot.Location = new System.Drawing.Point(115, 289);
+            this.btnBrowseRoot.Name = "btnBrowseRoot";
+            this.btnBrowseRoot.Size = new System.Drawing.Size(46, 19);
+            this.btnBrowseRoot.TabIndex = 16;
+            this.btnBrowseRoot.Text = "瀏覽";
+            this.btnBrowseRoot.UseVisualStyleBackColor = false;
+            // 
+            // btnPreView
+            // 
+            this.btnPreView.Enabled = false;
+            this.btnPreView.Location = new System.Drawing.Point(277, 237);
+            this.btnPreView.Name = "btnPreView";
+            this.btnPreView.Size = new System.Drawing.Size(75, 39);
+            this.btnPreView.TabIndex = 17;
+            this.btnPreView.Text = "預覽";
+            this.btnPreView.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(703, 530);
+            this.ClientSize = new System.Drawing.Size(742, 530);
             this.Controls.Add(this.lbLog);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbUploadList);
@@ -360,9 +431,15 @@
         private System.Windows.Forms.Button btnSelectAll;
         private System.Windows.Forms.Button btnCancelSelect;
         private System.Windows.Forms.Button btnRename;
-        private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.Button btnBrowseBackUp;
         private System.Windows.Forms.TextBox tbBackUpPath;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnBrowseRoot;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnPreView;
     }
 }
 
