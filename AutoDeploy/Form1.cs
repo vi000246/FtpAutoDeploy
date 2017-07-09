@@ -106,26 +106,20 @@ namespace AutoDeploy
         {
             if (MessageBox.Show("確定刪除選中的Deploy群組及底下的上傳清單?", "關閉", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                //new ListBox().deleteListBoxItem<model.Deploy_M>(lbDeployGroup, db.DeleteFtpMasterAndDetail);
+                new ListBoxUtility().LoopListBoxItem<model.Deploy_M>(lbDeployGroup, db.DeleteDeployMasterAndDetail);
                 //重新整理master和detail
                 ShowGroupData();
+                //將所有項目unchecked
+                ListBoxUtility.unCheckAll(lbDeployGroup);
             }
         }
-        //點擊兩下 修改名稱
-        private void lbDeployGroup_DoubleClick(object sender, EventArgs e)
+        //修改名稱 loop checked的項目
+        private void btnRename_Click(object sender, EventArgs e)
         {
-            if (lbDeployGroup.SelectedItem != null)
-            {
-                //取得修改後的名稱
-                string name = dialog.ShowInputGroupNameForm("重新命名");
-                if (!string.IsNullOrEmpty(name))
-                {
-                    model.Deploy_M item = (lbDeployGroup.SelectedItem as model.Deploy_M);
-                    item.Name = name;
-                    db.UpdateDataToDB(item);
-                }
-            }
+            new ListBoxUtility().LoopListBoxItem<model.Deploy_M>(lbDeployGroup, ListBoxUtility.RenameDeployGroupItem);
             ShowGroupData();
+            //將所有項目unchecked
+            ListBoxUtility.unCheckAll(lbDeployGroup);
         }
         //取得Deploy群組資料  用來Refresh或一開始的init
         private void ShowGroupData()

@@ -35,6 +35,10 @@
             this.testToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnRename = new System.Windows.Forms.Button();
+            this.btnCancelSelect = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnSelectAll = new System.Windows.Forms.Button();
             this.lbDeployGroup = new System.Windows.Forms.CheckedListBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
@@ -46,9 +50,6 @@
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.lbLog = new System.Windows.Forms.ListBox();
-            this.btnSelectAll = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnCancelSelect = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbUploadList.SuspendLayout();
@@ -107,6 +108,7 @@
             // groupBox1
             // 
             this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.btnRename);
             this.groupBox1.Controls.Add(this.btnCancelSelect);
             this.groupBox1.Controls.Add(this.btnDelete);
             this.groupBox1.Controls.Add(this.btnSelectAll);
@@ -115,10 +117,50 @@
             this.groupBox1.Controls.Add(this.btnCopy);
             this.groupBox1.Location = new System.Drawing.Point(0, 24);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(210, 504);
+            this.groupBox1.Size = new System.Drawing.Size(210, 515);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deploy群組";
+            // 
+            // btnRename
+            // 
+            this.btnRename.Location = new System.Drawing.Point(10, 471);
+            this.btnRename.Name = "btnRename";
+            this.btnRename.Size = new System.Drawing.Size(75, 23);
+            this.btnRename.TabIndex = 15;
+            this.btnRename.Text = "重命名勾選";
+            this.btnRename.UseVisualStyleBackColor = true;
+            this.btnRename.Click += new System.EventHandler(this.btnRename_Click);
+            // 
+            // btnCancelSelect
+            // 
+            this.btnCancelSelect.Location = new System.Drawing.Point(112, 429);
+            this.btnCancelSelect.Name = "btnCancelSelect";
+            this.btnCancelSelect.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelSelect.TabIndex = 14;
+            this.btnCancelSelect.Text = "取消全選";
+            this.btnCancelSelect.UseVisualStyleBackColor = true;
+            this.btnCancelSelect.Click += new System.EventHandler(this.btnCancelSelect_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(112, 471);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 13;
+            this.btnDelete.Text = "刪除勾選";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnSelectAll
+            // 
+            this.btnSelectAll.Location = new System.Drawing.Point(10, 429);
+            this.btnSelectAll.Name = "btnSelectAll";
+            this.btnSelectAll.Size = new System.Drawing.Size(75, 23);
+            this.btnSelectAll.TabIndex = 12;
+            this.btnSelectAll.Text = "全選";
+            this.btnSelectAll.UseVisualStyleBackColor = true;
+            this.btnSelectAll.Click += new System.EventHandler(this.btnSelectAll_Click);
             // 
             // lbDeployGroup
             // 
@@ -127,7 +169,6 @@
             this.lbDeployGroup.Name = "lbDeployGroup";
             this.lbDeployGroup.Size = new System.Drawing.Size(188, 361);
             this.lbDeployGroup.TabIndex = 11;
-            this.lbDeployGroup.DoubleClick += new System.EventHandler(this.lbDeployGroup_DoubleClick);
             // 
             // btnAdd
             // 
@@ -235,36 +276,6 @@
             this.lbLog.Size = new System.Drawing.Size(449, 124);
             this.lbLog.TabIndex = 7;
             // 
-            // btnSelectAll
-            // 
-            this.btnSelectAll.Location = new System.Drawing.Point(10, 429);
-            this.btnSelectAll.Name = "btnSelectAll";
-            this.btnSelectAll.Size = new System.Drawing.Size(75, 23);
-            this.btnSelectAll.TabIndex = 12;
-            this.btnSelectAll.Text = "全選";
-            this.btnSelectAll.UseVisualStyleBackColor = true;
-            this.btnSelectAll.Click += new System.EventHandler(this.btnSelectAll_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(52, 460);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(91, 23);
-            this.btnDelete.TabIndex = 13;
-            this.btnDelete.Text = "刪除勾選項目";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnCancelSelect
-            // 
-            this.btnCancelSelect.Location = new System.Drawing.Point(112, 429);
-            this.btnCancelSelect.Name = "btnCancelSelect";
-            this.btnCancelSelect.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelSelect.TabIndex = 14;
-            this.btnCancelSelect.Text = "取消全選";
-            this.btnCancelSelect.UseVisualStyleBackColor = true;
-            this.btnCancelSelect.Click += new System.EventHandler(this.btnCancelSelect_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -310,6 +321,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnSelectAll;
         private System.Windows.Forms.Button btnCancelSelect;
+        private System.Windows.Forms.Button btnRename;
     }
 }
 

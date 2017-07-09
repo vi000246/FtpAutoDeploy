@@ -20,13 +20,13 @@ namespace AutoDeploy
         {
             Form prompt = new Form()
             {
-                Width = 220,
+                Width = 245,
                 Height = 150,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 Text = title,
                 StartPosition = FormStartPosition.CenterParent
             };
-            Label textLabel = new Label() { Left = 30, Top = 20, Text = message };
+            Label textLabel = new Label() { Left = 30, Top = 20,Width=150, Text = message,AutoSize=true };
             TextBox textBox = new TextBox() { Left = 30, Top = 50, Width = 150 };
             Button confirmation = new Button() { Text = "確定", Left = 70, Width = 50, Top = 80, DialogResult = DialogResult.OK };
             Button cancelation = new Button() { Text = "取消", Left = 130, Width = 50, Top = 80, DialogResult = DialogResult.Cancel };

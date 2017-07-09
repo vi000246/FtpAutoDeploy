@@ -55,6 +55,19 @@ namespace AutoDeploy
             }
 
         }
+        //刪除Deploy的主表和明細表
+        public void DeleteDeployMasterAndDetail(model.Deploy_M item)
+        {
+            //刪除主表的資料
+            DeleteDataFromDB(item);
+            //刪除明細表的資料  where GroupID=主表ID的資料
+            using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
+            {
+                cnn.Open();
+                cnn.DeleteList<model.Deploy_D>(new { GroupID = item.ID });
+            }
+
+        }
 
         //新增Deploy群組
         public int? AddDeployGroup(string name)
