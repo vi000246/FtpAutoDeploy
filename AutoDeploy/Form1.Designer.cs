@@ -170,6 +170,7 @@
             this.lbDeployGroup.Name = "lbDeployGroup";
             this.lbDeployGroup.Size = new System.Drawing.Size(188, 361);
             this.lbDeployGroup.TabIndex = 11;
+            this.lbDeployGroup.SelectedIndexChanged += new System.EventHandler(this.lbDeployGroup_SelectedIndexChanged);
             // 
             // btnAdd
             // 
@@ -225,6 +226,7 @@
             this.lbFileList.ItemHeight = 12;
             this.lbFileList.Location = new System.Drawing.Point(6, 21);
             this.lbFileList.Name = "lbFileList";
+            this.lbFileList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbFileList.Size = new System.Drawing.Size(457, 232);
             this.lbFileList.TabIndex = 0;
             this.lbFileList.DragDrop += new System.Windows.Forms.DragEventHandler(this.lbFileList_DragDrop);

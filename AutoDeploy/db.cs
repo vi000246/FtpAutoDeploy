@@ -43,6 +43,21 @@ namespace AutoDeploy
             return newId;
         }
 
+        //新增Deploy 路徑清單
+        public int? AddDeployDetail(model.Deploy_D item)
+        {
+            int? newId = 0;
+            using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
+            {
+                cnn.Open();
+                var result = cnn.Execute(@"Insert into Deploy_D (GroupID,Path) 
+                                            values(@groupid,@path)",
+                    new { groupid = item.GroupID, path = item.Path});
+            }
+            return newId;
+        }
+
+
         //刪除FTP的主表和明細表
         public void DeleteFtpMasterAndDetail(model.FTP_M item) {
             //刪除主表的資料

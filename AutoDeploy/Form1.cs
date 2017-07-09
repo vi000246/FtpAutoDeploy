@@ -19,6 +19,7 @@ namespace AutoDeploy
         {
             InitializeComponent();
             ShowGroupData();
+            ShowDetailData();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -51,30 +52,80 @@ namespace AutoDeploy
         // 檔案拖放
         private void lbFileList_DragDrop(object sender, DragEventArgs e)
         {
-            // GetData() 回傳 string[]，內容為物件路徑，允許使用者一次拖曳多個物件
-            string[] entriesPath = (string[])e.Data.GetData(DataFormats.FileDrop, false);
-            foreach (string entryPath in entriesPath)
+            try
             {
-                lbFileList.Items.Add(entryPath);
+                CheckIsSelectDeployGroup();
+                // GetData() 回傳 string[]，內容為物件路徑，允許使用者一次拖曳多個物件
+                string[] entriesPath = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+                foreach (string entryPath in entriesPath)
+                {
+                    int groupid = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
+                    db.AddDeployDetail(new model.Deploy_D {GroupID = groupid ,Path = entryPath});
+                }
+                ShowDetailData();
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
             }
         }
 
         //按下delete鍵 刪掉反白的路徑
         private void lbFileList_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete)
+            try
             {
-                //從DB刪除資料
-                //new ListBox().deleteListBoxItem(lbFileList);
+                CheckIsSelectDeployGroup();
+                if (e.KeyCode == Keys.Delete)
+                {
+                    //從DB刪除資料
+                    new ListBoxUtility().LoopListBoxItem<model.Deploy_D>(lbFileList, db.DeleteDataFromDB);
+                    ShowDetailData();
+                }
             }
-        }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+}
         //清除所有檔案清單的路徑
         private void btnClear_Click(object sender, EventArgs e)
         {
-            lbFileList.Items.Clear();
+            try { 
+                CheckIsSelectDeployGroup();
+                for (int i = lbFileList.Items.Count - 1; i >= 0; i--)
+                {
+                    // do with listBox1.Items[i]
+                    db.DeleteDataFromDB<model.Deploy_D>((model.Deploy_D)lbFileList.Items[i]);
+                }
+                ShowDetailData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
+        //重整detail view的資料 依據選擇的Deploy群組
+        private void ShowDetailData()
+        {
+            if (lbDeployGroup.SelectedItem != null)
+            {
+                lbFileList.DataSource = db.
+                    GetDataFromDBByCondition<model.Deploy_D>(new { GroupID = (lbDeployGroup.SelectedItem as model.Deploy_M).ID });
+                lbFileList.DisplayMember = "Path";
+                lbFileList.ValueMember = "Path";
+            }
+            else
+            {
+                lbFileList.DataSource = null;
+            }
+        }
 
+        private void CheckIsSelectDeployGroup() {
+            if (lbDeployGroup.SelectedItem == null)
+            {
+                throw new ArgumentException("請先選擇Deploy群組");
+            }
+        }
 
         #endregion
         #region ========================Deploy 群組相關===============================
@@ -88,7 +139,11 @@ namespace AutoDeploy
             }
             ShowGroupData();
         }
-
+        //依據group 自動切換Detail view
+        private void lbDeployGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ShowDetailData();
+        }
 
         //全選按鈕
         private void btnSelectAll_Click(object sender, EventArgs e)
@@ -155,5 +210,7 @@ Github：vi000246
 
 ","程式資訊");
         }
+
+
     }
 }
