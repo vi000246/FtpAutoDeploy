@@ -96,6 +96,29 @@ namespace AutoDeploy
             }
             return newId;
         }
+        //更新Deploy群組的config相關欄位
+        public int? UpdateDeployConfig(model.Deploy_M form) {
+            int? newId = 0;
+            using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
+            {
+                cnn.Open();
+                var result = cnn.Execute(@"update Deploy_M set 
+                    FtpGroup = @FtpGroup,
+                    FtpTargetPath = @FtpTargetPath,
+                    FileRootPath = @FileRootPath,
+                    BackUpPath = @BackUpPath,
+                    Memo = @Memo
+                    where Id = @id", 
+                    new { id = form.ID,
+                        FtpGroup = form.FtpGroup,
+                        FtpTargetPath = form.FtpTargetPath,
+                        FileRootPath = form.FileRootPath,
+                        BackUpPath = form.BackUpPath,
+                        Memo = form.Memo
+                    });
+            }
+            return newId;
+        }
 
         /// <summary>
         /// 更新資料到DB 傳進資料的class instance 用simpleCRUD更新資料
@@ -124,6 +147,22 @@ namespace AutoDeploy
             }
             return list;
         }
+        /// <summary>
+        /// 多載 依據id取得單一筆資料
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public T GetDataFromDB<T>(int id)where T:new()
+        {
+            T result = new T();
+            using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
+            {
+                cnn.Open();
+                result = cnn.Get<T>(id);
+            }
+            return result;
+        }
 
         /// <summary>
         /// 依據where條件 從資料庫取得此class的資料
@@ -141,6 +180,7 @@ namespace AutoDeploy
             }
             return list;
         }
+
 
 
         /// <summary>

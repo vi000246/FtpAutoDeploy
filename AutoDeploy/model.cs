@@ -35,6 +35,11 @@ namespace AutoDeploy
             [Key]
             public int ID { get; set; }
             public string Name { get; set; }
+            public int FtpGroup { get; set; }
+            public string FtpTargetPath { get; set; }
+            public string FileRootPath { get; set; }
+            public string BackUpPath { get; set; }
+            public string Memo { get; set; }
         }
         [Table("Deploy_D")]
         public class Deploy_D

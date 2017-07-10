@@ -33,6 +33,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.deploy伺服器設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.上傳預設值設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -44,6 +45,9 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
             this.gbUploadList = new System.Windows.Forms.GroupBox();
+            this.tbMemo = new System.Windows.Forms.TextBox();
+            this.lbmemo = new System.Windows.Forms.Label();
+            this.lbLog = new System.Windows.Forms.ListBox();
             this.btnPreView = new System.Windows.Forms.Button();
             this.btnBrowseRoot = new System.Windows.Forms.Button();
             this.lbFileRoot = new System.Windows.Forms.Label();
@@ -59,12 +63,7 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
-            this.lbLog = new System.Windows.Forms.ListBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.lbmemo = new System.Windows.Forms.Label();
-            this.tbMemo = new System.Windows.Forms.TextBox();
-            this.btnSaveConfig = new System.Windows.Forms.Button();
-            this.上傳預設值設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbUploadList.SuspendLayout();
@@ -107,6 +106,12 @@
             this.deploy伺服器設定ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.deploy伺服器設定ToolStripMenuItem.Text = "Deploy伺服器設定";
             this.deploy伺服器設定ToolStripMenuItem.Click += new System.EventHandler(this.deploy伺服器設定ToolStripMenuItem_Click);
+            // 
+            // 上傳預設值設定ToolStripMenuItem
+            // 
+            this.上傳預設值設定ToolStripMenuItem.Name = "上傳預設值設定ToolStripMenuItem";
+            this.上傳預設值設定ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.上傳預設值設定ToolStripMenuItem.Text = "上傳預設值設定";
             // 
             // testToolStripMenuItem1
             // 
@@ -211,7 +216,6 @@
             // gbUploadList
             // 
             this.gbUploadList.AutoSize = true;
-            this.gbUploadList.Controls.Add(this.btnSaveConfig);
             this.gbUploadList.Controls.Add(this.tbMemo);
             this.gbUploadList.Controls.Add(this.lbmemo);
             this.gbUploadList.Controls.Add(this.lbLog);
@@ -237,6 +241,33 @@
             this.gbUploadList.TabIndex = 1;
             this.gbUploadList.TabStop = false;
             this.gbUploadList.Text = "上傳清單";
+            // 
+            // tbMemo
+            // 
+            this.tbMemo.ImeMode = System.Windows.Forms.ImeMode.Hiragana;
+            this.tbMemo.Location = new System.Drawing.Point(112, 352);
+            this.tbMemo.Multiline = true;
+            this.tbMemo.Name = "tbMemo";
+            this.tbMemo.Size = new System.Drawing.Size(258, 43);
+            this.tbMemo.TabIndex = 19;
+            // 
+            // lbmemo
+            // 
+            this.lbmemo.AutoSize = true;
+            this.lbmemo.Location = new System.Drawing.Point(17, 352);
+            this.lbmemo.Name = "lbmemo";
+            this.lbmemo.Size = new System.Drawing.Size(32, 12);
+            this.lbmemo.TabIndex = 18;
+            this.lbmemo.Text = "備註:";
+            // 
+            // lbLog
+            // 
+            this.lbLog.FormattingEnabled = true;
+            this.lbLog.ItemHeight = 12;
+            this.lbLog.Location = new System.Drawing.Point(14, 410);
+            this.lbLog.Name = "lbLog";
+            this.lbLog.Size = new System.Drawing.Size(500, 88);
+            this.lbLog.TabIndex = 7;
             // 
             // btnPreView
             // 
@@ -387,53 +418,11 @@
             this.cbIsBackUp.Text = "是否備份遠端原始檔";
             this.cbIsBackUp.UseVisualStyleBackColor = true;
             // 
-            // lbLog
-            // 
-            this.lbLog.FormattingEnabled = true;
-            this.lbLog.ItemHeight = 12;
-            this.lbLog.Location = new System.Drawing.Point(14, 410);
-            this.lbLog.Name = "lbLog";
-            this.lbLog.Size = new System.Drawing.Size(500, 88);
-            this.lbLog.TabIndex = 7;
-            // 
             // toolTip
             // 
             this.toolTip.AutoPopDelay = 30000;
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
-            // 
-            // lbmemo
-            // 
-            this.lbmemo.AutoSize = true;
-            this.lbmemo.Location = new System.Drawing.Point(17, 352);
-            this.lbmemo.Name = "lbmemo";
-            this.lbmemo.Size = new System.Drawing.Size(32, 12);
-            this.lbmemo.TabIndex = 18;
-            this.lbmemo.Text = "備註:";
-            // 
-            // tbMemo
-            // 
-            this.tbMemo.ImeMode = System.Windows.Forms.ImeMode.Hiragana;
-            this.tbMemo.Location = new System.Drawing.Point(112, 352);
-            this.tbMemo.Multiline = true;
-            this.tbMemo.Name = "tbMemo";
-            this.tbMemo.Size = new System.Drawing.Size(258, 43);
-            this.tbMemo.TabIndex = 19;
-            // 
-            // btnSaveConfig
-            // 
-            this.btnSaveConfig.Location = new System.Drawing.Point(423, 358);
-            this.btnSaveConfig.Name = "btnSaveConfig";
-            this.btnSaveConfig.Size = new System.Drawing.Size(91, 37);
-            this.btnSaveConfig.TabIndex = 20;
-            this.btnSaveConfig.Text = "儲存目前設置";
-            this.btnSaveConfig.UseVisualStyleBackColor = true;
-            // 
-            // 上傳預設值設定ToolStripMenuItem
-            // 
-            this.上傳預設值設定ToolStripMenuItem.Name = "上傳預設值設定ToolStripMenuItem";
-            this.上傳預設值設定ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.上傳預設值設定ToolStripMenuItem.Text = "上傳預設值設定";
             // 
             // Form1
             // 
@@ -446,6 +435,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "FTP AutoDeploy";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -492,7 +482,6 @@
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.TextBox tbMemo;
         private System.Windows.Forms.Label lbmemo;
-        private System.Windows.Forms.Button btnSaveConfig;
         private System.Windows.Forms.ToolStripMenuItem 上傳預設值設定ToolStripMenuItem;
     }
 }

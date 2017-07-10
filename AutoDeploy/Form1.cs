@@ -17,6 +17,8 @@ namespace AutoDeploy
         private static Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
         public db db = new db();
+        //用來儲存目前選擇的Deploy群組 在selected index change事件會變更此值
+        public int lastDeployGroupIdSelected = 0;
 
         public Form1()
         {
@@ -39,7 +41,8 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            if (lbDeployGroup.SelectedItem != null)
+                lastDeployGroupIdSelected = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
         }
 
         // 啟動按鈕Click
@@ -73,7 +76,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 }
                 btnStart.Enabled = true;
             }
-            catch (Exception ex) {
+            catch (ArgumentException ex) {
                 MessageBox.Show(ex.Message);
             }
         }
@@ -109,7 +112,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 }
                 ShowDetailData();
             }
-            catch (Exception ex) {
+            catch (ArgumentException ex) {
                 MessageBox.Show(ex.Message);
             }
         }
@@ -127,7 +130,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                     ShowDetailData();
                 }
             }
-            catch (Exception ex) {
+            catch (ArgumentException ex) {
                 MessageBox.Show(ex.Message);
             }
 }
@@ -143,7 +146,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 }
                 ShowDetailData();
             }
-            catch (Exception ex)
+            catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -187,7 +190,11 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
         //依據group 自動切換Detail view
         private void lbDeployGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
+            UpdateDeployConfig(lastDeployGroupIdSelected);
+            if (lbDeployGroup.SelectedItem != null)
+                lastDeployGroupIdSelected = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
             ShowDetailData();
+            ShowConfigData();
         }
 
         //全選按鈕
@@ -227,6 +234,48 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
             //將所有項目unchecked
             ListBoxUtility.unCheckAll(lbDeployGroup);
         }
+        /// <summary>
+        /// 只更新Deploy_M裡 和設置有關的欄位
+        /// </summary>
+        public void UpdateDeployConfig(int DeployGroupDd) {
+            model.Deploy_M form = new model.Deploy_M();
+            CheckIsSelectDeployGroup();
+            int serverGroupID = 0;
+            if (cbServerList.SelectedItem!=null)
+                serverGroupID = (cbServerList.SelectedItem as model.FTP_M).ID;
+
+            form.ID = DeployGroupDd;
+            form.FtpGroup = serverGroupID;
+            form.FileRootPath = tbFileRoot.Text;
+            form.FtpTargetPath = tbFtpRoot.Text;
+            form.BackUpPath = tbBackUpPath.Text;
+            form.Memo = tbMemo.Text;
+            db.UpdateDeployConfig(form);
+        }
+        //當切換群組時 讀取Deploy_M裡的config相關欄位並顯示到控制項中
+        public void ShowConfigData() {
+            if (lbDeployGroup.SelectedItem != null)
+            {
+                int groupid = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
+                model.Deploy_M form = db.GetDataFromDB<model.Deploy_M>(groupid);
+
+                //依據config欄位 勾選Ftp Combobox的值
+                for (int i = 0; i < cbServerList.Items.Count; i++)
+                {
+
+                    if ((cbServerList.Items[i] as model.FTP_M).ID == form.FtpGroup)
+                    {
+                        cbServerList.SelectedIndex = i;
+                        break;
+                    }
+                }
+                tbFileRoot.Text = form.FileRootPath;
+                tbFtpRoot.Text = form.FtpTargetPath;
+                tbBackUpPath.Text = form.BackUpPath;
+                tbMemo.Text = form.Memo;
+            }
+        }
+
         //取得Deploy群組資料  用來Refresh或一開始的init
         private void ShowGroupData()
         {
@@ -261,8 +310,13 @@ Github：vi000246
 
 ","程式資訊");
         }
+
         #endregion
 
-
+        //當視窗關閉時 將目前的設置存檔至Deploy_M
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UpdateDeployConfig(lastDeployGroupIdSelected);
+        }
     }
 }
