@@ -15,12 +15,18 @@ namespace AutoDeploy
     {
         public FtpClient client;
         public ftp(string ClientIP,string User,string Password) {
-            client = new FtpClient(ClientIP);
-            //如果帳密不為空 就登入 否則採用匿名登入
-            if(!string.IsNullOrEmpty(User) && !string.IsNullOrEmpty(Password))
-                client.Credentials = new NetworkCredential(User, Password);
+            try
+            {
+                client = new FtpClient(ClientIP);
+                //如果帳密不為空 就登入 否則採用匿名登入
+                if (!string.IsNullOrEmpty(User) && !string.IsNullOrEmpty(Password))
+                    client.Credentials = new NetworkCredential(User, Password);
 
-            client.Connect();
+                client.Connect();
+            }
+            catch (Exception ex) {
+                throw new ArgumentException(ex.Message);
+            }
         }
         //上傳檔案至FTP
         public void UploadFileToFtp(List<string> filePaths,bool IsBackUp = false,string BackUpPath = "") {

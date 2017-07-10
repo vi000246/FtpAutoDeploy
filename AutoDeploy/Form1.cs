@@ -43,6 +43,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
         {
             if (lbDeployGroup.SelectedItem != null)
                 lastDeployGroupIdSelected = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
+            ShowConfigData();
         }
 
         // 啟動按鈕Click
@@ -54,8 +55,10 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 if (lbFileList.Items.Count == 0)
                     throw new ArgumentException("上傳清單不得為空");
 
-                if (cbServerList.SelectedItem != null)
+                if (cbServerList.SelectedItem == null)
                     throw new ArgumentException("請選擇一個伺服器群組");
+                //儲存目前的設置
+                UpdateDeployConfig(lastDeployGroupIdSelected);
 
                 int serverGroupID = (cbServerList.SelectedItem as model.FTP_M).ID;
                 //取得combobx選中的FTP群組的FTP列表
@@ -74,10 +77,15 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                         //ftp.testUpload();
                     }
                 }
-                btnStart.Enabled = true;
+                //將紀錄存檔到txt
+                logger.Trace(log.BuildDeployHistoryMessage(lastDeployGroupIdSelected));
             }
-            catch (ArgumentException ex) {
+            catch (ArgumentException ex)
+            {
                 MessageBox.Show(ex.Message);
+            }
+            finally {
+                btnStart.Enabled = true;
             }
         }
         //載入伺服器選單的combobox
