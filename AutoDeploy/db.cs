@@ -155,13 +155,19 @@ namespace AutoDeploy
         /// <returns></returns>
         public T GetDataFromDB<T>(int id)where T:new()
         {
-            T result = new T();
-            using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
-            {
-                cnn.Open();
-                result = cnn.Get<T>(id);
+            try { 
+                T result = new T();
+                using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
+                {
+                    cnn.Open();
+                    result = cnn.Get<T>(id);
+                }
+                return result;
             }
-            return result;
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
         }
 
         /// <summary>
@@ -172,13 +178,19 @@ namespace AutoDeploy
         /// <returns></returns>
         public List<T> GetDataFromDBByCondition<T>(object whereConditions)
         {
-            List<T> list = new List<T>();
-            using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
+            try
             {
-                cnn.Open();
-                list = cnn.GetList<T>(whereConditions).ToList<T>();
+                List<T> list = new List<T>();
+                using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
+                {
+                    cnn.Open();
+                    list = cnn.GetList<T>(whereConditions).ToList<T>();
+                }
+                return list;
             }
-            return list;
+            catch (Exception ex) {
+                throw new ArgumentException(ex.Message);
+            }
         }
 
 
@@ -189,10 +201,17 @@ namespace AutoDeploy
         /// <typeparam name="T"></typeparam>
         /// <param name="item"></param>
         public void DeleteDataFromDB<T>(T item) {
-            using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
+            try
             {
-                cnn.Open();
-                cnn.Delete(item);
+                using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
+                {
+                    cnn.Open();
+                    cnn.Delete(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
             }
         }
     }

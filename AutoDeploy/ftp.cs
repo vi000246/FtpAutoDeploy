@@ -30,15 +30,22 @@ namespace AutoDeploy
         }
         //上傳檔案至FTP
         public void UploadFileToFtp(List<string> filePaths,bool IsBackUp = false,string BackUpPath = "") {
-            client.RetryAttempts = 3;
-            foreach (var path in filePaths)
+            try
             {
-                //移除路徑的根目錄 ex.  C:/destop/user/test/111.txt  =>destop/user/test/111.txt
-                string remotePath = path.Substring(Path.GetPathRoot(path).Length);
-                //取得目錄名稱 ex.c:/Desktop/test.txt  => c:/Desktop
-                string directory = Path.GetDirectoryName(remotePath);
-                //這是用來多檔案上傳的api 因為單檔上傳的有bug
-                client.UploadFiles(new string[] { path }, directory, FtpExists.Overwrite, true);
+                client.RetryAttempts = 3;
+                foreach (var path in filePaths)
+                {
+                    //移除路徑的根目錄 ex.  C:/destop/user/test/111.txt  =>destop/user/test/111.txt
+                    string remotePath = path.Substring(Path.GetPathRoot(path).Length);
+                    //取得目錄名稱 ex.c:/Desktop/test.txt  => c:/Desktop
+                    string directory = Path.GetDirectoryName(remotePath);
+                    //這是用來多檔案上傳的api 因為單檔上傳的有bug
+                    client.UploadFiles(new string[] { path }, directory, FtpExists.Overwrite, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
             }
         }
 

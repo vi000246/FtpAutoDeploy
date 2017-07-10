@@ -20,27 +20,34 @@ namespace AutoDeploy
         /// <param name="deleteFromDb">從DB處理資料的委派</param>
         public void LoopListBoxItem<T>(ListBox listBox,Action<T> DoSomeThingFromDb)
         {
-            //如果是listBox就loop被selected的item
-            if (listBox.GetType() == typeof(ListBox))
+            try
             {
-                ListBox.SelectedObjectCollection selectedItems = new ListBox.SelectedObjectCollection(listBox);
-                selectedItems = listBox.SelectedItems;
-
-                if (listBox.SelectedIndex != -1)
+                //如果是listBox就loop被selected的item
+                if (listBox.GetType() == typeof(ListBox))
                 {
-                    foreach (T item in selectedItems)
+                    ListBox.SelectedObjectCollection selectedItems = new ListBox.SelectedObjectCollection(listBox);
+                    selectedItems = listBox.SelectedItems;
+
+                    if (listBox.SelectedIndex != -1)
                     {
-                        DoSomeThingFromDb(item);
+                        foreach (T item in selectedItems)
+                        {
+                            DoSomeThingFromDb(item);
+                        }
+                    }
+                }
+                //如果是checkedListBox 就loop被勾選的值
+                else if (listBox.GetType() == typeof(CheckedListBox))
+                {
+                    foreach (T itemChecked in (listBox as CheckedListBox).CheckedItems)
+                    {
+                        DoSomeThingFromDb(itemChecked);
                     }
                 }
             }
-            //如果是checkedListBox 就loop被勾選的值
-            else if (listBox.GetType() == typeof(CheckedListBox))
+            catch (Exception ex)
             {
-                foreach (T itemChecked in (listBox as CheckedListBox).CheckedItems)
-                {
-                    DoSomeThingFromDb(itemChecked);
-                }
+                throw new ArgumentException(ex.Message);
             }
         }
 
@@ -49,12 +56,19 @@ namespace AutoDeploy
         /// </summary>
         /// <param name="item"></param>
         public static void RenameDeployGroupItem(model.Deploy_M item) {
-            //取得修改後的名稱
-            string name = dialog.ShowInputGroupNameForm("重新命名", "請輸入群組名稱 \n 原名稱("+item.Name+")");
-            if (!string.IsNullOrEmpty(name))
+            try
             {
-                item.Name = name;
-                new db().UpdateDataToDB(item);
+                //取得修改後的名稱
+                string name = dialog.ShowInputGroupNameForm("重新命名", "請輸入群組名稱 \n 原名稱(" + item.Name + ")");
+                if (!string.IsNullOrEmpty(name))
+                {
+                    item.Name = name;
+                    new db().UpdateDataToDB(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
             }
         }
 

@@ -80,7 +80,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 //將紀錄存檔到txt
                 logger.Trace(log.BuildDeployHistoryMessage(lastDeployGroupIdSelected));
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -90,9 +90,15 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
         }
         //載入伺服器選單的combobox
         public void LoadServerCombobox() {
-            cbServerList.DataSource = db.GetDataFromDB<model.FTP_M>();
-            cbServerList.ValueMember = "ID";
-            cbServerList.DisplayMember = "Name";
+            try
+            {
+                cbServerList.DataSource = db.GetDataFromDB<model.FTP_M>();
+                cbServerList.ValueMember = "ID";
+                cbServerList.DisplayMember = "Name";
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         #region ========================檔案清單相關===============================
@@ -120,7 +126,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 }
                 ShowDetailData();
             }
-            catch (ArgumentException ex) {
+            catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
         }
@@ -138,7 +144,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                     ShowDetailData();
                 }
             }
-            catch (ArgumentException ex) {
+            catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
 }
@@ -154,7 +160,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 }
                 ShowDetailData();
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -163,16 +169,23 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
         //重整detail view的資料 依據選擇的Deploy群組
         private void ShowDetailData()
         {
-            if (lbDeployGroup.SelectedItem != null)
+            try
             {
-                lbFileList.DataSource = db.
-                    GetDataFromDBByCondition<model.Deploy_D>(new { GroupID = (lbDeployGroup.SelectedItem as model.Deploy_M).ID });
-                lbFileList.DisplayMember = "Path";
-                lbFileList.ValueMember = "Path";
+                if (lbDeployGroup.SelectedItem != null)
+                {
+                    lbFileList.DataSource = db.
+                        GetDataFromDBByCondition<model.Deploy_D>(new { GroupID = (lbDeployGroup.SelectedItem as model.Deploy_M).ID });
+                    lbFileList.DisplayMember = "Path";
+                    lbFileList.ValueMember = "Path";
+                }
+                else
+                {
+                    lbFileList.DataSource = null;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                lbFileList.DataSource = null;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -188,21 +201,35 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
         //新增Deploy群組
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string name = dialog.ShowInputGroupNameForm();
-            if (!string.IsNullOrEmpty(name))
+            try
             {
-                int? newID = db.AddDeployGroup(name);
+                string name = dialog.ShowInputGroupNameForm();
+                if (!string.IsNullOrEmpty(name))
+                {
+                    int? newID = db.AddDeployGroup(name);
+                }
+                ShowGroupData();
             }
-            ShowGroupData();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         //依據group 自動切換Detail view
         private void lbDeployGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateDeployConfig(lastDeployGroupIdSelected);
-            if (lbDeployGroup.SelectedItem != null)
-                lastDeployGroupIdSelected = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
-            ShowDetailData();
-            ShowConfigData();
+            try
+            {
+                UpdateDeployConfig(lastDeployGroupIdSelected);
+                if (lbDeployGroup.SelectedItem != null)
+                    lastDeployGroupIdSelected = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
+                ShowDetailData();
+                ShowConfigData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         //全選按鈕
@@ -220,76 +247,111 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
         //刪除勾選項目
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("確定刪除選中的Deploy群組及底下的上傳清單?", "關閉", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            try
             {
-                new ListBoxUtility().LoopListBoxItem<model.Deploy_M>(lbDeployGroup, db.DeleteDeployMasterAndDetail);
-                //重新整理master和detail
-                ShowGroupData();
-                //將所有項目unchecked
-                ListBoxUtility.unCheckAll(lbDeployGroup);
+                if (MessageBox.Show("確定刪除選中的Deploy群組及底下的上傳清單?", "關閉", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    new ListBoxUtility().LoopListBoxItem<model.Deploy_M>(lbDeployGroup, db.DeleteDeployMasterAndDetail);
+                    //重新整理master和detail
+                    ShowGroupData();
+                    //將所有項目unchecked
+                    ListBoxUtility.unCheckAll(lbDeployGroup);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
         //修改名稱 loop checked的項目
         private void btnRename_Click(object sender, EventArgs e)
         {
-            if (lbDeployGroup.CheckedItems.Count == 0)
+            try
             {
-                MessageBox.Show("請至少勾選一個項目");
-                return;
+                if (lbDeployGroup.CheckedItems.Count == 0)
+                {
+                    MessageBox.Show("請至少勾選一個項目");
+                    return;
+                }
+                new ListBoxUtility().LoopListBoxItem<model.Deploy_M>(lbDeployGroup, ListBoxUtility.RenameDeployGroupItem);
+                ShowGroupData();
+                //將所有項目unchecked
+                ListBoxUtility.unCheckAll(lbDeployGroup);
             }
-            new ListBoxUtility().LoopListBoxItem<model.Deploy_M>(lbDeployGroup, ListBoxUtility.RenameDeployGroupItem);
-            ShowGroupData();
-            //將所有項目unchecked
-            ListBoxUtility.unCheckAll(lbDeployGroup);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         /// <summary>
         /// 只更新Deploy_M裡 和設置有關的欄位
         /// </summary>
         public void UpdateDeployConfig(int DeployGroupDd) {
-            model.Deploy_M form = new model.Deploy_M();
-            CheckIsSelectDeployGroup();
-            int serverGroupID = 0;
-            if (cbServerList.SelectedItem!=null)
-                serverGroupID = (cbServerList.SelectedItem as model.FTP_M).ID;
+            try
+            {
+                model.Deploy_M form = new model.Deploy_M();
+                CheckIsSelectDeployGroup();
+                int serverGroupID = 0;
+                if (cbServerList.SelectedItem != null)
+                    serverGroupID = (cbServerList.SelectedItem as model.FTP_M).ID;
 
-            form.ID = DeployGroupDd;
-            form.FtpGroup = serverGroupID;
-            form.FileRootPath = tbFileRoot.Text;
-            form.FtpTargetPath = tbFtpRoot.Text;
-            form.BackUpPath = tbBackUpPath.Text;
-            form.Memo = tbMemo.Text;
-            db.UpdateDeployConfig(form);
+                form.ID = DeployGroupDd;
+                form.FtpGroup = serverGroupID;
+                form.FileRootPath = tbFileRoot.Text;
+                form.FtpTargetPath = tbFtpRoot.Text;
+                form.BackUpPath = tbBackUpPath.Text;
+                form.Memo = tbMemo.Text;
+                db.UpdateDeployConfig(form);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         //當切換群組時 讀取Deploy_M裡的config相關欄位並顯示到控制項中
         public void ShowConfigData() {
-            if (lbDeployGroup.SelectedItem != null)
+            try
             {
-                int groupid = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
-                model.Deploy_M form = db.GetDataFromDB<model.Deploy_M>(groupid);
-
-                //依據config欄位 勾選Ftp Combobox的值
-                for (int i = 0; i < cbServerList.Items.Count; i++)
+                if (lbDeployGroup.SelectedItem != null)
                 {
+                    int groupid = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
+                    model.Deploy_M form = db.GetDataFromDB<model.Deploy_M>(groupid);
 
-                    if ((cbServerList.Items[i] as model.FTP_M).ID == form.FtpGroup)
+                    //依據config欄位 勾選Ftp Combobox的值
+                    for (int i = 0; i < cbServerList.Items.Count; i++)
                     {
-                        cbServerList.SelectedIndex = i;
-                        break;
+
+                        if ((cbServerList.Items[i] as model.FTP_M).ID == form.FtpGroup)
+                        {
+                            cbServerList.SelectedIndex = i;
+                            break;
+                        }
                     }
+                    tbFileRoot.Text = form.FileRootPath;
+                    tbFtpRoot.Text = form.FtpTargetPath;
+                    tbBackUpPath.Text = form.BackUpPath;
+                    tbMemo.Text = form.Memo;
                 }
-                tbFileRoot.Text = form.FileRootPath;
-                tbFtpRoot.Text = form.FtpTargetPath;
-                tbBackUpPath.Text = form.BackUpPath;
-                tbMemo.Text = form.Memo;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         //取得Deploy群組資料  用來Refresh或一開始的init
         private void ShowGroupData()
         {
-            lbDeployGroup.DataSource = db.GetDataFromDB<model.Deploy_M>();
-            lbDeployGroup.DisplayMember = "Name";
-            lbDeployGroup.ValueMember = "ID";
+            try
+            {
+                lbDeployGroup.DataSource = db.GetDataFromDB<model.Deploy_M>();
+                lbDeployGroup.DisplayMember = "Name";
+                lbDeployGroup.ValueMember = "ID";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         #endregion
 
@@ -297,13 +359,20 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
         //點擊Menu的伺服器設定時
         private void deploy伺服器設定ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form FormServer = new FormServer();
-            //關閉Server設定時 重整combobox
-            FormServer.FormClosing += (formSender, Forme) =>
+            try
             {
-                LoadServerCombobox();
-            };
-            FormServer.Show();
+                Form FormServer = new FormServer();
+                //關閉Server設定時 重整combobox
+                FormServer.FormClosing += (formSender, Forme) =>
+                {
+                    LoadServerCombobox();
+                };
+                FormServer.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         //menu 說明 click
@@ -324,7 +393,14 @@ Github：vi000246
         //當視窗關閉時 將目前的設置存檔至Deploy_M
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            UpdateDeployConfig(lastDeployGroupIdSelected);
+            try
+            {
+                UpdateDeployConfig(lastDeployGroupIdSelected);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

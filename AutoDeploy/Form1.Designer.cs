@@ -33,8 +33,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.deploy伺服器設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.上傳預設值設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.testToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnRename = new System.Windows.Forms.Button();
@@ -93,8 +91,6 @@
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deploy伺服器設定ToolStripMenuItem,
-            this.上傳預設值設定ToolStripMenuItem,
-            this.testToolStripMenuItem1,
             this.test2ToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(43, 20);
@@ -106,19 +102,6 @@
             this.deploy伺服器設定ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.deploy伺服器設定ToolStripMenuItem.Text = "Deploy伺服器設定";
             this.deploy伺服器設定ToolStripMenuItem.Click += new System.EventHandler(this.deploy伺服器設定ToolStripMenuItem_Click);
-            // 
-            // 上傳預設值設定ToolStripMenuItem
-            // 
-            this.上傳預設值設定ToolStripMenuItem.Name = "上傳預設值設定ToolStripMenuItem";
-            this.上傳預設值設定ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.上傳預設值設定ToolStripMenuItem.Text = "上傳預設值設定";
-            // 
-            // testToolStripMenuItem1
-            // 
-            this.testToolStripMenuItem1.Enabled = false;
-            this.testToolStripMenuItem1.Name = "testToolStripMenuItem1";
-            this.testToolStripMenuItem1.Size = new System.Drawing.Size(175, 22);
-            this.testToolStripMenuItem1.Text = "Deploy歷史紀錄";
             // 
             // test2ToolStripMenuItem
             // 
@@ -451,7 +434,6 @@
         private System.Windows.Forms.Label lbProgress;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem test2ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deploy伺服器設定ToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -482,7 +464,6 @@
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.TextBox tbMemo;
         private System.Windows.Forms.Label lbmemo;
-        private System.Windows.Forms.ToolStripMenuItem 上傳預設值設定ToolStripMenuItem;
     }
 }
 

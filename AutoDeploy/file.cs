@@ -13,17 +13,24 @@ namespace AutoDeploy
     {
         //輸入路徑 如果是目錄就取出所有檔案path 是檔案就回傳檔案path
         public List<string> getAllFiles(string path) {
-            List<string> filePaths = new List<string>();
-            FileAttributes attr = File.GetAttributes(path);
-            if (attr.HasFlag(FileAttributes.Directory))
+            try
             {
-                filePaths = Directory.GetFiles(path, "*",
-                                 SearchOption.AllDirectories).ToList();
+                List<string> filePaths = new List<string>();
+                FileAttributes attr = File.GetAttributes(path);
+                if (attr.HasFlag(FileAttributes.Directory))
+                {
+                    filePaths = Directory.GetFiles(path, "*",
+                                     SearchOption.AllDirectories).ToList();
+                }
+                else
+                {
+                    filePaths.Add(path);
+                }
+                return filePaths;
             }
-            else {
-                filePaths.Add(path);
+            catch (Exception ex) {
+                throw new ArgumentException(ex.Message);
             }
-            return filePaths;
         }
 
     }
