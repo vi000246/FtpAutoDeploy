@@ -56,5 +56,18 @@ namespace AutoDeploy
             return false;
         }
 
+        /// <summary>
+        /// 依據本地檔案清單根目錄跟FTP上傳目標目錄 組合出FTP的上傳路徑
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static string BuildFtpRemotePath(string path, string fileRootPath, string FtpTargetPath) {
+            //移除路徑的根目錄 ex.  C:/destop/user/test/111.txt  =>destop/user/test/111.txt
+            string remotePath = path.Replace(fileRootPath,"");
+            //取得目錄名稱 ex.c:/Desktop/test.txt  => c:/Desktop
+            remotePath = FtpTargetPath + remotePath;
+            return remotePath;
+        }
+
     }
 }

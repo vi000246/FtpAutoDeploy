@@ -29,18 +29,16 @@ namespace AutoDeploy
             }
         }
         //上傳檔案至FTP
-        public void UploadFileToFtp(List<string> filePaths,bool IsBackUp = false,string BackUpPath = "") {
+        public void UploadFileToFtp(List<string> filePaths,string fileRootPath,string FtpTargetPath, string BackUpPath = "",bool IsBackUp = false) {
             try
             {
                 client.RetryAttempts = 3;
                 foreach (var path in filePaths)
                 {
-                    //移除路徑的根目錄 ex.  C:/destop/user/test/111.txt  =>destop/user/test/111.txt
-                    string remotePath = path.Substring(Path.GetPathRoot(path).Length);
-                    //取得目錄名稱 ex.c:/Desktop/test.txt  => c:/Desktop
-                    string directory = Path.GetDirectoryName(remotePath);
-                    //這是用來多檔案上傳的api 因為單檔上傳的有bug
-                    client.UploadFiles(new string[] { path }, directory, FtpExists.Overwrite, true);
+                    //建立出FTP要上傳的目錄
+                    string remotePath = file.BuildFtpRemotePath(path, fileRootPath, FtpTargetPath);
+                    //因為FluentFTP UploadFile()有bug 所以用多檔上傳的api來傳檔案
+                    client.UploadFiles(new string[] { path }, remotePath, FtpExists.Overwrite, true);
                 }
             }
             catch (Exception ex)

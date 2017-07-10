@@ -57,6 +57,8 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
 
                 if (cbServerList.SelectedItem == null)
                     throw new ArgumentException("請選擇一個伺服器群組");
+                if(string.IsNullOrEmpty(tbFileRoot.Text))
+                    throw new ArgumentException("請選擇檔案清單根目錄");
                 //儲存目前的設置
                 UpdateDeployConfig(lastDeployGroupIdSelected);
 
@@ -72,7 +74,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                         foreach (model.Deploy_D item in lbFileList.Items)
                         {
                             List<string> files = new file().getAllFiles(item.Path);
-                            ftp.UploadFileToFtp(files);
+                            ftp.UploadFileToFtp(files,tbFileRoot.Text, tbFtpRoot.Text);
                         }
                         //ftp.testUpload();
                     }
@@ -143,7 +145,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                     {
                         int groupid = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
                         //存檔進去的路徑會replace掉檔案清單根目錄
-                        db.AddDeployDetail(new model.Deploy_D { GroupID = groupid, Path = entryPath.Replace(tbFileRoot.Text,"") });
+                        db.AddDeployDetail(new model.Deploy_D { GroupID = groupid, Path = entryPath });
                     }
                 }
                 ShowDetailData();
