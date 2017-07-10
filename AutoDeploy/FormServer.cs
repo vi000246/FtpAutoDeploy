@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,7 @@ namespace AutoDeploy
 {
     public partial class FormServer : Form
     {
+        private static Logger logger = NLog.LogManager.GetCurrentClassLogger();
         public db db = new db();
 
         public FormServer()

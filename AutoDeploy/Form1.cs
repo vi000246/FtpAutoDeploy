@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,8 @@ namespace AutoDeploy
 {
     public partial class Form1 : Form
     {
+        private static Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
         public db db = new db();
 
         public Form1()
@@ -32,7 +35,6 @@ Example:
 Deploy專案根目錄:C:/Projects/Build/DemoWebSite
 則會將Script/jquery.js傳到FTP目標目錄");
             toolTip.SetToolTip(lbBackUp, "請選擇備份檔放置的目錄");
-            
         }
 
         private void Form1_Load(object sender, EventArgs e)
