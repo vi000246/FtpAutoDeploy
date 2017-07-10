@@ -33,5 +33,28 @@ namespace AutoDeploy
             }
         }
 
+        /// <summary>
+        /// 判斷一個路徑是否是另一個路徑的子目錄 是子目錄就回傳true 如果兩個路徑相等也回傳true
+        /// </summary>
+        /// <param name="parentPath"></param>
+        /// <param name="childPath"></param>
+        /// <returns></returns>
+        public static bool IsSubfolder(string parentPath, string childPath)
+        {
+            var parentUri = new Uri(parentPath);
+            var childUri = new DirectoryInfo(childPath).Parent;
+            while (childUri != null)
+            {
+                if (new Uri(childUri.FullName) == parentUri)
+                {
+                    return true;
+                }
+                childUri = childUri.Parent;
+            }
+            if (parentPath == childPath)
+                return true;
+            return false;
+        }
+
     }
 }

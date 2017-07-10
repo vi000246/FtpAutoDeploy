@@ -231,7 +231,7 @@
             this.tbMemo.Location = new System.Drawing.Point(112, 352);
             this.tbMemo.Multiline = true;
             this.tbMemo.Name = "tbMemo";
-            this.tbMemo.Size = new System.Drawing.Size(258, 43);
+            this.tbMemo.Size = new System.Drawing.Size(266, 43);
             this.tbMemo.TabIndex = 19;
             // 
             // lbmemo
@@ -265,13 +265,13 @@
             // btnBrowseRoot
             // 
             this.btnBrowseRoot.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnBrowseRoot.Enabled = false;
-            this.btnBrowseRoot.Location = new System.Drawing.Point(115, 289);
+            this.btnBrowseRoot.Location = new System.Drawing.Point(387, 292);
             this.btnBrowseRoot.Name = "btnBrowseRoot";
             this.btnBrowseRoot.Size = new System.Drawing.Size(46, 19);
             this.btnBrowseRoot.TabIndex = 16;
             this.btnBrowseRoot.Text = "瀏覽";
             this.btnBrowseRoot.UseVisualStyleBackColor = false;
+            this.btnBrowseRoot.Click += new System.EventHandler(this.btnBrowseRoot_Click);
             // 
             // lbFileRoot
             // 
@@ -286,9 +286,9 @@
             // tbFileRoot
             // 
             this.tbFileRoot.Enabled = false;
-            this.tbFileRoot.Location = new System.Drawing.Point(113, 288);
+            this.tbFileRoot.Location = new System.Drawing.Point(112, 292);
             this.tbFileRoot.Name = "tbFileRoot";
-            this.tbFileRoot.Size = new System.Drawing.Size(257, 22);
+            this.tbFileRoot.Size = new System.Drawing.Size(266, 22);
             this.tbFileRoot.TabIndex = 14;
             // 
             // tbFtpRoot
@@ -311,20 +311,20 @@
             // btnBrowseBackUp
             // 
             this.btnBrowseBackUp.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnBrowseBackUp.Enabled = false;
-            this.btnBrowseBackUp.Location = new System.Drawing.Point(115, 326);
+            this.btnBrowseBackUp.Location = new System.Drawing.Point(387, 320);
             this.btnBrowseBackUp.Name = "btnBrowseBackUp";
             this.btnBrowseBackUp.Size = new System.Drawing.Size(46, 19);
             this.btnBrowseBackUp.TabIndex = 11;
             this.btnBrowseBackUp.Text = "瀏覽";
             this.btnBrowseBackUp.UseVisualStyleBackColor = false;
+            this.btnBrowseBackUp.Click += new System.EventHandler(this.btnBrowseBackUp_Click);
             // 
             // tbBackUpPath
             // 
             this.tbBackUpPath.Enabled = false;
-            this.tbBackUpPath.Location = new System.Drawing.Point(112, 324);
+            this.tbBackUpPath.Location = new System.Drawing.Point(112, 320);
             this.tbBackUpPath.Name = "tbBackUpPath";
-            this.tbBackUpPath.Size = new System.Drawing.Size(258, 22);
+            this.tbBackUpPath.Size = new System.Drawing.Size(267, 22);
             this.tbBackUpPath.TabIndex = 10;
             // 
             // lbBackUp
@@ -394,7 +394,7 @@
             this.cbIsBackUp.AutoSize = true;
             this.cbIsBackUp.Cursor = System.Windows.Forms.Cursors.Help;
             this.cbIsBackUp.Enabled = false;
-            this.cbIsBackUp.Location = new System.Drawing.Point(388, 330);
+            this.cbIsBackUp.Location = new System.Drawing.Point(387, 354);
             this.cbIsBackUp.Name = "cbIsBackUp";
             this.cbIsBackUp.Size = new System.Drawing.Size(132, 16);
             this.cbIsBackUp.TabIndex = 5;

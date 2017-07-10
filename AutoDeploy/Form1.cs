@@ -105,6 +105,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
         //拖曳進入事件
         private void lbFileList_DragEnter(object sender, DragEventArgs e)
         {
+
             // 判斷物件是否可以拖曳進入控件，EX：垃圾桶無法拖曳進入控件，
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.All;
@@ -117,12 +118,33 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
             try
             {
                 CheckIsSelectDeployGroup();
+                //如果還沒選擇檔案清單 就跳出 Browse Dialog讓使用者選
+                if (string.IsNullOrEmpty(tbFileRoot.Text))
+                {
+                    //讓messageBox顯示在最上層
+                    MessageBox.Show(new Form() { TopMost = true }, "請先選擇要Deploy的專案根路徑");
+                    string path = dialog.BrowseFolder();
+                    tbFileRoot.Text = path;
+                }
+                //如果沒選擇專案根目錄 就中止
+                if (string.IsNullOrEmpty(tbFileRoot.Text))
+                    return;
+
                 // GetData() 回傳 string[]，內容為物件路徑，允許使用者一次拖曳多個物件
                 string[] entriesPath = (string[])e.Data.GetData(DataFormats.FileDrop, false);
                 foreach (string entryPath in entriesPath)
                 {
-                    int groupid = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
-                    db.AddDeployDetail(new model.Deploy_D {GroupID = groupid ,Path = entryPath});
+                    //判斷拖曳的檔案或資料夾 是否在根目錄內 (判斷是否為子目錄)
+                    if (!file.IsSubfolder(tbFileRoot.Text, entryPath))
+                    {
+                        MessageBox.Show(new Form {TopMost=true},@"此路徑:"+ Environment.NewLine + entryPath + "\n不屬於檔案清單根目錄的路徑");
+                    }
+                    else
+                    {
+                        int groupid = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
+                        //存檔進去的路徑會replace掉檔案清單根目錄
+                        db.AddDeployDetail(new model.Deploy_D { GroupID = groupid, Path = entryPath.Replace(tbFileRoot.Text,"") });
+                    }
                 }
                 ShowDetailData();
             }
@@ -151,19 +173,22 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
         //清除所有檔案清單的路徑
         private void btnClear_Click(object sender, EventArgs e)
         {
-            try { 
-                CheckIsSelectDeployGroup();
-                for (int i = lbFileList.Items.Count - 1; i >= 0; i--)
-                {
-                    // do with listBox1.Items[i]
-                    db.DeleteDataFromDB<model.Deploy_D>((model.Deploy_D)lbFileList.Items[i]);
-                }
-                ShowDetailData();
+            try {
+                ClearCurrentFileList();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        private void ClearCurrentFileList() {
+            CheckIsSelectDeployGroup();
+            for (int i = lbFileList.Items.Count - 1; i >= 0; i--)
+            {
+                // do with listBox1.Items[i]
+                db.DeleteDataFromDB<model.Deploy_D>((model.Deploy_D)lbFileList.Items[i]);
+            }
+            ShowDetailData();
         }
 
         //重整detail view的資料 依據選擇的Deploy群組
@@ -194,6 +219,23 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
             {
                 throw new ArgumentException("請先選擇Deploy群組");
             }
+        }
+
+        #endregion
+        #region =======================config控制項相關================================
+        //瀏覽按鈕點擊事件
+        private void btnBrowseRoot_Click(object sender, EventArgs e)
+        {
+            string path = dialog.BrowseFolder();
+            //如果切換根目錄 則會清除所有的檔案清單
+            if (!string.IsNullOrEmpty(path))
+                ClearCurrentFileList();
+            tbFileRoot.Text = path;
+        }
+        private void btnBrowseBackUp_Click(object sender, EventArgs e)
+        {
+            string path = dialog.BrowseFolder();
+            tbBackUpPath.Text = path;
         }
 
         #endregion
@@ -390,6 +432,7 @@ Github：vi000246
 
         #endregion
 
+
         //當視窗關閉時 將目前的設置存檔至Deploy_M
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -402,5 +445,7 @@ Github：vi000246
                 MessageBox.Show(ex.Message);
             }
         }
+
+
     }
 }

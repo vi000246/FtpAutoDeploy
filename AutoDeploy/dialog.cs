@@ -139,5 +139,17 @@ namespace AutoDeploy
                 throw new ArgumentException(ex.Message);
             }
         }
+
+        //開啟資料夾瀏覽視窗 回傳所選擇的資料夾路徑
+        public static string BrowseFolder()
+        {
+            string folderPath = "";
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                folderPath = folderBrowserDialog1.SelectedPath;
+            }
+            return folderPath;
+        }
     }
 }
