@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -238,6 +239,19 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
         {
             string path = dialog.BrowseFolder();
             tbBackUpPath.Text = path;
+        }
+        //伺服器目標目徑的驗證
+        private void tbFtpRoot_Validating(object sender, CancelEventArgs e)
+        {
+            if (!Regex.IsMatch(tbFtpRoot.Text, @"^([\\/]?\w*[\\/]?)+$"))
+            {
+                MessageBox.Show(@"目標目徑的格式錯誤!
+範例:
+aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
+/aaa 、 /aaa/ 、 aaa/ 、 /aaa/bbb 、 aaa/bbb 、 aaa/bbb/ 、 /aaa/bbb/
+");
+                tbFtpRoot.Text = "";
+            }
         }
 
         #endregion

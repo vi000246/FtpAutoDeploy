@@ -297,6 +297,7 @@
             this.tbFtpRoot.Name = "tbFtpRoot";
             this.tbFtpRoot.Size = new System.Drawing.Size(132, 22);
             this.tbFtpRoot.TabIndex = 13;
+            this.tbFtpRoot.Validating += new System.ComponentModel.CancelEventHandler(this.tbFtpRoot_Validating);
             // 
             // lbFTPDirectory
             // 

@@ -59,8 +59,8 @@ namespace AutoDeploy
                         string remotePath = file.BuildFtpRemotePath(path, fileRootPath, FtpTargetPath);
                         //因為FluentFTP UploadFile()有bug 所以用多檔上傳的api來傳檔案
                         //client.UploadFiles(new string[] { path }, remotePath, FtpExists.Overwrite, true);
-                        client.UploadFiles(new string[] { path }, remotePath, FtpExists.Overwrite, true);
-                        form.LogToBox("已上傳 檔案:"+path);
+                        int result = client.UploadFiles(new string[] { path }, remotePath, FtpExists.Overwrite, true);
+                        form.LogToBox("上傳"+((result==1)?"成功":"失敗")+" 檔案:"+path);
                     }
                 }
             }
@@ -74,12 +74,7 @@ namespace AutoDeploy
             //正確的
             client.UploadFiles(new string[] { @"C:\Users\vi000\Desktop\testUpload\111.txt" }, @"Users\vi000\Desktop\testUpload\", FtpExists.Overwrite, true);
             ///錯誤的remotePath   (看來是FTP server的問題)
-            ///  "aaa\bbb"  斜線要 / 才是正確的
-            ///  "aa/bb"  要寫成"/aa/bb"才是正確的
-            ///  "aa/"
-            ///  "/aa/bb"
-            ///  "/aa/bb/"
-            ///  "/aa/"
+
         }
 
 
