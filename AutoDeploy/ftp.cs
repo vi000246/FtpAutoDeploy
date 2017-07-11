@@ -41,7 +41,7 @@ namespace AutoDeploy
                     string remotePath = file.BuildFtpRemotePath(path, fileRootPath, FtpTargetPath);
                     //因為FluentFTP UploadFile()有bug 所以用多檔上傳的api來傳檔案
                     //client.UploadFiles(new string[] { path }, remotePath, FtpExists.Overwrite, true);
-                    client.UploadFiles(new string[] { @"C:\Users\user\Desktop\測試用專案\root.txt" }, @"\test\", FtpExists.Overwrite, true);
+                    client.UploadFiles(new string[] { path }, remotePath, FtpExists.Overwrite, true);
                 }
             }
             catch (Exception ex)
