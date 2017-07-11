@@ -152,6 +152,32 @@ namespace AutoDeploy
                 throw new ArgumentException(ex.Message);
             }
         }
+        //顯示預覽視窗
+        public static void ShowPreview(List<string> paths,string fileRootPath,string FtpTargetPath) {
+            //處理path 轉成上傳至FTP的path
+            List<string> newPaths = new List<string>();
+            paths.ForEach(x=> newPaths.Add(file.BuildFtpRemotePath(x, fileRootPath, FtpTargetPath,false)));
+
+            Form prompt = new Form()
+            {
+                Width = 550,
+                Height = 300,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = "預覽",
+                StartPosition = FormStartPosition.CenterParent
+            };
+            Button confirmation = new Button() { Text = "關閉", Left = 470, Width = 50, Top = 230, DialogResult = DialogResult.OK };
+            ListBox listbox = new ListBox() { Text = "關閉", Left = 10, Width = 508,Height=208, Top = 10};
+            listbox.DataSource = newPaths;
+            confirmation.Click += (sender, e) =>
+            {
+                prompt.Close();
+            };
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(listbox);
+            prompt.AcceptButton = confirmation;
+            prompt.ShowDialog();
+        }
 
         //開啟資料夾瀏覽視窗 回傳所選擇的資料夾路徑
         public static string BrowseFolder()

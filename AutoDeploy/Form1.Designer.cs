@@ -254,13 +254,13 @@
             // 
             // btnPreView
             // 
-            this.btnPreView.Enabled = false;
             this.btnPreView.Location = new System.Drawing.Point(277, 237);
             this.btnPreView.Name = "btnPreView";
             this.btnPreView.Size = new System.Drawing.Size(75, 39);
             this.btnPreView.TabIndex = 17;
             this.btnPreView.Text = "預覽";
             this.btnPreView.UseVisualStyleBackColor = true;
+            this.btnPreView.Click += new System.EventHandler(this.btnPreView_Click);
             // 
             // btnBrowseRoot
             // 

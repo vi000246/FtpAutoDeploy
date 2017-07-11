@@ -61,11 +61,12 @@ namespace AutoDeploy
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static string BuildFtpRemotePath(string path, string fileRootPath, string FtpTargetPath) {
+        public static string BuildFtpRemotePath(string path, string fileRootPath, string FtpTargetPath,bool removeFileName = true) {
             //移除路徑的根目錄 
             string remotePath = path.Replace(fileRootPath,"");
             //取得目錄名稱 ex.c:/Desktop/test.txt  => c:/Desktop
-            remotePath = Path.GetDirectoryName(remotePath);
+            if(removeFileName)
+                remotePath = Path.GetDirectoryName(remotePath);
             remotePath = FtpTargetPath + remotePath;
 
 

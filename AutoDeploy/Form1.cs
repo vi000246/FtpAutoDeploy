@@ -67,14 +67,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 int serverGroupID = (cbServerList.SelectedItem as model.FTP_M).ID;
                 //取得combobx選中的FTP群組的FTP列表
                 List<model.FTP_D> FTPList = db.GetDataFromDBByCondition<model.FTP_D>(new { GroupID = serverGroupID });
-                //loop檔案清單 取得所有待上傳的檔案
-                List<string> files = new List<string>();
-                foreach (model.Deploy_D item in lbFileList.Items)
-                {
-                    List<string> temp = file.getAllFiles(item.Path);
-                    //取得檔案listBox中的所有檔案
-                    files = files.Concat(temp).ToList();
-                }
+                List<string> files = ListBoxUtility.GetAllPath(lbFileList);
                 foreach (var FTPitem in FTPList)
                 {
                     using (ftp ftp = new ftp(this,FTPitem.ClientIP, FTPitem.UserName, FTPitem.Password,Convert.ToInt32(FTPitem.Port)))
@@ -255,6 +248,13 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
 ");
                 tbFtpRoot.Text = "";
             }
+        }
+
+        //預覽按鈕點擊事件
+        private void btnPreView_Click(object sender, EventArgs e)
+        {
+            List<string> paths = ListBoxUtility.GetAllPath(lbFileList);
+            dialog.ShowPreview(paths,tbFileRoot.Text,tbFtpRoot.Text);
         }
 
         #endregion

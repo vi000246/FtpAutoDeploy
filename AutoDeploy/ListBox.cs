@@ -83,5 +83,21 @@ namespace AutoDeploy
                 listbox.SetItemCheckState(i, CheckState.Unchecked);
             }
         }
+        /// <summary>
+        /// 取得檔案清單listbox所有路徑底下的所有檔案
+        /// </summary>
+        /// <param name="lbFileList"></param>
+        /// <returns></returns>
+        public static List<string> GetAllPath(ListBox lbFileList) {
+            List<string> files = new List<string>();
+            file file = new file();
+            foreach (model.Deploy_D item in lbFileList.Items)
+            {
+                List<string> temp = file.getAllFiles(item.Path);
+                //取得檔案listBox中的所有檔案
+                files = files.Concat(temp).ToList();
+            }
+            return files;
+        }
     }
 }
