@@ -6,24 +6,31 @@ using System.Threading.Tasks;
 using FluentFTP;
 using System.Net;
 using System.IO;
+using System.Windows.Forms;
 /// <summary>
 /// 用來處理ftp相關
 /// </summary>
 namespace AutoDeploy
 {
+
+
     public class ftp: IDisposable
     {
+        public readonly Form1 form;
+
         public FtpClient client;
-        public ftp(string ClientIP,string User,string Password,int port) {
+        public ftp(Form1 form,string ClientIP,string User,string Password,int port) {
             try
             {
+                this.form = form;//這樣才能access Form的控制項
+
                 client = new FtpClient(ClientIP);
                 //client.Encoding = Encoding.UTF8;
                 //如果帳密不為空 就登入 否則採用匿名登入
                 if (!string.IsNullOrEmpty(User) && !string.IsNullOrEmpty(Password))
                     client.Credentials = new NetworkCredential(User, Password);
                 client.Port = port;
-
+                client.Encoding = Encoding.Default;//防止上傳的中文變亂碼
                 client.Connect();
             }
             catch (Exception ex) {
@@ -35,13 +42,26 @@ namespace AutoDeploy
             try
             {
                 client.RetryAttempts = 3;
-                foreach (var path in filePaths)
+                bool valid = true;
+                var IsDirectoryExist = client.DirectoryExists(FtpTargetPath);
+                if (!IsDirectoryExist)
+                    if (MessageBox.Show("FTP查無此目標目錄\n" + FtpTargetPath + "\n 是否創建此目錄並上傳檔案 ?", "關閉", MessageBoxButtons.YesNo)
+                        == DialogResult.No)
+                    {
+                        valid = false;
+                    }
+
+                if (valid)
                 {
-                    //建立出FTP要上傳的目錄
-                    string remotePath = file.BuildFtpRemotePath(path, fileRootPath, FtpTargetPath);
-                    //因為FluentFTP UploadFile()有bug 所以用多檔上傳的api來傳檔案
-                    //client.UploadFiles(new string[] { path }, remotePath, FtpExists.Overwrite, true);
-                    client.UploadFiles(new string[] { path }, remotePath, FtpExists.Overwrite, true);
+                    foreach (var path in filePaths)
+                    {
+                        //建立出FTP要上傳的目錄
+                        string remotePath = file.BuildFtpRemotePath(path, fileRootPath, FtpTargetPath);
+                        //因為FluentFTP UploadFile()有bug 所以用多檔上傳的api來傳檔案
+                        //client.UploadFiles(new string[] { path }, remotePath, FtpExists.Overwrite, true);
+                        client.UploadFiles(new string[] { path }, remotePath, FtpExists.Overwrite, true);
+                        form.LogToBox("已上傳 檔案:"+path);
+                    }
                 }
             }
             catch (Exception ex)
@@ -54,10 +74,12 @@ namespace AutoDeploy
             //正確的
             client.UploadFiles(new string[] { @"C:\Users\vi000\Desktop\testUpload\111.txt" }, @"Users\vi000\Desktop\testUpload\", FtpExists.Overwrite, true);
             ///錯誤的remotePath   (看來是FTP server的問題)
-            ///  會create test資料夾 但can't find file
-            ///  "test\"
-            ///  "\test"
-            ///  "\test\"
+            ///  "aaa\bbb"  斜線要 / 才是正確的
+            ///  "aa/bb"  要寫成"/aa/bb"才是正確的
+            ///  "aa/"
+            ///  "/aa/bb"
+            ///  "/aa/bb/"
+            ///  "/aa/"
         }
 
 

@@ -69,7 +69,7 @@ namespace AutoDeploy
             remotePath = FtpTargetPath + remotePath;
 
 
-            return remotePath.Replace(@"\\",@"\");
+            return remotePath;
         }
 
     }
