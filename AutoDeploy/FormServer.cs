@@ -126,14 +126,36 @@ namespace AutoDeploy
         //當編輯單元格時 存檔至資料庫
         private void gridList_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            model.FTP_D item = new model.FTP_D();
-            item.ID = (int)gridList.Rows[e.RowIndex].Cells[(int)columnIndex.FTP_D.ID].Value;
-            item.ClientIP = (string)gridList.Rows[e.RowIndex].Cells[(int)columnIndex.FTP_D.ClientIP].Value;
-            item.UserName = (string)gridList.Rows[e.RowIndex].Cells[(int)columnIndex.FTP_D.UserName].Value;
-            item.Password = (string)gridList.Rows[e.RowIndex].Cells[(int)columnIndex.FTP_D.Password].Value;
-            db.UpdateDataToDB(item);
-            this.BeginInvoke(new MethodInvoker(ShowDetailData));
+            try
+            {
+                bool isValid = true;
+                //驗證欄位
+                //存在資料庫的Port是string 但存進去時要驗證是否為數字 這樣取出時才不會轉換錯誤
+                int port = 21;
+                var cellPort = gridList.Rows[e.RowIndex].Cells[(int)columnIndex.FTP_D.Port].Value;
+                if (!int.TryParse(cellPort.ToString(), out port))
+                {
+                    gridList.Rows[e.RowIndex].ErrorText = "Port必須為數字";
+                    throw new ArgumentException("Port必須為數字，此次異動未存檔");
+                }
+                if (isValid)
+                {
+                    model.FTP_D item = new model.FTP_D();
+                    item.ID = (int)gridList.Rows[e.RowIndex].Cells[(int)columnIndex.FTP_D.ID].Value;
+                    item.Port = (string)gridList.Rows[e.RowIndex].Cells[(int)columnIndex.FTP_D.Port].Value;
+                    item.ClientIP = (string)gridList.Rows[e.RowIndex].Cells[(int)columnIndex.FTP_D.ClientIP].Value;
+                    item.UserName = (string)gridList.Rows[e.RowIndex].Cells[(int)columnIndex.FTP_D.UserName].Value;
+                    item.Password = (string)gridList.Rows[e.RowIndex].Cells[(int)columnIndex.FTP_D.Password].Value;
+                    db.UpdateDataToDB(item);
+                    gridList.Rows[e.RowIndex].ErrorText = "";
+                    this.BeginInvoke(new MethodInvoker(ShowDetailData));
+                }
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         //重整detail view的資料 依據選擇的FTP群組
         private void ShowDetailData() {
             if (lbGroup.SelectedItem != null)
@@ -166,6 +188,7 @@ FTP站台列表操作說明:
 ",
 "程式說明");
         }
+
 
     }
 }

@@ -83,19 +83,29 @@ namespace AutoDeploy
                 Form prompt = new Form()
                 {
                     Width = 270,
-                    Height = 200,
+                    Height = 230,
                     FormBorderStyle = FormBorderStyle.FixedDialog,
                     Text = title,
                     StartPosition = FormStartPosition.CenterParent
                 };
                 Label lbIP = new Label() { Left = 10, Top = 20, Width = 70, Text = "FTP IP" };
                 TextBox tbIP = new TextBox() { Left = 80, Top = 20, Width = 150 };
-                Label lbName = new Label() { Left = 10, Top = 50, Width = 70, Text = "使用者名稱" };
-                TextBox tbName = new TextBox() { Left = 80, Top = 50, Width = 150 };
-                Label lbPassword = new Label() { Left = 10, Top = 80, Width = 70, Text = "密碼" };
-                TextBox tbPassword = new TextBox() { Left = 80, Top = 80, Width = 150 };
-                Button confirmation = new Button() { Text = "確定", Left = 100, Width = 50, Top = 120, DialogResult = DialogResult.OK };
-                Button cancelation = new Button() { Text = "取消", Left = 160, Width = 50, Top = 120, DialogResult = DialogResult.Cancel };
+                Label lbPort = new Label() { Left = 10, Top = 50, Width = 70, Text = "Port" };
+                NumericUpDown nuPort = new NumericUpDown() { Left = 80, Top = 50, Width = 150,Value=21,Maximum= 65535 };
+                Label lbName = new Label() { Left = 10, Top = 80, Width = 70, Text = "使用者名稱" };
+                TextBox tbName = new TextBox() { Left = 80, Top = 80, Width = 150 };
+                Label lbPassword = new Label() { Left = 10, Top = 110, Width = 70, Text = "密碼" };
+                TextBox tbPassword = new TextBox() { Left = 80, Top = 110, Width = 150 };
+                Button confirmation = new Button() { Text = "確定", Left = 100, Width = 50, Top = 150, DialogResult = DialogResult.OK };
+                Button cancelation = new Button() { Text = "取消", Left = 160, Width = 50, Top = 150, DialogResult = DialogResult.Cancel };
+                //只允許port輸入整數
+                nuPort.KeyPress += (sender, e) =>
+                {
+                    if (e.KeyChar < 48 || e.KeyChar > 57)
+                    {
+                        e.Handled = true;
+                    }
+                };
                 confirmation.Click += (sender, e) =>
                 {
                     prompt.Close();
@@ -116,6 +126,7 @@ namespace AutoDeploy
                         item.ClientIP = tbIP.Text;
                         item.UserName = tbName.Text;
                         item.Password = tbPassword.Text;
+                        item.Port = Convert.ToInt32(nuPort.Value).ToString();
                     }
                 };
 
@@ -123,6 +134,8 @@ namespace AutoDeploy
                 prompt.Controls.Add(cancelation);
                 prompt.Controls.Add(lbIP);
                 prompt.Controls.Add(tbIP);
+                prompt.Controls.Add(lbPort);
+                prompt.Controls.Add(nuPort);
                 prompt.Controls.Add(lbName);
                 prompt.Controls.Add(tbName);
                 prompt.Controls.Add(lbPassword);

@@ -37,9 +37,9 @@ namespace AutoDeploy
             using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
             {
                 cnn.Open();
-                var result = cnn.Execute(@"Insert into FTP_D (ClientIP,UserName,Password,GroupID) 
-                                            values(@ip,@name,@password,@groupid)",
-                    new { ip= item.ClientIP,name=item.UserName,password=item.Password,groupid=item.GroupID});
+                var result = cnn.Execute(@"Insert into FTP_D (ClientIP,UserName,Port,Password,GroupID) 
+                                            values(@ip,@name,@port,@password,@groupid)",
+                    new { ip= item.ClientIP,name=item.UserName,port = item.Port, password=item.Password,groupid=item.GroupID});
             }
             return newId;
         }

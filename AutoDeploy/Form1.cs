@@ -68,7 +68,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
 
                 foreach (var FTPitem in FTPList)
                 {
-                    using (ftp ftp = new ftp(FTPitem.ClientIP, FTPitem.UserName, FTPitem.Password))
+                    using (ftp ftp = new ftp(FTPitem.ClientIP, FTPitem.UserName, FTPitem.Password,Convert.ToInt32(FTPitem.Port)))
                     {
                         //取得檔案listBox中的所有檔案
                         foreach (model.Deploy_D item in lbFileList.Items)

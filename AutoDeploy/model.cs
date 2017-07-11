@@ -24,6 +24,7 @@ namespace AutoDeploy
             public string ClientIP { get; set; }
             public string UserName { get; set; }
             public string Password { get; set; }
+            public string Port { get; set; }
             [Editable(false)]
             public int GroupID { get; set; }
 
@@ -58,6 +59,7 @@ namespace AutoDeploy
         public enum FTP_D {
             ID,
             ClientIP,
+            Port,
             UserName,
             Password
         }
