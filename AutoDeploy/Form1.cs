@@ -253,8 +253,18 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
         //預覽按鈕點擊事件
         private void btnPreView_Click(object sender, EventArgs e)
         {
+            bool isShow = true;
             List<string> paths = ListBoxUtility.GetAllPath(lbFileList);
-            dialog.ShowPreview(paths,tbFileRoot.Text,tbFtpRoot.Text);
+            int TotalPath = paths.Count();
+            if (TotalPath > 50000)
+            {
+                if (MessageBox.Show("檔案數過多 共"+ TotalPath + "筆 是否仍要預覽?", "關閉", MessageBoxButtons.YesNo) == DialogResult.No)
+                {
+                    isShow = false;
+                }
+            }
+            if(isShow)
+                dialog.ShowPreview(paths,tbFileRoot.Text,tbFtpRoot.Text);
         }
 
         #endregion

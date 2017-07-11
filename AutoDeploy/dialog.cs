@@ -167,14 +167,18 @@ namespace AutoDeploy
                 StartPosition = FormStartPosition.CenterParent
             };
             Button confirmation = new Button() { Text = "關閉", Left = 470, Width = 50, Top = 230, DialogResult = DialogResult.OK };
-            ListBox listbox = new ListBox() { Text = "關閉", Left = 10, Width = 508,Height=208, Top = 10};
+            Label lbSum = new Label() {Left = 20, Width = 200, Top = 230};
+            lbSum.Text = "總檔案數: " + paths.Count().ToString();
+            ListBox listbox = new ListBox() { Left = 10, Width = 508,Height=208, Top = 10};
             listbox.DataSource = newPaths;
+
             confirmation.Click += (sender, e) =>
             {
                 prompt.Close();
             };
             prompt.Controls.Add(confirmation);
             prompt.Controls.Add(listbox);
+            prompt.Controls.Add(lbSum);
             prompt.AcceptButton = confirmation;
             prompt.ShowDialog();
         }
