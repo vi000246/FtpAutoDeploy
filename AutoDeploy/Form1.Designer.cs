@@ -62,7 +62,6 @@
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbUploadList.SuspendLayout();
@@ -200,7 +199,6 @@
             // gbUploadList
             // 
             this.gbUploadList.AutoSize = true;
-            this.gbUploadList.Controls.Add(this.progressBar1);
             this.gbUploadList.Controls.Add(this.tbMemo);
             this.gbUploadList.Controls.Add(this.lbmemo);
             this.gbUploadList.Controls.Add(this.lbLog);
@@ -222,7 +220,7 @@
             this.gbUploadList.Controls.Add(this.cbIsBackUp);
             this.gbUploadList.Location = new System.Drawing.Point(216, 24);
             this.gbUploadList.Name = "gbUploadList";
-            this.gbUploadList.Size = new System.Drawing.Size(526, 536);
+            this.gbUploadList.Size = new System.Drawing.Size(526, 534);
             this.gbUploadList.TabIndex = 1;
             this.gbUploadList.TabStop = false;
             this.gbUploadList.Text = "上傳清單";
@@ -249,9 +247,9 @@
             // 
             this.lbLog.FormattingEnabled = true;
             this.lbLog.ItemHeight = 12;
-            this.lbLog.Location = new System.Drawing.Point(14, 439);
+            this.lbLog.Location = new System.Drawing.Point(14, 413);
             this.lbLog.Name = "lbLog";
-            this.lbLog.Size = new System.Drawing.Size(500, 76);
+            this.lbLog.Size = new System.Drawing.Size(500, 100);
             this.lbLog.TabIndex = 7;
             // 
             // btnPreView
@@ -410,18 +408,11 @@
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(14, 414);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(500, 19);
-            this.progressBar1.TabIndex = 20;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(742, 551);
+            this.ClientSize = new System.Drawing.Size(742, 545);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbUploadList);
             this.Controls.Add(this.menuStrip1);
@@ -479,8 +470,6 @@
         public void LogToBox(string msg) {
             lbLog.Items.Add(msg);
         }
-
-        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 
