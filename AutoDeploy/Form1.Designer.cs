@@ -1,4 +1,6 @@
-﻿namespace AutoDeploy
+﻿using System;
+
+namespace AutoDeploy
 {
     partial class Form1
     {
@@ -465,11 +467,6 @@
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.TextBox tbMemo;
         private System.Windows.Forms.Label lbmemo;
-
-        //用來將字串寫到log 的listBox
-        public void LogToBox(string msg) {
-            lbLog.Items.Add(msg);
-        }
     }
 }
 

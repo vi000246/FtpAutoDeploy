@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -53,7 +54,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
         {
             try
             {
-                btnStart.Enabled = false;
+                SetControlEnable(false);
                 if (lbFileList.Items.Count == 0)
                     throw new ArgumentException("上傳清單不得為空");
 
@@ -64,28 +65,49 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 //儲存目前的設置
                 UpdateDeployConfig(lastDeployGroupIdSelected);
 
-                int serverGroupID = (cbServerList.SelectedItem as model.FTP_M).ID;
-                //取得combobx選中的FTP群組的FTP列表
-                List<model.FTP_D> FTPList = db.GetDataFromDBByCondition<model.FTP_D>(new { GroupID = serverGroupID });
-                List<string> files = ListBoxUtility.GetAllPath(lbFileList);
-                foreach (var FTPitem in FTPList)
-                {
-                    using (ftp ftp = new ftp(this,FTPitem.ClientIP, FTPitem.UserName, FTPitem.Password,Convert.ToInt32(FTPitem.Port)))
-                    {
-                        ftp.UploadFileToFtp(files, tbFileRoot.Text, tbFtpRoot.Text);
-                        //ftp.testUpload();
-                    }
-                }
+                ThreadPool.QueueUserWorkItem(state => UpdateProcess());
+
                 //將紀錄存檔到txt
                 logger.Trace(log.BuildDeployHistoryMessage(lastDeployGroupIdSelected));
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                SetControlEnable(true);
+            }
+        }
+        //用Thread呼叫更新邏輯
+        public void UpdateProcess() {
+            try
+            {
+                int serverGroupID = 0;
+                List<string> files = new List<string>();
+                //跨執行緒存取UI thread的control
+                Invoke(new Action(() =>
+                {
+                    serverGroupID = (cbServerList.SelectedItem as model.FTP_M).ID;
+                    files = ListBoxUtility.GetAllPath(lbFileList);
+                }));
+                
+                //取得combobx選中的FTP群組的FTP列表
+                List<model.FTP_D> FTPList = db.GetDataFromDBByCondition<model.FTP_D>(new { GroupID = serverGroupID });
+                foreach (var FTPitem in FTPList)
+                {
+                    using (ftp ftp = new ftp(this, FTPitem.ClientIP, FTPitem.UserName, FTPitem.Password, Convert.ToInt32(FTPitem.Port)))
+                    {
+                        ftp.UploadFileToFtp(files, tbFileRoot.Text, tbFtpRoot.Text);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
             }
             finally {
-                btnStart.Enabled = true;
+                //將UI控制項設為Enable
+                SetControlEnable(true);
             }
+
         }
         //載入伺服器選單的combobox
         public void LoadServerCombobox() {
@@ -477,6 +499,35 @@ Github：vi000246
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        //用來將字串寫到log 的listBox
+        public void LogToBox(string msg)
+        {
+            MethodInvoker updateLog = delegate
+            {
+                lbLog.Items.Add(msg);
+                int visibleItems = lbLog.ClientSize.Height / lbLog.ItemHeight;
+                lbLog.TopIndex = Math.Max(lbLog.Items.Count - visibleItems + 1, 0);
+            };
+            lbLog.BeginInvoke(updateLog);
+        }
+
+        //當上傳時 將控制項disable 結束時再enable
+        private void SetControlEnable(bool enable) {
+            //跨執行緒存取UI thread的control
+            Invoke(new Action(() =>
+            {
+                btnStart.Enabled = enable;
+                cbServerList.Enabled = enable;
+                tbFtpRoot.Enabled = enable;
+                btnBrowseRoot.Enabled = enable;
+                btnBrowseBackUp.Enabled = enable;
+                cbIsBackUp.Enabled = enable;
+                tbMemo.Enabled = enable;
+                btnClear.Enabled = enable;
+            }));
+
         }
 
 
