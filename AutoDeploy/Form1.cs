@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -484,7 +485,16 @@ Github：vi000246
 
 ","程式資訊");
         }
+        //按下log時 開啟Log資料夾
+        private void log查詢ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = System.AppDomain.CurrentDomain.BaseDirectory + @"Logs";
+            if (Directory.Exists(path))
+                Process.Start("explorer.exe", path);
+            else
+                MessageBox.Show("找不到Logs資料夾");
 
+        }
         #endregion
 
 

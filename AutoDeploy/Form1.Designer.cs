@@ -64,6 +64,7 @@ namespace AutoDeploy
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.log查詢ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbUploadList.SuspendLayout();
@@ -93,6 +94,7 @@ namespace AutoDeploy
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deploy伺服器設定ToolStripMenuItem,
+            this.log查詢ToolStripMenuItem,
             this.test2ToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(43, 20);
@@ -410,6 +412,13 @@ namespace AutoDeploy
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
             // 
+            // log查詢ToolStripMenuItem
+            // 
+            this.log查詢ToolStripMenuItem.Name = "log查詢ToolStripMenuItem";
+            this.log查詢ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.log查詢ToolStripMenuItem.Text = "Log查詢";
+            this.log查詢ToolStripMenuItem.Click += new System.EventHandler(this.log查詢ToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -467,6 +476,7 @@ namespace AutoDeploy
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.TextBox tbMemo;
         private System.Windows.Forms.Label lbmemo;
+        private System.Windows.Forms.ToolStripMenuItem log查詢ToolStripMenuItem;
     }
 }
 
