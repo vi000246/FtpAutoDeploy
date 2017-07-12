@@ -25,9 +25,6 @@ namespace AutoDeploy
         public Form1()
         {
             InitializeComponent();
-            ShowGroupData();
-            ShowDetailData();
-            LoadServerCombobox();
             toolTip.SetToolTip(lbChooseServerGroup,"選擇FTP伺服器群組，會Deploy至此群組底下的FTP列表");
             toolTip.SetToolTip(lbFTPDirectory, @"輸入要上傳至FTP的目標目錄，有子目錄就用斜線分隔，開頭跟後面不要有斜線 
 如果為空代表是FTP的根目錄
@@ -45,6 +42,15 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
         {
             if (lbDeployGroup.SelectedItem != null)
                 lastDeployGroupIdSelected = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
+
+        }
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            ShowGroupData();
+            ShowDetailData();
+            LoadServerCombobox();
+            //當ServerCombobox載入後才綁定SelectedIndexChange事件 避免在form load時就呼叫UpdateDeployConfig() 
+            this.lbDeployGroup.SelectedIndexChanged += new System.EventHandler(this.lbDeployGroup_SelectedIndexChanged);
             ShowConfigData();
         }
 
@@ -295,7 +301,9 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
         {
             try
             {
+
                 UpdateDeployConfig(lastDeployGroupIdSelected);
+                //要等呼叫完UpdateDeployConfig()才更新lastDeployGroupIdSelected
                 if (lbDeployGroup.SelectedItem != null)
                     lastDeployGroupIdSelected = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
                 ShowDetailData();
@@ -367,9 +375,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 model.Deploy_M form = new model.Deploy_M();
                 CheckIsSelectDeployGroup();
                 int serverGroupID = 0;
-                if (cbServerList.SelectedItem != null)
-                    serverGroupID = (cbServerList.SelectedItem as model.FTP_M).ID;
-
+                serverGroupID = (cbServerList.SelectedItem as model.FTP_M).ID;
                 form.ID = DeployGroupDd;
                 form.FtpGroup = serverGroupID;
                 form.FileRootPath = tbFileRoot.Text;
