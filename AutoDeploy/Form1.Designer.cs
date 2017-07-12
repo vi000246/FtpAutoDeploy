@@ -175,6 +175,7 @@
             this.lbDeployGroup.Name = "lbDeployGroup";
             this.lbDeployGroup.Size = new System.Drawing.Size(188, 361);
             this.lbDeployGroup.TabIndex = 11;
+            this.lbDeployGroup.SelectedIndexChanged += new System.EventHandler(this.lbDeployGroup_SelectedIndexChanged);
             // 
             // btnAdd
             // 
@@ -429,7 +430,6 @@
             this.Text = "FTP AutoDeploy";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.Shown += new System.EventHandler(this.Form1_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
