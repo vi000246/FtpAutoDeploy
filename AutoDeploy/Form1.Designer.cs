@@ -35,6 +35,7 @@ namespace AutoDeploy
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.deploy伺服器設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.log查詢ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnRename = new System.Windows.Forms.Button();
@@ -64,7 +65,6 @@ namespace AutoDeploy
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.log查詢ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbUploadList.SuspendLayout();
@@ -106,6 +106,13 @@ namespace AutoDeploy
             this.deploy伺服器設定ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.deploy伺服器設定ToolStripMenuItem.Text = "Deploy伺服器設定";
             this.deploy伺服器設定ToolStripMenuItem.Click += new System.EventHandler(this.deploy伺服器設定ToolStripMenuItem_Click);
+            // 
+            // log查詢ToolStripMenuItem
+            // 
+            this.log查詢ToolStripMenuItem.Name = "log查詢ToolStripMenuItem";
+            this.log查詢ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.log查詢ToolStripMenuItem.Text = "Log查詢";
+            this.log查詢ToolStripMenuItem.Click += new System.EventHandler(this.log查詢ToolStripMenuItem_Click);
             // 
             // test2ToolStripMenuItem
             // 
@@ -192,13 +199,13 @@ namespace AutoDeploy
             // 
             // btnCopy
             // 
-            this.btnCopy.Enabled = false;
             this.btnCopy.Location = new System.Drawing.Point(112, 391);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(75, 23);
             this.btnCopy.TabIndex = 10;
             this.btnCopy.Text = "複製";
             this.btnCopy.UseVisualStyleBackColor = true;
+            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
             // 
             // gbUploadList
             // 
@@ -411,13 +418,6 @@ namespace AutoDeploy
             this.toolTip.AutoPopDelay = 30000;
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
-            // 
-            // log查詢ToolStripMenuItem
-            // 
-            this.log查詢ToolStripMenuItem.Name = "log查詢ToolStripMenuItem";
-            this.log查詢ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.log查詢ToolStripMenuItem.Text = "Log查詢";
-            this.log查詢ToolStripMenuItem.Click += new System.EventHandler(this.log查詢ToolStripMenuItem_Click);
             // 
             // Form1
             // 

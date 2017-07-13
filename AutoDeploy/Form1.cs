@@ -304,7 +304,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 string name = dialog.ShowInputGroupNameForm();
                 if (!string.IsNullOrEmpty(name))
                 {
-                    int? newID = db.AddDeployGroup(name);
+                    int newID = db.AddDeployGroupByName(new model.Deploy_M { Name=name});
                 }
                 ShowGroupData();
             }
@@ -361,6 +361,34 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 MessageBox.Show(ex.Message);
             }
         }
+        //複製按鈕
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CheckIsSelectDeployGroup();
+                int groupId = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
+                //取得被複製的群組及子群組的資料
+                var OriginGroupM = db.GetDataFromDB<model.Deploy_M>(groupId);
+                var OriginGroupD = db.GetDataFromDBByCondition<model.Deploy_D>(new { GroupID = groupId });
+                //新增一筆名稱一樣的deploy group 並取得id
+                int newID = db.AddDeployGroupByName(OriginGroupM);
+
+                //將原始DeployGroup_D的groupID設為新的群組ID
+                var GroupD = OriginGroupD.Select(s=> { s.GroupID = Convert.ToInt32(newID);return s; }).ToList<model.Deploy_D>();
+                //複製原始DeployGroup_D到新的群組Detail
+                db.AddDeployDetail(GroupD);
+                
+
+                ShowGroupData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
         //修改名稱 loop checked的項目
         private void btnRename_Click(object sender, EventArgs e)
         {

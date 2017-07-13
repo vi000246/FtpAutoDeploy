@@ -57,6 +57,19 @@ namespace AutoDeploy
             }
             return newId;
         }
+        //新增Deploy 路徑清單 新增多筆
+        public int? AddDeployDetail(List<model.Deploy_D> item)
+        {
+            int? newId = 0;
+            using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
+            {
+                cnn.Open();
+                var result = cnn.Execute(@"Insert into Deploy_D (GroupID,Path) 
+                                            values(@groupid,@path)",
+                    item);
+            }
+            return newId;
+        }
 
 
         //刪除FTP的主表和明細表
@@ -86,13 +99,18 @@ namespace AutoDeploy
         }
 
         //新增Deploy群組
-        public int? AddDeployGroup(string name)
+        public int AddDeployGroupByName(model.Deploy_M item)
         {
-            int? newId = 0;
+            if (string.IsNullOrEmpty(item.Name))
+                throw new ArgumentException("名稱不得為空");
+            int newId = 0;
             using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
             {
                 cnn.Open();
-                var result = cnn.Execute(@"Insert into Deploy_M (Name) values(@name)", new { name });
+                newId = cnn.Query<int>(@"Insert into Deploy_M (Name,FtpGroup,FtpTargetPath,FileRootPath,BackUpPath,Memo,CreateTime) 
+                                            values(@name,@FtpGroup,@FtpTargetPath,@FileRootPath,@BackUpPath,@Memo,@createtime);
+                                            SELECT CAST(last_insert_rowid() as int)", 
+                                            new { item.Name,item.FtpGroup,item.FtpTargetPath,item.FileRootPath,item.BackUpPath,item.Memo,DateTime.Now }).Single();
             }
             return newId;
         }
