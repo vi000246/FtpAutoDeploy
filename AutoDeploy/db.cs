@@ -106,11 +106,12 @@ namespace AutoDeploy
             int newId = 0;
             using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
             {
+                var CreateTime = DateTimeSQLite(DateTime.Now);
                 cnn.Open();
                 newId = cnn.Query<int>(@"Insert into Deploy_M (Name,FtpGroup,FtpTargetPath,FileRootPath,BackUpPath,Memo,CreateTime) 
                                             values(@name,@FtpGroup,@FtpTargetPath,@FileRootPath,@BackUpPath,@Memo,@createtime);
                                             SELECT CAST(last_insert_rowid() as int)", 
-                                            new { item.Name,item.FtpGroup,item.FtpTargetPath,item.FileRootPath,item.BackUpPath,item.Memo,DateTime.Now }).Single();
+                                            new { item.Name,item.FtpGroup,item.FtpTargetPath,item.FileRootPath,item.BackUpPath,item.Memo, CreateTime }).Single();
             }
             return newId;
         }
@@ -231,6 +232,13 @@ namespace AutoDeploy
             {
                 throw new ArgumentException(ex.Message);
             }
+        }
+
+        //將DateTime改成Sqlite能儲存的時間
+        public string DateTimeSQLite(DateTime datetime)
+        {
+            string dateTimeFormat = "{0}-{1}-{2} {3}:{4}:{5}.{6}";
+            return string.Format(dateTimeFormat, datetime.Year, datetime.Month, datetime.Day, datetime.Hour, datetime.Minute, datetime.Second, datetime.Millisecond);
         }
     }
 }
