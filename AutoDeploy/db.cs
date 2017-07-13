@@ -106,12 +106,11 @@ namespace AutoDeploy
             int newId = 0;
             using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
             {
-                var CreateTime = DateTimeSQLite(DateTime.Now);
                 cnn.Open();
-                newId = cnn.Query<int>(@"Insert into Deploy_M (Name,FtpGroup,FtpTargetPath,FileRootPath,BackUpPath,Memo,CreateTime) 
-                                            values(@name,@FtpGroup,@FtpTargetPath,@FileRootPath,@BackUpPath,@Memo,@createtime);
+                newId = cnn.Query<int>(@"Insert into Deploy_M (Name,FtpGroup,FtpTargetPath,FileRootPath,BackUpPath,Memo) 
+                                            values(@name,@FtpGroup,@FtpTargetPath,@FileRootPath,@BackUpPath,@Memo);
                                             SELECT CAST(last_insert_rowid() as int)", 
-                                            new { item.Name,item.FtpGroup,item.FtpTargetPath,item.FileRootPath,item.BackUpPath,item.Memo, CreateTime }).Single();
+                                            new { item.Name,item.FtpGroup,item.FtpTargetPath,item.FileRootPath,item.BackUpPath,item.Memo }).Single();
             }
             return newId;
         }

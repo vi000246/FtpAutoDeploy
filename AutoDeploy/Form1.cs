@@ -470,7 +470,11 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
         {
             try
             {
-                lbDeployGroup.DataSource = db.GetDataFromDB<model.Deploy_M>();
+                var data = db.GetDataFromDB<model.Deploy_M>();
+                //將最新的排序在最上面
+                data = data.OrderByDescending(x => x.ID).ToList<model.Deploy_M>();
+
+                lbDeployGroup.DataSource = data;
                 lbDeployGroup.DisplayMember = "Name";
                 lbDeployGroup.ValueMember = "ID";
             }
