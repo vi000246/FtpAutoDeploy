@@ -63,6 +63,8 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                     throw new ArgumentException("請選擇一個伺服器群組");
                 if(string.IsNullOrEmpty(tbFileRoot.Text))
                     throw new ArgumentException("請選擇檔案清單根目錄");
+                if (cbIsBackUp.Checked && string.IsNullOrEmpty(tbBackUpPath.Text))
+                    throw new ArgumentException("請輸入備份檔存放路徑");
                 //儲存目前的設置
                 UpdateDeployConfig(lastDeployGroupIdSelected);
 
@@ -255,13 +257,16 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
             string path = dialog.BrowseFolder();
             //如果切換根目錄 則會清除所有的檔案清單
             if (!string.IsNullOrEmpty(path))
+            {
                 ClearCurrentFileList();
-            tbFileRoot.Text = path;
+                tbFileRoot.Text = path;
+            }
         }
         private void btnBrowseBackUp_Click(object sender, EventArgs e)
         {
             string path = dialog.BrowseFolder();
-            tbBackUpPath.Text = path;
+            if(!string.IsNullOrEmpty(path))
+                tbBackUpPath.Text = path;
         }
         //伺服器目標目徑的驗證
         private void tbFtpRoot_Validating(object sender, CancelEventArgs e)
@@ -555,6 +560,17 @@ Github：vi000246
                 lbLog.TopIndex = Math.Max(lbLog.Items.Count - visibleItems + 1, 0);
             };
             lbLog.BeginInvoke(updateLog);
+        }
+
+        //取得目前選取的Deploy群組名稱 供log使用
+        public string GetDeployGroupName() {
+            string name = string.Empty;
+            Invoke(new Action(() =>
+            {
+                if (lbDeployGroup.SelectedItem != null)
+                    name = (lbDeployGroup.SelectedItem as model.Deploy_M).Name;
+            }));
+            return name;
         }
 
         //當上傳時 將控制項disable 結束時再enable

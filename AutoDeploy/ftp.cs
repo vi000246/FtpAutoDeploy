@@ -32,6 +32,7 @@ namespace AutoDeploy
                 client.Port = port;
                 client.Encoding = Encoding.Default;//防止上傳的中文變亂碼
                 client.Connect();
+                form.LogToBox("=====連線至FTP :"+ClientIP+":"+port+"======");
             }
             catch (Exception ex) {
                 throw new ArgumentException(ex.Message);
@@ -63,8 +64,12 @@ namespace AutoDeploy
                         if (client.FileExists(remotePath))
                         {
                             if (IsBackUp && !string.IsNullOrEmpty(BackUpPath)) {
-                                var fileName = Path.GetFileName(remotePath);
-                                client.DownloadFile(BackUpPath+"\\"+ remotePath, remotePath);
+                                string deployGroupName = form.GetDeployGroupName();
+                                if (string.IsNullOrEmpty(deployGroupName))
+                                    throw new ArgumentException("程式錯誤: 無法取得Deploy群組的名稱");
+                                client.DownloadFile(
+                                    BackUpPath+"\\"+ DateTime.Now.ToString("yyyy-MM-dd") +"\\"+deployGroupName+"\\" +remotePath,
+                                    remotePath);
                             }
 
                         }
