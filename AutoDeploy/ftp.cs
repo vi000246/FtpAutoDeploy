@@ -32,14 +32,14 @@ namespace AutoDeploy
                 client.Port = port;
                 client.Encoding = Encoding.Default;//防止上傳的中文變亂碼
                 client.Connect();
-                form.LogToBox("=====連線至FTP :"+ClientIP+":"+port+"======");
+                form.LogToBox("===================   連線至FTP :" + ClientIP+":"+port+ "   ===================");
             }
             catch (Exception ex) {
                 throw new ArgumentException(ex.Message);
             }
         }
         //上傳檔案至FTP
-        public void UploadFileToFtp(List<string> filePaths,string fileRootPath,string FtpTargetPath, string BackUpPath = "",bool IsBackUp = false) {
+        public async void UploadFileToFtp(List<string> filePaths,string fileRootPath,string FtpTargetPath, string BackUpPath = "",bool IsBackUp = false) {
             try
             {
                 client.RetryAttempts = 3;
@@ -67,7 +67,7 @@ namespace AutoDeploy
                                 string deployGroupName = form.GetDeployGroupName();
                                 if (string.IsNullOrEmpty(deployGroupName))
                                     throw new ArgumentException("程式錯誤: 無法取得Deploy群組的名稱");
-                                client.DownloadFile(
+                                await client.DownloadFileAsync(
                                     BackUpPath+"\\"+ DateTime.Now.ToString("yyyy-MM-dd") +"\\"+deployGroupName+"\\" +remotePath,
                                     remotePath);
                             }
@@ -77,10 +77,10 @@ namespace AutoDeploy
                         //取得目錄名稱 ex.c:/Desktop/test.txt  => c:/Desktop
                         remotePath = Path.GetDirectoryName(remotePath);
                         //因為FluentFTP UploadFile()有bug 所以用多檔上傳的api來傳檔案
-                        int result = client.UploadFiles(new string[] { path }, remotePath, FtpExists.Overwrite, true);
+                        var result = await client.UploadFilesAsync(new string[] { path }, remotePath, FtpExists.Overwrite, true);
                         form.LogToBox("剩餘:"+ rest + " 上傳"+((result==1)?"成功":"失敗")+" 檔案: "+path.Replace(fileRootPath,""));
                     }
-                    form.LogToBox("=========所有檔案部署完成=======");
+                    form.LogToBox("===================    所有檔案部署完成    ===================");
                 }
             }
             catch (Exception ex)
