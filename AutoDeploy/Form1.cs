@@ -515,14 +515,8 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
         //menu 說明 click
         private void test2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(@"
-這是用來幫助快速部署網站的FTP上傳程式
-
-作者   ：Yich Lin
-Github：vi000246
-信箱   ：vi000246@hotmail.com
-
-","程式資訊");
+            AuthorInfo form = new AuthorInfo();
+            form.Show();
         }
         //按下log時 開啟Log資料夾
         private void log查詢ToolStripMenuItem_Click(object sender, EventArgs e)

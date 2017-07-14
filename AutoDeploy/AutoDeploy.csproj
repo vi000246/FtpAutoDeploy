@@ -117,6 +117,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthorInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AuthorInfo.Designer.cs">
+      <DependentUpon>AuthorInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="db.cs" />
     <Compile Include="dbDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -143,6 +149,9 @@
     <Compile Include="model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AuthorInfo.resx">
+      <DependentUpon>AuthorInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
