@@ -31,6 +31,7 @@ namespace AutoDeploy
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.lbProgress = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +49,7 @@ namespace AutoDeploy
             this.gbUploadList = new System.Windows.Forms.GroupBox();
             this.tbMemo = new System.Windows.Forms.TextBox();
             this.lbmemo = new System.Windows.Forms.Label();
+            this.lbLog = new System.Windows.Forms.ListBox();
             this.btnPreView = new System.Windows.Forms.Button();
             this.btnBrowseRoot = new System.Windows.Forms.Button();
             this.lbFileRoot = new System.Windows.Forms.Label();
@@ -64,7 +66,6 @@ namespace AutoDeploy
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.lbLog = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbUploadList.SuspendLayout();
@@ -254,6 +255,15 @@ namespace AutoDeploy
             this.lbmemo.TabIndex = 18;
             this.lbmemo.Text = "備註:";
             // 
+            // lbLog
+            // 
+            this.lbLog.FormattingEnabled = true;
+            this.lbLog.ItemHeight = 12;
+            this.lbLog.Location = new System.Drawing.Point(14, 413);
+            this.lbLog.Name = "lbLog";
+            this.lbLog.Size = new System.Drawing.Size(500, 100);
+            this.lbLog.TabIndex = 7;
+            // 
             // btnPreView
             // 
             this.btnPreView.Location = new System.Drawing.Point(277, 237);
@@ -409,15 +419,6 @@ namespace AutoDeploy
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
             // 
-            // lbLog
-            // 
-            this.lbLog.FormattingEnabled = true;
-            this.lbLog.ItemHeight = 12;
-            this.lbLog.Location = new System.Drawing.Point(14, 413);
-            this.lbLog.Name = "lbLog";
-            this.lbLog.Size = new System.Drawing.Size(500, 100);
-            this.lbLog.TabIndex = 7;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -426,6 +427,7 @@ namespace AutoDeploy
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbUploadList);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "FTP AutoDeploy";

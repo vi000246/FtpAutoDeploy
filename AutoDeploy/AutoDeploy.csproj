@@ -65,6 +65,9 @@
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>if_circle-content-upload-cloud_1495031.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
@@ -181,6 +184,7 @@
     <None Include="dbDataSet.xss">
       <DependentUpon>dbDataSet.xsd</DependentUpon>
     </None>
+    <Content Include="if_circle-content-upload-cloud_1495031.ico" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
