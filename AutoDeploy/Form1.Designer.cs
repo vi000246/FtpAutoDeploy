@@ -48,7 +48,6 @@ namespace AutoDeploy
             this.gbUploadList = new System.Windows.Forms.GroupBox();
             this.tbMemo = new System.Windows.Forms.TextBox();
             this.lbmemo = new System.Windows.Forms.Label();
-            this.lbLog = new System.Windows.Forms.ListBox();
             this.btnPreView = new System.Windows.Forms.Button();
             this.btnBrowseRoot = new System.Windows.Forms.Button();
             this.lbFileRoot = new System.Windows.Forms.Label();
@@ -65,6 +64,7 @@ namespace AutoDeploy
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.lbLog = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbUploadList.SuspendLayout();
@@ -254,15 +254,6 @@ namespace AutoDeploy
             this.lbmemo.TabIndex = 18;
             this.lbmemo.Text = "備註:";
             // 
-            // lbLog
-            // 
-            this.lbLog.FormattingEnabled = true;
-            this.lbLog.ItemHeight = 12;
-            this.lbLog.Location = new System.Drawing.Point(14, 413);
-            this.lbLog.Name = "lbLog";
-            this.lbLog.Size = new System.Drawing.Size(500, 100);
-            this.lbLog.TabIndex = 7;
-            // 
             // btnPreView
             // 
             this.btnPreView.Location = new System.Drawing.Point(277, 237);
@@ -405,7 +396,6 @@ namespace AutoDeploy
             // 
             this.cbIsBackUp.AutoSize = true;
             this.cbIsBackUp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.cbIsBackUp.Enabled = false;
             this.cbIsBackUp.Location = new System.Drawing.Point(387, 354);
             this.cbIsBackUp.Name = "cbIsBackUp";
             this.cbIsBackUp.Size = new System.Drawing.Size(132, 16);
@@ -418,6 +408,15 @@ namespace AutoDeploy
             this.toolTip.AutoPopDelay = 30000;
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
+            // 
+            // lbLog
+            // 
+            this.lbLog.FormattingEnabled = true;
+            this.lbLog.ItemHeight = 12;
+            this.lbLog.Location = new System.Drawing.Point(14, 413);
+            this.lbLog.Name = "lbLog";
+            this.lbLog.Size = new System.Drawing.Size(500, 100);
+            this.lbLog.TabIndex = 7;
             // 
             // Form1
             // 
@@ -451,7 +450,6 @@ namespace AutoDeploy
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnCopy;
-        private System.Windows.Forms.ListBox lbLog;
         private System.Windows.Forms.GroupBox gbUploadList;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.ListBox lbFileList;
@@ -477,6 +475,7 @@ namespace AutoDeploy
         private System.Windows.Forms.TextBox tbMemo;
         private System.Windows.Forms.Label lbmemo;
         private System.Windows.Forms.ToolStripMenuItem log查詢ToolStripMenuItem;
+        private System.Windows.Forms.ListBox lbLog;
     }
 }
 

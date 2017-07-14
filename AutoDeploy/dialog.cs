@@ -156,7 +156,7 @@ namespace AutoDeploy
         public static void ShowPreview(List<string> paths,string fileRootPath,string FtpTargetPath) {
             //處理path 轉成上傳至FTP的path
             List<string> newPaths = new List<string>();
-            paths.ForEach(x=> newPaths.Add(file.BuildFtpRemotePath(x, fileRootPath, FtpTargetPath,false)));
+            paths.ForEach(x=> newPaths.Add(file.BuildFtpRemotePath(x, fileRootPath, FtpTargetPath)));
 
             Form prompt = new Form()
             {

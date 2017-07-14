@@ -125,14 +125,16 @@ namespace AutoDeploy
                     FtpTargetPath = @FtpTargetPath,
                     FileRootPath = @FileRootPath,
                     BackUpPath = @BackUpPath,
-                    Memo = @Memo
+                    Memo = @Memo,
+                    IsBackup = @IsBackup
                     where Id = @id", 
                     new { id = form.ID,
                         FtpGroup = form.FtpGroup,
                         FtpTargetPath = form.FtpTargetPath,
                         FileRootPath = form.FileRootPath,
                         BackUpPath = form.BackUpPath,
-                        Memo = form.Memo
+                        Memo = form.Memo,
+                        IsBackup = form.IsBackup
                     });
             }
             return newId;

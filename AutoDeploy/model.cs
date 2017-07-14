@@ -41,6 +41,7 @@ namespace AutoDeploy
             public string FileRootPath { get; set; }
             public string BackUpPath { get; set; }
             public string Memo { get; set; }
+            public bool IsBackup { get; set; }
         }
         [Table("Deploy_D")]
         public class Deploy_D

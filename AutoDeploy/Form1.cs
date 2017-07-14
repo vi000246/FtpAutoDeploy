@@ -96,7 +96,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 {
                     using (ftp ftp = new ftp(this, FTPitem.ClientIP, FTPitem.UserName, FTPitem.Password, Convert.ToInt32(FTPitem.Port)))
                     {
-                        ftp.UploadFileToFtp(files, tbFileRoot.Text, tbFtpRoot.Text);
+                        ftp.UploadFileToFtp(files, tbFileRoot.Text, tbFtpRoot.Text,tbBackUpPath.Text, cbIsBackUp.Checked);
                     }
                 }
             }
@@ -427,6 +427,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 form.FtpTargetPath = tbFtpRoot.Text;
                 form.BackUpPath = tbBackUpPath.Text;
                 form.Memo = tbMemo.Text;
+                form.IsBackup = cbIsBackUp.Checked;
                 db.UpdateDeployConfig(form);
             }
             catch (Exception ex)
@@ -457,6 +458,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                     tbFtpRoot.Text = form.FtpTargetPath;
                     tbBackUpPath.Text = form.BackUpPath;
                     tbMemo.Text = form.Memo;
+                    cbIsBackUp.Checked = form.IsBackup;
                 }
             }
             catch (Exception ex)
