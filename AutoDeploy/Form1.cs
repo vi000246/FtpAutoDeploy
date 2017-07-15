@@ -106,6 +106,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                         ftp.UploadFileToFtp(files, tbFileRoot.Text, tbFtpRoot.Text,tbBackUpPath.Text, cbIsBackUp.Checked);
                     }
                 }
+                LogToBox("===================    所有檔案部署完成    ===================");
             }
             catch (Exception ex)
             {
@@ -118,14 +119,15 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
 
         }
 
+        //更新progressBar進度
         public void updateProgressBar() {
             fileUploadCompletedCount += 1;
+            int percent = (int)Math.Round((double)(100 * fileUploadCompletedCount) / TotalFileCount);
             MethodInvoker updateProgressBar = delegate
             {
-                progressBar1.Value = fileUploadCompletedCount / TotalFileCount * 100;
+                progressBar1.Value = percent;
             };
-            progressBar1.Invoke(updateProgressBar);
-
+            progressBar1.BeginInvoke(updateProgressBar);
         }
 
         //載入伺服器選單的combobox
@@ -570,6 +572,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 lbLog.TopIndex = Math.Max(lbLog.Items.Count - visibleItems + 1, 0);
             };
             lbLog.BeginInvoke(updateLog);
+
         }
 
         //取得目前選取的Deploy群組名稱 供log使用
@@ -599,7 +602,5 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
             }));
 
         }
-
-
     }
 }

@@ -57,9 +57,6 @@ namespace AutoDeploy
                 {
                     foreach (var path in filePaths)
                     {
-                        int index = filePaths.IndexOf(path);
-                        int rest = filePaths.Count - (index+1);
-
                         //建立出FTP要上傳的目錄
                         string remotePath = file.BuildFtpRemotePath(path, fileRootPath, FtpTargetPath);
                         if (client.FileExists(remotePath))
@@ -79,10 +76,9 @@ namespace AutoDeploy
                         remotePath = Path.GetDirectoryName(remotePath);
                         //因為FluentFTP UploadFile()有bug 所以用多檔上傳的api來傳檔案
                         var result = client.UploadFiles(new string[] { path }, remotePath, FtpExists.Overwrite, true);
-                        form.LogToBox("剩餘:"+ rest + " 上傳"+((result==1)?"成功":"失敗")+" 檔案: "+path.Replace(fileRootPath,""));
+                        form.LogToBox("上傳"+((result==1)?"成功":"失敗")+" 檔案: "+path.Replace(fileRootPath,""));
                         form.updateProgressBar();
                     }
-                    form.LogToBox("===================    所有檔案部署完成    ===================");
                 }
             }
             catch (Exception ex)

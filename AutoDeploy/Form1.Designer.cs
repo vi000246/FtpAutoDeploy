@@ -34,11 +34,13 @@ namespace AutoDeploy
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.lbProgress = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.測試選單ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deploy伺服器設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.log查詢ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnRename = new System.Windows.Forms.Button();
             this.btnCancelSelect = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -47,6 +49,7 @@ namespace AutoDeploy
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
             this.gbUploadList = new System.Windows.Forms.GroupBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.tbMemo = new System.Windows.Forms.TextBox();
             this.lbmemo = new System.Windows.Forms.Label();
             this.lbLog = new System.Windows.Forms.ListBox();
@@ -66,9 +69,9 @@ namespace AutoDeploy
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbUploadList.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,7 +79,7 @@ namespace AutoDeploy
             // 
             this.lbProgress.AutoSize = true;
             this.lbProgress.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lbProgress.Location = new System.Drawing.Point(10, 428);
+            this.lbProgress.Location = new System.Drawing.Point(6, 405);
             this.lbProgress.Name = "lbProgress";
             this.lbProgress.Size = new System.Drawing.Size(73, 19);
             this.lbProgress.TabIndex = 8;
@@ -84,21 +87,23 @@ namespace AutoDeploy
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.測試選單ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(742, 24);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // toolStripMenuItem1
+            // 測試選單ToolStripMenuItem
             // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.測試選單ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deploy伺服器設定ToolStripMenuItem,
             this.log查詢ToolStripMenuItem,
             this.test2ToolStripMenuItem});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(43, 20);
-            this.toolStripMenuItem1.Text = "選單";
+            this.測試選單ToolStripMenuItem.Name = "測試選單ToolStripMenuItem";
+            this.測試選單ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.測試選單ToolStripMenuItem.Text = "選單";
             // 
             // deploy伺服器設定ToolStripMenuItem
             // 
@@ -121,9 +126,15 @@ namespace AutoDeploy
             this.test2ToolStripMenuItem.Text = "說明";
             this.test2ToolStripMenuItem.Click += new System.EventHandler(this.test2ToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(32, 19);
+            // 
             // groupBox1
             // 
             this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.btnRename);
             this.groupBox1.Controls.Add(this.btnCancelSelect);
             this.groupBox1.Controls.Add(this.btnDelete);
@@ -131,16 +142,25 @@ namespace AutoDeploy
             this.groupBox1.Controls.Add(this.lbDeployGroup);
             this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.btnCopy);
-            this.groupBox1.Location = new System.Drawing.Point(0, 24);
+            this.groupBox1.Location = new System.Drawing.Point(6, 24);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(210, 515);
+            this.groupBox1.Size = new System.Drawing.Size(210, 555);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deploy群組";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(37, 491);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(127, 43);
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
+            // 
             // btnRename
             // 
-            this.btnRename.Location = new System.Drawing.Point(10, 471);
+            this.btnRename.Location = new System.Drawing.Point(10, 462);
             this.btnRename.Name = "btnRename";
             this.btnRename.Size = new System.Drawing.Size(75, 23);
             this.btnRename.TabIndex = 15;
@@ -150,7 +170,7 @@ namespace AutoDeploy
             // 
             // btnCancelSelect
             // 
-            this.btnCancelSelect.Location = new System.Drawing.Point(112, 429);
+            this.btnCancelSelect.Location = new System.Drawing.Point(112, 426);
             this.btnCancelSelect.Name = "btnCancelSelect";
             this.btnCancelSelect.Size = new System.Drawing.Size(75, 23);
             this.btnCancelSelect.TabIndex = 14;
@@ -160,7 +180,7 @@ namespace AutoDeploy
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(112, 471);
+            this.btnDelete.Location = new System.Drawing.Point(112, 462);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 13;
@@ -170,7 +190,7 @@ namespace AutoDeploy
             // 
             // btnSelectAll
             // 
-            this.btnSelectAll.Location = new System.Drawing.Point(10, 429);
+            this.btnSelectAll.Location = new System.Drawing.Point(10, 427);
             this.btnSelectAll.Name = "btnSelectAll";
             this.btnSelectAll.Size = new System.Drawing.Size(75, 23);
             this.btnSelectAll.TabIndex = 12;
@@ -230,12 +250,19 @@ namespace AutoDeploy
             this.gbUploadList.Controls.Add(this.btnStart);
             this.gbUploadList.Controls.Add(this.cbServerList);
             this.gbUploadList.Controls.Add(this.cbIsBackUp);
-            this.gbUploadList.Location = new System.Drawing.Point(216, 24);
+            this.gbUploadList.Location = new System.Drawing.Point(222, 27);
             this.gbUploadList.Name = "gbUploadList";
-            this.gbUploadList.Size = new System.Drawing.Size(526, 571);
+            this.gbUploadList.Size = new System.Drawing.Size(526, 551);
             this.gbUploadList.TabIndex = 1;
             this.gbUploadList.TabStop = false;
             this.gbUploadList.Text = "上傳清單";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(112, 401);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(396, 23);
+            this.progressBar1.TabIndex = 20;
             // 
             // tbMemo
             // 
@@ -259,7 +286,7 @@ namespace AutoDeploy
             // 
             this.lbLog.FormattingEnabled = true;
             this.lbLog.ItemHeight = 12;
-            this.lbLog.Location = new System.Drawing.Point(14, 450);
+            this.lbLog.Location = new System.Drawing.Point(10, 430);
             this.lbLog.Name = "lbLog";
             this.lbLog.Size = new System.Drawing.Size(500, 100);
             this.lbLog.TabIndex = 7;
@@ -419,18 +446,11 @@ namespace AutoDeploy
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(14, 402);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(500, 23);
-            this.progressBar1.TabIndex = 20;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(742, 582);
+            this.ClientSize = new System.Drawing.Size(742, 583);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbUploadList);
             this.Controls.Add(this.menuStrip1);
@@ -443,6 +463,7 @@ namespace AutoDeploy
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.gbUploadList.ResumeLayout(false);
             this.gbUploadList.PerformLayout();
             this.ResumeLayout(false);
@@ -486,6 +507,8 @@ namespace AutoDeploy
         private System.Windows.Forms.ToolStripMenuItem log查詢ToolStripMenuItem;
         private System.Windows.Forms.ListBox lbLog;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ToolStripMenuItem 測試選單ToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
