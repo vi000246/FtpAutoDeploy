@@ -69,6 +69,7 @@ namespace AutoDeploy
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.lbRestFile = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -230,6 +231,7 @@ namespace AutoDeploy
             // gbUploadList
             // 
             this.gbUploadList.AutoSize = true;
+            this.gbUploadList.Controls.Add(this.lbRestFile);
             this.gbUploadList.Controls.Add(this.progressBar1);
             this.gbUploadList.Controls.Add(this.tbMemo);
             this.gbUploadList.Controls.Add(this.lbmemo);
@@ -252,7 +254,7 @@ namespace AutoDeploy
             this.gbUploadList.Controls.Add(this.cbIsBackUp);
             this.gbUploadList.Location = new System.Drawing.Point(222, 27);
             this.gbUploadList.Name = "gbUploadList";
-            this.gbUploadList.Size = new System.Drawing.Size(526, 551);
+            this.gbUploadList.Size = new System.Drawing.Size(526, 568);
             this.gbUploadList.TabIndex = 1;
             this.gbUploadList.TabStop = false;
             this.gbUploadList.Text = "上傳清單";
@@ -446,6 +448,15 @@ namespace AutoDeploy
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
             // 
+            // lbRestFile
+            // 
+            this.lbRestFile.AutoSize = true;
+            this.lbRestFile.Location = new System.Drawing.Point(385, 535);
+            this.lbRestFile.Name = "lbRestFile";
+            this.lbRestFile.Size = new System.Drawing.Size(65, 12);
+            this.lbRestFile.TabIndex = 21;
+            this.lbRestFile.Text = "檔案剩餘：";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -509,6 +520,7 @@ namespace AutoDeploy
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.ToolStripMenuItem 測試選單ToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lbRestFile;
     }
 }
 

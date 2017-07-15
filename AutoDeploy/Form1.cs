@@ -29,9 +29,7 @@ namespace AutoDeploy
         public Form1()
         {
             InitializeComponent();
-            ShowGroupData();
-            ShowDetailData();
-            LoadServerCombobox();
+            LoadServerCombobox();//Combobox要先init出來 ShowConfigData()才能自動依據DB裡的值選擇伺服器群組
             toolTip.SetToolTip(lbChooseServerGroup,"選擇FTP伺服器群組，會Deploy至此群組底下的FTP列表");
             toolTip.SetToolTip(lbFTPDirectory, @"輸入要上傳至FTP的目標目錄，有子目錄就用斜線分隔，開頭跟後面不要有斜線 
 如果為空代表是FTP的根目錄
@@ -47,8 +45,12 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ShowGroupData();
+            ShowDetailData();
             if (lbDeployGroup.SelectedItem != null)
                 lastDeployGroupIdSelected = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
+            else
+                SetControlEnable(false);
             ShowConfigData();
         }
 
@@ -96,8 +98,14 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 
                 //取得combobx選中的FTP群組的FTP列表
                 List<model.FTP_D> FTPList = db.GetDataFromDBByCondition<model.FTP_D>(new { GroupID = serverGroupID });
+                if (FTPList.Count() == 0)
+                    throw new ArgumentException("此FTP群組內沒有設置FTP Server");
                 TotalFileCount = FTPList.Count() * files.Count();
                 fileUploadCompletedCount = 0;//重設progress bar
+                Invoke(new Action(() =>
+                {
+                    lbRestFile.Text = string.Format("檔案剩餘：{0}", TotalFileCount.ToString());
+                }));
 
                 foreach (var FTPitem in FTPList)
                 {
@@ -128,6 +136,12 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 progressBar1.Value = percent;
             };
             progressBar1.BeginInvoke(updateProgressBar);
+
+            MethodInvoker updateRestFile = delegate
+            {
+                lbRestFile.Text = "檔案剩餘："+(TotalFileCount- fileUploadCompletedCount).ToString();
+            };
+            lbRestFile.BeginInvoke(updateRestFile);
         }
 
         //載入伺服器選單的combobox
@@ -147,12 +161,18 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
         //拖曳進入事件
         private void lbFileList_DragEnter(object sender, DragEventArgs e)
         {
-
-            // 判斷物件是否可以拖曳進入控件，EX：垃圾桶無法拖曳進入控件，
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.All;
-            else
-                e.Effect = DragDropEffects.None;
+            try
+            {
+                // 判斷物件是否可以拖曳進入控件，EX：垃圾桶無法拖曳進入控件，
+                if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                    e.Effect = DragDropEffects.All;
+                else
+                    e.Effect = DragDropEffects.None;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         // 檔案拖放
         private void lbFileList_DragDrop(object sender, DragEventArgs e)
@@ -195,7 +215,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 ShowDetailData();
             }
             catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(new Form { TopMost = true},ex.Message);
             }
         }
 
@@ -439,7 +459,12 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
             try
             {
                 model.Deploy_M form = new model.Deploy_M();
+                //如果Deploy群組裡面沒東西 跳過此方法
+                if (lbDeployGroup.Items.Count == 0)
+                    return;
+
                 CheckIsSelectDeployGroup();
+
                 int serverGroupID = 0;
                 if (cbServerList.SelectedItem != null)
                     serverGroupID = (cbServerList.SelectedItem as model.FTP_M).ID;
@@ -452,6 +477,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 form.Memo = tbMemo.Text;
                 form.IsBackup = cbIsBackUp.Checked;
                 db.UpdateDeployConfig(form);
+                
             }
             catch (Exception ex)
             {
@@ -502,6 +528,9 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 lbDeployGroup.DataSource = data;
                 lbDeployGroup.DisplayMember = "Name";
                 lbDeployGroup.ValueMember = "ID";
+
+                //如果Deploy群組沒東西 就將control設為disable
+                SetControlEnable(!(lbDeployGroup.Items.Count == 0));
             }
             catch (Exception ex)
             {
