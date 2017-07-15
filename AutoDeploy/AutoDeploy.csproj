@@ -185,7 +185,9 @@
     <None Include="dbDataSet.xss">
       <DependentUpon>dbDataSet.xsd</DependentUpon>
     </None>
-    <Content Include="Resources\if_circle-content-upload-cloud_1495031.ico" />
+    <EmbeddedResource Include="Resources\if_circle-content-upload-cloud_1495031.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

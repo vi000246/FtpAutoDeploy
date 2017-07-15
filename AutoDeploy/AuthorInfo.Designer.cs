@@ -1,4 +1,6 @@
-﻿namespace AutoDeploy
+﻿using System.Drawing;
+
+namespace AutoDeploy
 {
     partial class AuthorInfo
     {
@@ -43,6 +45,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
+            this.Icon = new Icon("Resources/if_circle-content-upload-cloud_1495031.ico");
             // 
             // label1
             // 
