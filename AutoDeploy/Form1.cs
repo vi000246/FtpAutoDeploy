@@ -127,22 +127,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
 
         }
 
-        //更新progressBar進度
-        public void updateProgressBar() {
-            fileUploadCompletedCount += 1;
-            int percent = (int)Math.Round((double)(100 * fileUploadCompletedCount) / TotalFileCount);
-            MethodInvoker updateProgressBar = delegate
-            {
-                progressBar1.Value = percent;
-            };
-            progressBar1.BeginInvoke(updateProgressBar);
 
-            MethodInvoker updateRestFile = delegate
-            {
-                lbRestFile.Text = "檔案剩餘："+(TotalFileCount- fileUploadCompletedCount).ToString();
-            };
-            lbRestFile.BeginInvoke(updateRestFile);
-        }
 
         //載入伺服器選單的combobox
         public void LoadServerCombobox() {
@@ -337,6 +322,23 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 dialog.ShowPreview(paths,tbFileRoot.Text,tbFtpRoot.Text);
         }
 
+        //更新progressBar進度
+        public void updateProgressBar()
+        {
+            fileUploadCompletedCount += 1;
+            int percent = (int)Math.Round((double)(100 * fileUploadCompletedCount) / TotalFileCount);
+            MethodInvoker updateProgressBar = delegate
+            {
+                progressBar1.Value = percent;
+            };
+            progressBar1.BeginInvoke(updateProgressBar);
+
+            MethodInvoker updateRestFile = delegate
+            {
+                lbRestFile.Text = "檔案剩餘：" + (TotalFileCount - fileUploadCompletedCount).ToString();
+            };
+            lbRestFile.BeginInvoke(updateRestFile);
+        }
         #endregion
         #region ========================Deploy 群組相關===============================
         //新增Deploy群組
@@ -575,6 +577,12 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 MessageBox.Show("找不到Logs資料夾");
 
         }
+        //常用清單click
+        private void 常用清單設置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormFastChoose form = new FormFastChoose();
+            form.Show();
+        }
         #endregion
 
 
@@ -631,5 +639,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
             }));
 
         }
+
+
     }
 }

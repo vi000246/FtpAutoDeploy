@@ -134,6 +134,12 @@
     </Compile>
     <Compile Include="dialog.cs" />
     <Compile Include="file.cs" />
+    <Compile Include="FormFastChoose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFastChoose.Designer.cs">
+      <DependentUpon>FormFastChoose.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormServer.cs">
       <SubType>Form</SubType>
     </Compile>

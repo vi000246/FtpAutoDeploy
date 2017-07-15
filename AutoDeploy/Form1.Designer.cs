@@ -70,6 +70,7 @@ namespace AutoDeploy
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.lbRestFile = new System.Windows.Forms.Label();
+            this.常用清單設置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -100,6 +101,7 @@ namespace AutoDeploy
             // 
             this.測試選單ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deploy伺服器設定ToolStripMenuItem,
+            this.常用清單設置ToolStripMenuItem,
             this.log查詢ToolStripMenuItem,
             this.test2ToolStripMenuItem});
             this.測試選單ToolStripMenuItem.Name = "測試選單ToolStripMenuItem";
@@ -457,6 +459,13 @@ namespace AutoDeploy
             this.lbRestFile.TabIndex = 21;
             this.lbRestFile.Text = "檔案剩餘：";
             // 
+            // 常用清單設置ToolStripMenuItem
+            // 
+            this.常用清單設置ToolStripMenuItem.Name = "常用清單設置ToolStripMenuItem";
+            this.常用清單設置ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.常用清單設置ToolStripMenuItem.Text = "常用清單設置";
+            this.常用清單設置ToolStripMenuItem.Click += new System.EventHandler(this.常用清單設置ToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -521,6 +530,7 @@ namespace AutoDeploy
         private System.Windows.Forms.ToolStripMenuItem 測試選單ToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lbRestFile;
+        private System.Windows.Forms.ToolStripMenuItem 常用清單設置ToolStripMenuItem;
     }
 }
 
