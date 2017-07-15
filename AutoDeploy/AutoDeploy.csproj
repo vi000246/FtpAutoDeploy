@@ -152,6 +152,7 @@
     <Compile Include="model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Resources\Icon.ico" />
     <EmbeddedResource Include="AuthorInfo.resx">
       <DependentUpon>AuthorInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -169,6 +170,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Content Include="db.db3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
