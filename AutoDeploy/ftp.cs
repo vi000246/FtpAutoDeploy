@@ -7,6 +7,7 @@ using FluentFTP;
 using System.Net;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading;
 /// <summary>
 /// 用來處理ftp相關
 /// </summary>
@@ -39,7 +40,7 @@ namespace AutoDeploy
             }
         }
         //上傳檔案至FTP
-        public async void UploadFileToFtp(List<string> filePaths,string fileRootPath,string FtpTargetPath, string BackUpPath = "",bool IsBackUp = false) {
+        public void UploadFileToFtp(List<string> filePaths,string fileRootPath,string FtpTargetPath, string BackUpPath = "",bool IsBackUp = false) {
             try
             {
                 client.RetryAttempts = 3;
@@ -67,7 +68,7 @@ namespace AutoDeploy
                                 string deployGroupName = form.GetDeployGroupName();
                                 if (string.IsNullOrEmpty(deployGroupName))
                                     throw new ArgumentException("程式錯誤: 無法取得Deploy群組的名稱");
-                                await client.DownloadFileAsync(
+                                client.DownloadFile(
                                     BackUpPath+"\\"+ DateTime.Now.ToString("yyyy-MM-dd") +"\\"+deployGroupName+"\\" +remotePath,
                                     remotePath);
                             }
@@ -77,8 +78,9 @@ namespace AutoDeploy
                         //取得目錄名稱 ex.c:/Desktop/test.txt  => c:/Desktop
                         remotePath = Path.GetDirectoryName(remotePath);
                         //因為FluentFTP UploadFile()有bug 所以用多檔上傳的api來傳檔案
-                        var result = await client.UploadFilesAsync(new string[] { path }, remotePath, FtpExists.Overwrite, true);
+                        var result = client.UploadFiles(new string[] { path }, remotePath, FtpExists.Overwrite, true);
                         form.LogToBox("剩餘:"+ rest + " 上傳"+((result==1)?"成功":"失敗")+" 檔案: "+path.Replace(fileRootPath,""));
+                        form.updateProgressBar();
                     }
                     form.LogToBox("===================    所有檔案部署完成    ===================");
                 }

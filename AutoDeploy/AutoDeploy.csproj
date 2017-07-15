@@ -66,7 +66,7 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>if_circle-content-upload-cloud_1495031.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\if_circle-content-upload-cloud_1495031.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -152,7 +152,6 @@
     <Compile Include="model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="Resources\Icon.ico" />
     <EmbeddedResource Include="AuthorInfo.resx">
       <DependentUpon>AuthorInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -186,7 +185,7 @@
     <None Include="dbDataSet.xss">
       <DependentUpon>dbDataSet.xsd</DependentUpon>
     </None>
-    <Content Include="if_circle-content-upload-cloud_1495031.ico" />
+    <Content Include="Resources\if_circle-content-upload-cloud_1495031.ico" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -66,6 +66,7 @@ namespace AutoDeploy
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbUploadList.SuspendLayout();
@@ -75,7 +76,7 @@ namespace AutoDeploy
             // 
             this.lbProgress.AutoSize = true;
             this.lbProgress.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lbProgress.Location = new System.Drawing.Point(10, 391);
+            this.lbProgress.Location = new System.Drawing.Point(10, 428);
             this.lbProgress.Name = "lbProgress";
             this.lbProgress.Size = new System.Drawing.Size(73, 19);
             this.lbProgress.TabIndex = 8;
@@ -83,8 +84,6 @@ namespace AutoDeploy
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(742, 24);
@@ -211,6 +210,7 @@ namespace AutoDeploy
             // gbUploadList
             // 
             this.gbUploadList.AutoSize = true;
+            this.gbUploadList.Controls.Add(this.progressBar1);
             this.gbUploadList.Controls.Add(this.tbMemo);
             this.gbUploadList.Controls.Add(this.lbmemo);
             this.gbUploadList.Controls.Add(this.lbLog);
@@ -232,7 +232,7 @@ namespace AutoDeploy
             this.gbUploadList.Controls.Add(this.cbIsBackUp);
             this.gbUploadList.Location = new System.Drawing.Point(216, 24);
             this.gbUploadList.Name = "gbUploadList";
-            this.gbUploadList.Size = new System.Drawing.Size(526, 534);
+            this.gbUploadList.Size = new System.Drawing.Size(526, 571);
             this.gbUploadList.TabIndex = 1;
             this.gbUploadList.TabStop = false;
             this.gbUploadList.Text = "上傳清單";
@@ -259,7 +259,7 @@ namespace AutoDeploy
             // 
             this.lbLog.FormattingEnabled = true;
             this.lbLog.ItemHeight = 12;
-            this.lbLog.Location = new System.Drawing.Point(14, 413);
+            this.lbLog.Location = new System.Drawing.Point(14, 450);
             this.lbLog.Name = "lbLog";
             this.lbLog.Size = new System.Drawing.Size(500, 100);
             this.lbLog.TabIndex = 7;
@@ -419,11 +419,18 @@ namespace AutoDeploy
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(14, 402);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(500, 23);
+            this.progressBar1.TabIndex = 20;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(742, 545);
+            this.ClientSize = new System.Drawing.Size(742, 582);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbUploadList);
             this.Controls.Add(this.menuStrip1);
@@ -478,6 +485,7 @@ namespace AutoDeploy
         private System.Windows.Forms.Label lbmemo;
         private System.Windows.Forms.ToolStripMenuItem log查詢ToolStripMenuItem;
         private System.Windows.Forms.ListBox lbLog;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 

@@ -23,6 +23,8 @@ namespace AutoDeploy
         //用來儲存目前選擇的Deploy群組 在selected index change事件會變更此值
         public int lastDeployGroupIdSelected = 0;
         public file file = new file();
+        public int TotalFileCount = 0;
+        public int fileUploadCompletedCount = 0;
 
         public Form1()
         {
@@ -94,6 +96,9 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 
                 //取得combobx選中的FTP群組的FTP列表
                 List<model.FTP_D> FTPList = db.GetDataFromDBByCondition<model.FTP_D>(new { GroupID = serverGroupID });
+                TotalFileCount = FTPList.Count() * files.Count();
+                fileUploadCompletedCount = 0;//重設progress bar
+
                 foreach (var FTPitem in FTPList)
                 {
                     using (ftp ftp = new ftp(this, FTPitem.ClientIP, FTPitem.UserName, FTPitem.Password, Convert.ToInt32(FTPitem.Port)))
@@ -104,7 +109,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
             }
             catch (Exception ex)
             {
-                throw new ArgumentException(ex.Message);
+                MessageBox.Show(ex.Message);
             }
             finally {
                 //將UI控制項設為Enable
@@ -112,6 +117,17 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
             }
 
         }
+
+        public void updateProgressBar() {
+            fileUploadCompletedCount += 1;
+            MethodInvoker updateProgressBar = delegate
+            {
+                progressBar1.Value = fileUploadCompletedCount / TotalFileCount * 100;
+            };
+            progressBar1.Invoke(updateProgressBar);
+
+        }
+
         //載入伺服器選單的combobox
         public void LoadServerCombobox() {
             try
