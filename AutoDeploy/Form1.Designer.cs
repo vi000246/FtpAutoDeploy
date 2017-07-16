@@ -74,6 +74,8 @@ namespace AutoDeploy
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.cbUpdateHighLight = new System.Windows.Forms.CheckBox();
+            this.btnOpenFileRoot = new System.Windows.Forms.Button();
+            this.btnOpenBackUpRoot = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -244,6 +246,8 @@ namespace AutoDeploy
             // gbUploadList
             // 
             this.gbUploadList.AutoSize = true;
+            this.gbUploadList.Controls.Add(this.btnOpenBackUpRoot);
+            this.gbUploadList.Controls.Add(this.btnOpenFileRoot);
             this.gbUploadList.Controls.Add(this.cbUpdateHighLight);
             this.gbUploadList.Controls.Add(this.btnFastChooseBackUpRoot);
             this.gbUploadList.Controls.Add(this.btnFastChooseFileRoot);
@@ -270,7 +274,7 @@ namespace AutoDeploy
             this.gbUploadList.Controls.Add(this.cbIsBackUp);
             this.gbUploadList.Location = new System.Drawing.Point(222, 27);
             this.gbUploadList.Name = "gbUploadList";
-            this.gbUploadList.Size = new System.Drawing.Size(544, 568);
+            this.gbUploadList.Size = new System.Drawing.Size(557, 568);
             this.gbUploadList.TabIndex = 1;
             this.gbUploadList.TabStop = false;
             this.gbUploadList.Text = "上傳清單";
@@ -278,9 +282,9 @@ namespace AutoDeploy
             // btnFastChooseBackUpRoot
             // 
             this.btnFastChooseBackUpRoot.Image = ((System.Drawing.Image)(resources.GetObject("btnFastChooseBackUpRoot.Image")));
-            this.btnFastChooseBackUpRoot.Location = new System.Drawing.Point(505, 317);
+            this.btnFastChooseBackUpRoot.Location = new System.Drawing.Point(484, 316);
             this.btnFastChooseBackUpRoot.Name = "btnFastChooseBackUpRoot";
-            this.btnFastChooseBackUpRoot.Size = new System.Drawing.Size(33, 28);
+            this.btnFastChooseBackUpRoot.Size = new System.Drawing.Size(28, 28);
             this.btnFastChooseBackUpRoot.TabIndex = 23;
             this.btnFastChooseBackUpRoot.UseVisualStyleBackColor = true;
             this.btnFastChooseBackUpRoot.Click += new System.EventHandler(this.btnFastChooseBackUpRoot_Click);
@@ -288,9 +292,9 @@ namespace AutoDeploy
             // btnFastChooseFileRoot
             // 
             this.btnFastChooseFileRoot.Image = ((System.Drawing.Image)(resources.GetObject("btnFastChooseFileRoot.Image")));
-            this.btnFastChooseFileRoot.Location = new System.Drawing.Point(505, 286);
+            this.btnFastChooseFileRoot.Location = new System.Drawing.Point(484, 286);
             this.btnFastChooseFileRoot.Name = "btnFastChooseFileRoot";
-            this.btnFastChooseFileRoot.Size = new System.Drawing.Size(33, 28);
+            this.btnFastChooseFileRoot.Size = new System.Drawing.Size(28, 28);
             this.btnFastChooseFileRoot.TabIndex = 22;
             this.btnFastChooseFileRoot.UseVisualStyleBackColor = true;
             this.btnFastChooseFileRoot.Click += new System.EventHandler(this.btnFastChooseFileRoot_Click);
@@ -358,9 +362,9 @@ namespace AutoDeploy
             this.btnBrowseRoot.BackColor = System.Drawing.Color.Transparent;
             this.btnBrowseRoot.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBrowseRoot.BackgroundImage")));
             this.btnBrowseRoot.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnBrowseRoot.Location = new System.Drawing.Point(466, 286);
+            this.btnBrowseRoot.Location = new System.Drawing.Point(450, 286);
             this.btnBrowseRoot.Name = "btnBrowseRoot";
-            this.btnBrowseRoot.Size = new System.Drawing.Size(33, 28);
+            this.btnBrowseRoot.Size = new System.Drawing.Size(28, 28);
             this.btnBrowseRoot.TabIndex = 16;
             this.btnBrowseRoot.UseVisualStyleBackColor = false;
             this.btnBrowseRoot.Click += new System.EventHandler(this.btnBrowseRoot_Click);
@@ -380,7 +384,7 @@ namespace AutoDeploy
             this.tbFileRoot.Enabled = false;
             this.tbFileRoot.Location = new System.Drawing.Point(112, 292);
             this.tbFileRoot.Name = "tbFileRoot";
-            this.tbFileRoot.Size = new System.Drawing.Size(344, 22);
+            this.tbFileRoot.Size = new System.Drawing.Size(332, 22);
             this.tbFileRoot.TabIndex = 14;
             // 
             // tbFtpRoot
@@ -406,9 +410,9 @@ namespace AutoDeploy
             this.btnBrowseBackUp.BackColor = System.Drawing.Color.Transparent;
             this.btnBrowseBackUp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBrowseBackUp.BackgroundImage")));
             this.btnBrowseBackUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnBrowseBackUp.Location = new System.Drawing.Point(466, 317);
+            this.btnBrowseBackUp.Location = new System.Drawing.Point(450, 317);
             this.btnBrowseBackUp.Name = "btnBrowseBackUp";
-            this.btnBrowseBackUp.Size = new System.Drawing.Size(33, 28);
+            this.btnBrowseBackUp.Size = new System.Drawing.Size(28, 28);
             this.btnBrowseBackUp.TabIndex = 11;
             this.btnBrowseBackUp.UseVisualStyleBackColor = false;
             this.btnBrowseBackUp.Click += new System.EventHandler(this.btnBrowseBackUp_Click);
@@ -418,7 +422,7 @@ namespace AutoDeploy
             this.tbBackUpPath.Enabled = false;
             this.tbBackUpPath.Location = new System.Drawing.Point(112, 322);
             this.tbBackUpPath.Name = "tbBackUpPath";
-            this.tbBackUpPath.Size = new System.Drawing.Size(344, 22);
+            this.tbBackUpPath.Size = new System.Drawing.Size(332, 22);
             this.tbBackUpPath.TabIndex = 10;
             // 
             // lbBackUp
@@ -522,6 +526,26 @@ namespace AutoDeploy
             this.cbUpdateHighLight.Text = "只上傳反白的路徑";
             this.cbUpdateHighLight.UseVisualStyleBackColor = true;
             // 
+            // btnOpenFileRoot
+            // 
+            this.btnOpenFileRoot.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenFileRoot.Image")));
+            this.btnOpenFileRoot.Location = new System.Drawing.Point(518, 287);
+            this.btnOpenFileRoot.Name = "btnOpenFileRoot";
+            this.btnOpenFileRoot.Size = new System.Drawing.Size(28, 28);
+            this.btnOpenFileRoot.TabIndex = 25;
+            this.btnOpenFileRoot.UseVisualStyleBackColor = true;
+            this.btnOpenFileRoot.Click += new System.EventHandler(this.btnOpenFileRoot_Click);
+            // 
+            // btnOpenBackUpRoot
+            // 
+            this.btnOpenBackUpRoot.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenBackUpRoot.Image")));
+            this.btnOpenBackUpRoot.Location = new System.Drawing.Point(518, 317);
+            this.btnOpenBackUpRoot.Name = "btnOpenBackUpRoot";
+            this.btnOpenBackUpRoot.Size = new System.Drawing.Size(28, 28);
+            this.btnOpenBackUpRoot.TabIndex = 26;
+            this.btnOpenBackUpRoot.UseVisualStyleBackColor = true;
+            this.btnOpenBackUpRoot.Click += new System.EventHandler(this.btnOpenBackUpRoot_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -590,6 +614,8 @@ namespace AutoDeploy
         private System.Windows.Forms.Button btnFastChooseBackUpRoot;
         private System.Windows.Forms.Button btnFastChooseFileRoot;
         private System.Windows.Forms.CheckBox cbUpdateHighLight;
+        private System.Windows.Forms.Button btnOpenBackUpRoot;
+        private System.Windows.Forms.Button btnOpenFileRoot;
     }
 }
 

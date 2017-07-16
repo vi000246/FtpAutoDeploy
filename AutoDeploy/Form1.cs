@@ -47,6 +47,8 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
             toolTip.SetToolTip(btnBrowseBackUp, "瀏覽");
             toolTip.SetToolTip(btnFastChooseFileRoot, "選擇常用路徑");
             toolTip.SetToolTip(btnFastChooseBackUpRoot, "選擇常用路徑");
+            toolTip.SetToolTip(btnOpenFileRoot, "開啟檔案清單根目錄");
+            toolTip.SetToolTip(btnOpenBackUpRoot, "開啟檔案備份目錄");
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -360,6 +362,23 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 lbRestFile.Text = "檔案剩餘：" + (TotalFileCount - fileUploadCompletedCount).ToString();
             };
             lbRestFile.BeginInvoke(updateRestFile);
+        }
+        //開啟目錄
+        private void btnOpenFileRoot_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(tbFileRoot.Text))
+                Process.Start("explorer.exe", tbFileRoot.Text);
+            else
+                MessageBox.Show("請先選擇檔案清單根目錄");
+
+        }
+        //開啟目錄
+        private void btnOpenBackUpRoot_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(tbBackUpPath.Text))
+                Process.Start("explorer.exe", tbBackUpPath.Text);
+            else
+                MessageBox.Show("請先選擇檔案備份根路徑");
         }
         #endregion
         #region ========================Deploy 群組相關===============================
