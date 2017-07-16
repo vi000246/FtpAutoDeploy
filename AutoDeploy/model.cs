@@ -11,12 +11,14 @@ namespace AutoDeploy
 {
     public class model
     {
+        //FTP群組
         [Table("FTP_M")]
         public class FTP_M {
             [Key]
             public int ID { get; set; }
             public string Name { get; set; }
         }
+        //FTP列表
         [Table("FTP_D")]
         public class FTP_D {
             [Key]
@@ -30,6 +32,7 @@ namespace AutoDeploy
 
 
         }
+        //Deploy群組
         [Table("Deploy_M")]
         public class Deploy_M
         {
@@ -43,6 +46,7 @@ namespace AutoDeploy
             public string Memo { get; set; }
             public bool IsBackup { get; set; }
         }
+        //檔案清單
         [Table("Deploy_D")]
         public class Deploy_D
         {
@@ -51,6 +55,14 @@ namespace AutoDeploy
             [Editable(false)]
             public int GroupID { get; set; }
             public string Path { get; set; }
+        }
+        //常用路徑設置
+        [Table("FastChoose")]
+        public class FastChoose {
+            [Key]
+            public int ID { get; set; }
+            public string Path { get; set; }
+            public int Type { get; set; }
         }
     }
     /// <summary>
@@ -64,5 +76,15 @@ namespace AutoDeploy
             UserName,
             Password
         }
+    }
+
+    /// <summary>
+    /// 用來儲存常用路徑的類型 
+    /// Project:專案根目錄
+    /// Backup:備份目錄
+    /// </summary>
+    public enum FastChooseType {
+        Project,
+        Backup
     }
 }

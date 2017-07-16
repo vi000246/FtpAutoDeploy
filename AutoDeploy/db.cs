@@ -70,6 +70,18 @@ namespace AutoDeploy
             }
             return newId;
         }
+        //新增常用路徑
+        public int? AddFastChoosePath(model.FastChoose item) {
+            int? newId = 0;
+            using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
+            {
+                cnn.Open();
+                var result = cnn.Execute(@"Insert into FastChoose (Path,Type) 
+                                            values(@Path,@Type)",
+                    item);
+            }
+            return newId;
+        }
 
 
         //刪除FTP的主表和明細表

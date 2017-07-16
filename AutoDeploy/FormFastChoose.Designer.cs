@@ -31,19 +31,18 @@ namespace AutoDeploy
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lbProjectPath = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.lbBackupPath = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
-            this.Icon = new Icon("Resources/if_circle-content-upload-cloud_1495031.ico");
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.listBox1);
+            this.groupBox1.Controls.Add(this.lbProjectPath);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(12, 22);
             this.groupBox1.Name = "groupBox1";
@@ -52,14 +51,19 @@ namespace AutoDeploy
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "常用上傳檔案清單根目錄";
             // 
-            // listBox1
+            // lbProjectPath
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(7, 22);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(506, 148);
-            this.listBox1.TabIndex = 1;
+            this.lbProjectPath.AllowDrop = true;
+            this.lbProjectPath.FormattingEnabled = true;
+            this.lbProjectPath.ItemHeight = 12;
+            this.lbProjectPath.Location = new System.Drawing.Point(7, 22);
+            this.lbProjectPath.Name = "lbProjectPath";
+            this.lbProjectPath.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lbProjectPath.Size = new System.Drawing.Size(506, 148);
+            this.lbProjectPath.TabIndex = 1;
+            this.lbProjectPath.DragDrop += new System.Windows.Forms.DragEventHandler(this.List_DragDrop);
+            this.lbProjectPath.DragEnter += new System.Windows.Forms.DragEventHandler(this.List_DragEnter);
+            this.lbProjectPath.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbProjectPath_KeyDown);
             // 
             // button1
             // 
@@ -69,10 +73,11 @@ namespace AutoDeploy
             this.button1.TabIndex = 0;
             this.button1.Text = "新增";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.listBox2);
+            this.groupBox2.Controls.Add(this.lbBackupPath);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Location = new System.Drawing.Point(12, 247);
             this.groupBox2.Name = "groupBox2";
@@ -81,14 +86,19 @@ namespace AutoDeploy
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "常用備份檔儲存路徑";
             // 
-            // listBox2
+            // lbBackupPath
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 12;
-            this.listBox2.Location = new System.Drawing.Point(7, 20);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(506, 148);
-            this.listBox2.TabIndex = 2;
+            this.lbBackupPath.AllowDrop = true;
+            this.lbBackupPath.FormattingEnabled = true;
+            this.lbBackupPath.ItemHeight = 12;
+            this.lbBackupPath.Location = new System.Drawing.Point(7, 20);
+            this.lbBackupPath.Name = "lbBackupPath";
+            this.lbBackupPath.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lbBackupPath.Size = new System.Drawing.Size(506, 148);
+            this.lbBackupPath.TabIndex = 2;
+            this.lbBackupPath.DragDrop += new System.Windows.Forms.DragEventHandler(this.List_DragDrop);
+            this.lbBackupPath.DragEnter += new System.Windows.Forms.DragEventHandler(this.List_DragEnter);
+            this.lbBackupPath.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbBackupPath_KeyDown);
             // 
             // button2
             // 
@@ -98,6 +108,7 @@ namespace AutoDeploy
             this.button2.TabIndex = 0;
             this.button2.Text = "新增";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // FormFastChoose
             // 
@@ -108,6 +119,7 @@ namespace AutoDeploy
             this.Controls.Add(this.groupBox1);
             this.Name = "FormFastChoose";
             this.Text = "常用路徑設置";
+            this.Load += new System.EventHandler(this.FormFastChoose_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -120,7 +132,7 @@ namespace AutoDeploy
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox lbProjectPath;
+        private System.Windows.Forms.ListBox lbBackupPath;
     }
 }
