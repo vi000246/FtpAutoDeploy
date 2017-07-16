@@ -101,6 +101,7 @@ namespace AutoDeploy
             // 
             // 測試選單ToolStripMenuItem
             // 
+            this.測試選單ToolStripMenuItem.BackColor = System.Drawing.Color.LightSteelBlue;
             this.測試選單ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deploy伺服器設定ToolStripMenuItem,
             this.常用清單設置ToolStripMenuItem,

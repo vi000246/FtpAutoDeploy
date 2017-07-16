@@ -191,7 +191,7 @@ namespace AutoDeploy
             // 
             // 說明ToolStripMenuItem
             // 
-            this.說明ToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.說明ToolStripMenuItem.BackColor = System.Drawing.Color.LightSteelBlue;
             this.說明ToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.說明ToolStripMenuItem.Name = "說明ToolStripMenuItem";
             this.說明ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
