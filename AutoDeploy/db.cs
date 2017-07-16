@@ -15,9 +15,9 @@ namespace AutoDeploy
     
     public class db
     {
-        //public string dbPath = @".\db.db3";
+        public string dbPath = @".\db.db3";
         //測試用路徑 
-        public string dbPath = @"E:\MyProjects\AutoDeploy\AutoDeploy\db.db3";
+        //public string dbPath = @"E:\MyProjects\AutoDeploy\AutoDeploy\db.db3";
         //public string dbPath = @"C:\Users\user\Documents\FtpAutoDeploy\AutoDeploy\db.db3";
         
         //新增FTP群組
