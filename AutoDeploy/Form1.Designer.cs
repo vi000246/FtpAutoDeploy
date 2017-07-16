@@ -36,6 +36,7 @@ namespace AutoDeploy
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.測試選單ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deploy伺服器設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.常用清單設置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.log查詢ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,6 +50,7 @@ namespace AutoDeploy
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
             this.gbUploadList = new System.Windows.Forms.GroupBox();
+            this.lbRestFile = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.tbMemo = new System.Windows.Forms.TextBox();
             this.lbmemo = new System.Windows.Forms.Label();
@@ -69,8 +71,8 @@ namespace AutoDeploy
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.lbRestFile = new System.Windows.Forms.Label();
-            this.常用清單設置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnFastChooseFileRoot = new System.Windows.Forms.Button();
+            this.btnFastChooseBackUpRoot = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -93,7 +95,7 @@ namespace AutoDeploy
             this.測試選單ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(742, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(776, 24);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -114,6 +116,13 @@ namespace AutoDeploy
             this.deploy伺服器設定ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.deploy伺服器設定ToolStripMenuItem.Text = "Deploy伺服器設定";
             this.deploy伺服器設定ToolStripMenuItem.Click += new System.EventHandler(this.deploy伺服器設定ToolStripMenuItem_Click);
+            // 
+            // 常用清單設置ToolStripMenuItem
+            // 
+            this.常用清單設置ToolStripMenuItem.Name = "常用清單設置ToolStripMenuItem";
+            this.常用清單設置ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.常用清單設置ToolStripMenuItem.Text = "常用路徑設置";
+            this.常用清單設置ToolStripMenuItem.Click += new System.EventHandler(this.常用清單設置ToolStripMenuItem_Click);
             // 
             // log查詢ToolStripMenuItem
             // 
@@ -233,6 +242,8 @@ namespace AutoDeploy
             // gbUploadList
             // 
             this.gbUploadList.AutoSize = true;
+            this.gbUploadList.Controls.Add(this.btnFastChooseBackUpRoot);
+            this.gbUploadList.Controls.Add(this.btnFastChooseFileRoot);
             this.gbUploadList.Controls.Add(this.lbRestFile);
             this.gbUploadList.Controls.Add(this.progressBar1);
             this.gbUploadList.Controls.Add(this.tbMemo);
@@ -256,16 +267,25 @@ namespace AutoDeploy
             this.gbUploadList.Controls.Add(this.cbIsBackUp);
             this.gbUploadList.Location = new System.Drawing.Point(222, 27);
             this.gbUploadList.Name = "gbUploadList";
-            this.gbUploadList.Size = new System.Drawing.Size(526, 568);
+            this.gbUploadList.Size = new System.Drawing.Size(544, 568);
             this.gbUploadList.TabIndex = 1;
             this.gbUploadList.TabStop = false;
             this.gbUploadList.Text = "上傳清單";
+            // 
+            // lbRestFile
+            // 
+            this.lbRestFile.AutoSize = true;
+            this.lbRestFile.Location = new System.Drawing.Point(385, 535);
+            this.lbRestFile.Name = "lbRestFile";
+            this.lbRestFile.Size = new System.Drawing.Size(65, 12);
+            this.lbRestFile.TabIndex = 21;
+            this.lbRestFile.Text = "檔案剩餘：";
             // 
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(112, 401);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(396, 23);
+            this.progressBar1.Size = new System.Drawing.Size(407, 23);
             this.progressBar1.TabIndex = 20;
             // 
             // tbMemo
@@ -280,7 +300,7 @@ namespace AutoDeploy
             // lbmemo
             // 
             this.lbmemo.AutoSize = true;
-            this.lbmemo.Location = new System.Drawing.Point(17, 352);
+            this.lbmemo.Location = new System.Drawing.Point(20, 367);
             this.lbmemo.Name = "lbmemo";
             this.lbmemo.Size = new System.Drawing.Size(32, 12);
             this.lbmemo.TabIndex = 18;
@@ -292,27 +312,33 @@ namespace AutoDeploy
             this.lbLog.ItemHeight = 12;
             this.lbLog.Location = new System.Drawing.Point(10, 430);
             this.lbLog.Name = "lbLog";
-            this.lbLog.Size = new System.Drawing.Size(500, 100);
+            this.lbLog.Size = new System.Drawing.Size(509, 100);
             this.lbLog.TabIndex = 7;
             // 
             // btnPreView
             // 
-            this.btnPreView.Location = new System.Drawing.Point(277, 237);
+            this.btnPreView.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnPreView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnPreView.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPreView.Font = new System.Drawing.Font("微軟正黑體", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnPreView.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPreView.Location = new System.Drawing.Point(300, 237);
             this.btnPreView.Name = "btnPreView";
             this.btnPreView.Size = new System.Drawing.Size(75, 39);
             this.btnPreView.TabIndex = 17;
             this.btnPreView.Text = "預覽";
-            this.btnPreView.UseVisualStyleBackColor = true;
+            this.btnPreView.UseVisualStyleBackColor = false;
             this.btnPreView.Click += new System.EventHandler(this.btnPreView_Click);
             // 
             // btnBrowseRoot
             // 
-            this.btnBrowseRoot.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnBrowseRoot.Location = new System.Drawing.Point(387, 292);
+            this.btnBrowseRoot.BackColor = System.Drawing.Color.Transparent;
+            this.btnBrowseRoot.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBrowseRoot.BackgroundImage")));
+            this.btnBrowseRoot.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnBrowseRoot.Location = new System.Drawing.Point(384, 287);
             this.btnBrowseRoot.Name = "btnBrowseRoot";
-            this.btnBrowseRoot.Size = new System.Drawing.Size(46, 19);
+            this.btnBrowseRoot.Size = new System.Drawing.Size(33, 28);
             this.btnBrowseRoot.TabIndex = 16;
-            this.btnBrowseRoot.Text = "瀏覽";
             this.btnBrowseRoot.UseVisualStyleBackColor = false;
             this.btnBrowseRoot.Click += new System.EventHandler(this.btnBrowseRoot_Click);
             // 
@@ -338,7 +364,7 @@ namespace AutoDeploy
             // 
             this.tbFtpRoot.Location = new System.Drawing.Point(113, 258);
             this.tbFtpRoot.Name = "tbFtpRoot";
-            this.tbFtpRoot.Size = new System.Drawing.Size(132, 22);
+            this.tbFtpRoot.Size = new System.Drawing.Size(167, 22);
             this.tbFtpRoot.TabIndex = 13;
             this.tbFtpRoot.Validating += new System.ComponentModel.CancelEventHandler(this.tbFtpRoot_Validating);
             // 
@@ -354,19 +380,20 @@ namespace AutoDeploy
             // 
             // btnBrowseBackUp
             // 
-            this.btnBrowseBackUp.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnBrowseBackUp.Location = new System.Drawing.Point(387, 320);
+            this.btnBrowseBackUp.BackColor = System.Drawing.Color.Transparent;
+            this.btnBrowseBackUp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBrowseBackUp.BackgroundImage")));
+            this.btnBrowseBackUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnBrowseBackUp.Location = new System.Drawing.Point(384, 319);
             this.btnBrowseBackUp.Name = "btnBrowseBackUp";
-            this.btnBrowseBackUp.Size = new System.Drawing.Size(46, 19);
+            this.btnBrowseBackUp.Size = new System.Drawing.Size(33, 28);
             this.btnBrowseBackUp.TabIndex = 11;
-            this.btnBrowseBackUp.Text = "瀏覽";
             this.btnBrowseBackUp.UseVisualStyleBackColor = false;
             this.btnBrowseBackUp.Click += new System.EventHandler(this.btnBrowseBackUp_Click);
             // 
             // tbBackUpPath
             // 
             this.tbBackUpPath.Enabled = false;
-            this.tbBackUpPath.Location = new System.Drawing.Point(112, 320);
+            this.tbBackUpPath.Location = new System.Drawing.Point(112, 322);
             this.tbBackUpPath.Name = "tbBackUpPath";
             this.tbBackUpPath.Size = new System.Drawing.Size(267, 22);
             this.tbBackUpPath.TabIndex = 10;
@@ -383,12 +410,15 @@ namespace AutoDeploy
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(358, 237);
+            this.btnClear.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnClear.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnClear.Location = new System.Drawing.Point(381, 237);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 39);
             this.btnClear.TabIndex = 7;
             this.btnClear.Text = "清除所有";
-            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // lbFileList
@@ -399,7 +429,7 @@ namespace AutoDeploy
             this.lbFileList.Location = new System.Drawing.Point(6, 21);
             this.lbFileList.Name = "lbFileList";
             this.lbFileList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbFileList.Size = new System.Drawing.Size(508, 208);
+            this.lbFileList.Size = new System.Drawing.Size(532, 208);
             this.lbFileList.TabIndex = 0;
             this.lbFileList.DragDrop += new System.Windows.Forms.DragEventHandler(this.lbFileList_DragDrop);
             this.lbFileList.DragEnter += new System.Windows.Forms.DragEventHandler(this.lbFileList_DragEnter);
@@ -417,12 +447,21 @@ namespace AutoDeploy
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(439, 237);
+            this.btnStart.BackColor = System.Drawing.Color.Crimson;
+            this.btnStart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnStart.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnStart.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnStart.ForeColor = System.Drawing.SystemColors.Menu;
+            this.btnStart.Image = ((System.Drawing.Image)(resources.GetObject("btnStart.Image")));
+            this.btnStart.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnStart.Location = new System.Drawing.Point(462, 237);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 73);
+            this.btnStart.Size = new System.Drawing.Size(76, 61);
             this.btnStart.TabIndex = 6;
             this.btnStart.Text = "開始上傳";
-            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // cbServerList
@@ -430,14 +469,14 @@ namespace AutoDeploy
             this.cbServerList.FormattingEnabled = true;
             this.cbServerList.Location = new System.Drawing.Point(113, 232);
             this.cbServerList.Name = "cbServerList";
-            this.cbServerList.Size = new System.Drawing.Size(132, 20);
+            this.cbServerList.Size = new System.Drawing.Size(167, 20);
             this.cbServerList.TabIndex = 2;
             // 
             // cbIsBackUp
             // 
             this.cbIsBackUp.AutoSize = true;
             this.cbIsBackUp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.cbIsBackUp.Location = new System.Drawing.Point(387, 354);
+            this.cbIsBackUp.Location = new System.Drawing.Point(387, 363);
             this.cbIsBackUp.Name = "cbIsBackUp";
             this.cbIsBackUp.Size = new System.Drawing.Size(132, 16);
             this.cbIsBackUp.TabIndex = 5;
@@ -450,27 +489,29 @@ namespace AutoDeploy
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
             // 
-            // lbRestFile
+            // btnFastChooseFileRoot
             // 
-            this.lbRestFile.AutoSize = true;
-            this.lbRestFile.Location = new System.Drawing.Point(385, 535);
-            this.lbRestFile.Name = "lbRestFile";
-            this.lbRestFile.Size = new System.Drawing.Size(65, 12);
-            this.lbRestFile.TabIndex = 21;
-            this.lbRestFile.Text = "檔案剩餘：";
+            this.btnFastChooseFileRoot.Image = ((System.Drawing.Image)(resources.GetObject("btnFastChooseFileRoot.Image")));
+            this.btnFastChooseFileRoot.Location = new System.Drawing.Point(423, 286);
+            this.btnFastChooseFileRoot.Name = "btnFastChooseFileRoot";
+            this.btnFastChooseFileRoot.Size = new System.Drawing.Size(33, 28);
+            this.btnFastChooseFileRoot.TabIndex = 22;
+            this.btnFastChooseFileRoot.UseVisualStyleBackColor = true;
             // 
-            // 常用清單設置ToolStripMenuItem
+            // btnFastChooseBackUpRoot
             // 
-            this.常用清單設置ToolStripMenuItem.Name = "常用清單設置ToolStripMenuItem";
-            this.常用清單設置ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.常用清單設置ToolStripMenuItem.Text = "常用清單設置";
-            this.常用清單設置ToolStripMenuItem.Click += new System.EventHandler(this.常用清單設置ToolStripMenuItem_Click);
+            this.btnFastChooseBackUpRoot.Image = ((System.Drawing.Image)(resources.GetObject("btnFastChooseBackUpRoot.Image")));
+            this.btnFastChooseBackUpRoot.Location = new System.Drawing.Point(423, 319);
+            this.btnFastChooseBackUpRoot.Name = "btnFastChooseBackUpRoot";
+            this.btnFastChooseBackUpRoot.Size = new System.Drawing.Size(33, 28);
+            this.btnFastChooseBackUpRoot.TabIndex = 23;
+            this.btnFastChooseBackUpRoot.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(742, 583);
+            this.ClientSize = new System.Drawing.Size(776, 583);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbUploadList);
             this.Controls.Add(this.menuStrip1);
@@ -531,6 +572,8 @@ namespace AutoDeploy
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lbRestFile;
         private System.Windows.Forms.ToolStripMenuItem 常用清單設置ToolStripMenuItem;
+        private System.Windows.Forms.Button btnFastChooseBackUpRoot;
+        private System.Windows.Forms.Button btnFastChooseFileRoot;
     }
 }
 

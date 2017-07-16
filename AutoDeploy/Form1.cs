@@ -40,7 +40,12 @@ Example:
 要傳的檔:C:/Projects/Build/DemoWebSite/Script/jquery.js
 Deploy專案根目錄:C:/Projects/Build/DemoWebSite
 則會將Script/jquery.js傳到FTP目標目錄");
+            toolTip.SetToolTip(cbIsBackUp, "若FTP已存在相同檔案，將FTP的檔案備份到指定目錄");
             toolTip.SetToolTip(lbBackUp, "請選擇備份檔放置的目錄");
+            toolTip.SetToolTip(btnBrowseRoot, "瀏覽");
+            toolTip.SetToolTip(btnBrowseBackUp, "瀏覽");
+            toolTip.SetToolTip(btnFastChooseFileRoot, "選擇常用路徑");
+            toolTip.SetToolTip(btnFastChooseBackUpRoot, "選擇常用路徑");
         }
 
         private void Form1_Load(object sender, EventArgs e)
