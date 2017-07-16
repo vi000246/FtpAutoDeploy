@@ -118,6 +118,7 @@ namespace AutoDeploy
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "FormFastChoose";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "常用路徑設置";
             this.Load += new System.EventHandler(this.FormFastChoose_Load);
             this.groupBox1.ResumeLayout(false);

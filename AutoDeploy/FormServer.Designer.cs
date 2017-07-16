@@ -37,16 +37,16 @@ namespace AutoDeploy
             this.fTPMBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dbDataSet = new AutoDeploy.dbDataSet();
             this.gridList = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnAddList = new System.Windows.Forms.Button();
-            this.fTP_MTableAdapter = new AutoDeploy.dbDataSetTableAdapters.FTP_MTableAdapter();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.說明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientIP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Port = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Password = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnAddList = new System.Windows.Forms.Button();
+            this.fTP_MTableAdapter = new AutoDeploy.dbDataSetTableAdapters.FTP_MTableAdapter();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.說明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fTPMBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbDataSet)).BeginInit();
@@ -54,7 +54,6 @@ namespace AutoDeploy
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            this.Icon = new Icon("Resources/if_circle-content-upload-cloud_1495031.ico");
             // 
             // groupBox1
             // 
@@ -123,6 +122,37 @@ namespace AutoDeploy
             this.gridList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridList_CellEndEdit);
             this.gridList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridList_KeyDown);
             // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.Visible = false;
+            // 
+            // ClientIP
+            // 
+            this.ClientIP.DataPropertyName = "ClientIP";
+            this.ClientIP.HeaderText = "IP";
+            this.ClientIP.Name = "ClientIP";
+            // 
+            // Port
+            // 
+            this.Port.DataPropertyName = "Port";
+            this.Port.HeaderText = "Port";
+            this.Port.Name = "Port";
+            // 
+            // UserName
+            // 
+            this.UserName.DataPropertyName = "UserName";
+            this.UserName.HeaderText = "使用者名稱";
+            this.UserName.Name = "UserName";
+            // 
+            // Password
+            // 
+            this.Password.DataPropertyName = "Password";
+            this.Password.HeaderText = "密碼";
+            this.Password.Name = "Password";
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnAddList);
@@ -168,37 +198,6 @@ namespace AutoDeploy
             this.說明ToolStripMenuItem.Text = "說明";
             this.說明ToolStripMenuItem.Click += new System.EventHandler(this.說明ToolStripMenuItem_Click);
             // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.Visible = false;
-            // 
-            // ClientIP
-            // 
-            this.ClientIP.DataPropertyName = "ClientIP";
-            this.ClientIP.HeaderText = "IP";
-            this.ClientIP.Name = "ClientIP";
-            // 
-            // Port
-            // 
-            this.Port.DataPropertyName = "Port";
-            this.Port.HeaderText = "Port";
-            this.Port.Name = "Port";
-            // 
-            // UserName
-            // 
-            this.UserName.DataPropertyName = "UserName";
-            this.UserName.HeaderText = "使用者名稱";
-            this.UserName.Name = "UserName";
-            // 
-            // Password
-            // 
-            this.Password.DataPropertyName = "Password";
-            this.Password.HeaderText = "密碼";
-            this.Password.Name = "Password";
-            // 
             // FormServer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -209,6 +208,7 @@ namespace AutoDeploy
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormServer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FTP列表";
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fTPMBindingSource)).EndInit();

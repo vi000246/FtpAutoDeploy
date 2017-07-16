@@ -574,7 +574,8 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 {
                     LoadServerCombobox();
                 };
-                FormServer.Show();
+                SetCenter(FormServer);
+                FormServer.Show(this);
             }
             catch (Exception ex)
             {
@@ -586,6 +587,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
         private void test2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AuthorInfo form = new AuthorInfo();
+            SetCenter(form);
             form.Show();
         }
         //按下log時 開啟Log資料夾
@@ -602,7 +604,8 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
         private void 常用清單設置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormFastChoose form = new FormFastChoose();
-            form.Show();
+            SetCenter(form);
+            form.Show(this);
         }
         #endregion
 
@@ -659,6 +662,11 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 btnClear.Enabled = enable;
             }));
 
+        }
+        //將視窗設為置中
+        private void SetCenter(Form form) {
+            form.StartPosition = FormStartPosition.Manual;
+            form.Location = new Point(this.Location.X + (this.Width - form.Width) / 2, this.Location.Y + (this.Height - form.Height) / 2);
         }
 
 
