@@ -275,20 +275,22 @@ namespace AutoDeploy
             // btnFastChooseBackUpRoot
             // 
             this.btnFastChooseBackUpRoot.Image = ((System.Drawing.Image)(resources.GetObject("btnFastChooseBackUpRoot.Image")));
-            this.btnFastChooseBackUpRoot.Location = new System.Drawing.Point(423, 319);
+            this.btnFastChooseBackUpRoot.Location = new System.Drawing.Point(505, 317);
             this.btnFastChooseBackUpRoot.Name = "btnFastChooseBackUpRoot";
             this.btnFastChooseBackUpRoot.Size = new System.Drawing.Size(33, 28);
             this.btnFastChooseBackUpRoot.TabIndex = 23;
             this.btnFastChooseBackUpRoot.UseVisualStyleBackColor = true;
+            this.btnFastChooseBackUpRoot.Click += new System.EventHandler(this.btnFastChooseBackUpRoot_Click);
             // 
             // btnFastChooseFileRoot
             // 
             this.btnFastChooseFileRoot.Image = ((System.Drawing.Image)(resources.GetObject("btnFastChooseFileRoot.Image")));
-            this.btnFastChooseFileRoot.Location = new System.Drawing.Point(423, 286);
+            this.btnFastChooseFileRoot.Location = new System.Drawing.Point(505, 286);
             this.btnFastChooseFileRoot.Name = "btnFastChooseFileRoot";
             this.btnFastChooseFileRoot.Size = new System.Drawing.Size(33, 28);
             this.btnFastChooseFileRoot.TabIndex = 22;
             this.btnFastChooseFileRoot.UseVisualStyleBackColor = true;
+            this.btnFastChooseFileRoot.Click += new System.EventHandler(this.btnFastChooseFileRoot_Click);
             // 
             // lbRestFile
             // 
@@ -353,7 +355,7 @@ namespace AutoDeploy
             this.btnBrowseRoot.BackColor = System.Drawing.Color.Transparent;
             this.btnBrowseRoot.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBrowseRoot.BackgroundImage")));
             this.btnBrowseRoot.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnBrowseRoot.Location = new System.Drawing.Point(384, 287);
+            this.btnBrowseRoot.Location = new System.Drawing.Point(466, 286);
             this.btnBrowseRoot.Name = "btnBrowseRoot";
             this.btnBrowseRoot.Size = new System.Drawing.Size(33, 28);
             this.btnBrowseRoot.TabIndex = 16;
@@ -375,7 +377,7 @@ namespace AutoDeploy
             this.tbFileRoot.Enabled = false;
             this.tbFileRoot.Location = new System.Drawing.Point(112, 292);
             this.tbFileRoot.Name = "tbFileRoot";
-            this.tbFileRoot.Size = new System.Drawing.Size(266, 22);
+            this.tbFileRoot.Size = new System.Drawing.Size(344, 22);
             this.tbFileRoot.TabIndex = 14;
             // 
             // tbFtpRoot
@@ -401,7 +403,7 @@ namespace AutoDeploy
             this.btnBrowseBackUp.BackColor = System.Drawing.Color.Transparent;
             this.btnBrowseBackUp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBrowseBackUp.BackgroundImage")));
             this.btnBrowseBackUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnBrowseBackUp.Location = new System.Drawing.Point(384, 319);
+            this.btnBrowseBackUp.Location = new System.Drawing.Point(466, 317);
             this.btnBrowseBackUp.Name = "btnBrowseBackUp";
             this.btnBrowseBackUp.Size = new System.Drawing.Size(33, 28);
             this.btnBrowseBackUp.TabIndex = 11;
@@ -413,7 +415,7 @@ namespace AutoDeploy
             this.tbBackUpPath.Enabled = false;
             this.tbBackUpPath.Location = new System.Drawing.Point(112, 322);
             this.tbBackUpPath.Name = "tbBackUpPath";
-            this.tbBackUpPath.Size = new System.Drawing.Size(267, 22);
+            this.tbBackUpPath.Size = new System.Drawing.Size(344, 22);
             this.tbBackUpPath.TabIndex = 10;
             // 
             // lbBackUp
@@ -467,18 +469,18 @@ namespace AutoDeploy
             // 
             this.btnStart.BackColor = System.Drawing.Color.Crimson;
             this.btnStart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnStart.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnStart.FlatAppearance.BorderColor = System.Drawing.Color.Maroon;
+            this.btnStart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Maroon;
+            this.btnStart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkRed;
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStart.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnStart.ForeColor = System.Drawing.SystemColors.Menu;
-            this.btnStart.Image = ((System.Drawing.Image)(resources.GetObject("btnStart.Image")));
+            this.btnStart.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnStart.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnStart.Location = new System.Drawing.Point(462, 237);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(76, 61);
+            this.btnStart.Size = new System.Drawing.Size(76, 39);
             this.btnStart.TabIndex = 6;
             this.btnStart.Text = "開始上傳";
-            this.btnStart.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 

@@ -327,6 +327,22 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 dialog.ShowPreview(paths,tbFileRoot.Text,tbFtpRoot.Text);
         }
 
+        //上傳檔案根目錄 開啟常用選單
+        private void btnFastChooseFileRoot_Click(object sender, EventArgs e)
+        {
+            string selectedPath = dialog.ShowFastChoose((int)FastChooseType.Project);
+            if (!string.IsNullOrEmpty(selectedPath))
+                tbFileRoot.Text = selectedPath;
+        }
+
+        //備份檔案目錄 開啟常用選單
+        private void btnFastChooseBackUpRoot_Click(object sender, EventArgs e)
+        {
+            string selectedPath = dialog.ShowFastChoose((int)FastChooseType.Backup);
+            if (!string.IsNullOrEmpty(selectedPath))
+                tbBackUpPath.Text = selectedPath;
+        }
+
         //更新progressBar進度
         public void updateProgressBar()
         {
@@ -644,5 +660,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
             }));
 
         }
+
+
     }
 }

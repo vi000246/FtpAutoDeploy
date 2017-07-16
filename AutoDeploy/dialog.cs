@@ -183,6 +183,65 @@ namespace AutoDeploy
             prompt.ShowDialog();
         }
 
+        /// <summary>
+        /// 開啟常用路徑選單 
+        /// </summary>
+        /// <param name="type">選單類別</param>
+        public static string ShowFastChoose(int type) {
+            Form prompt = new Form()
+            {
+                Width = 450,
+                Height = 110,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = "常用路徑選擇",
+                StartPosition = FormStartPosition.CenterParent
+            };
+            ComboBox pathList = new ComboBox() { Left = 10, Width = 400, Top = 10 };
+            Button confirmation = new Button() { Text = "確定", Left = 300, Width = 50, Top = 40, DialogResult = DialogResult.OK };
+            Button cancelation = new Button() { Text = "取消", Left = 360, Width = 50, Top = 40, DialogResult = DialogResult.Cancel };
+
+            //取得下拉選單的資料
+            var data = new db().GetDataFromDBByCondition<model.FastChoose>(new { Type = type });
+            if (data.Count > 0)
+                pathList.DataSource = data;
+            else
+            {
+                pathList.Items.Add(new model.FastChoose() { Path = "請先到【常用路徑設置】新增路徑" });
+                pathList.SelectedIndex = 0;
+                pathList.Enabled = false;
+                confirmation.Enabled = false;
+            }
+
+            pathList.ValueMember = "Path";
+            pathList.DisplayMember = "Path";
+
+            confirmation.Click += (sender, e) =>
+            {
+                prompt.Close();
+            };
+            cancelation.Click += (sender, e) =>
+            {
+                prompt.Close();
+            };
+            prompt.FormClosing += (sender, e) =>
+            {
+                if (prompt.DialogResult == DialogResult.OK)
+                {
+                    if (pathList.SelectedItem==null)
+                    {
+                        MessageBox.Show("請選擇一個路徑");
+                        e.Cancel = true;
+                    }
+                }
+            };
+            prompt.Controls.Add(pathList);
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(cancelation);
+            prompt.AcceptButton = confirmation;
+            prompt.CancelButton = cancelation;
+            return prompt.ShowDialog() == DialogResult.OK ? (pathList.SelectedItem as model.FastChoose).Path : null;
+        }
+
         //開啟資料夾瀏覽視窗 回傳所選擇的資料夾路徑
         public static string BrowseFolder()
         {

@@ -16,8 +16,8 @@ namespace AutoDeploy
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
-            Application.Run(new FormFastChoose());
+            Application.Run(new Form1());
+            //Application.Run(new FormFastChoose());
             //Application.Run(new FormServer());
         }
     }

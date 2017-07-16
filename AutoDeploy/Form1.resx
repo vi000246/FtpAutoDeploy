@@ -332,18 +332,6 @@
         WF52DlTvAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="btnStart.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAaCAYAAADWm14/AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EwAACxMBAJqcGAAAAUhJREFUSEvtlUtKA0EQhrPw7QHCkOmq6scojhCEcZ1cRBDv4BHc69KFRxBEEARB
-        8ALiFUQRUbxDLKWUmKmg88ggmh++TXd1/T/dTXeriogIPdB+v9WfkaHmtAJgvYFbjzRgjrMsm5WpySsY
-        4y3AnZi/Y4FOGgnhOi6xiPfD5h84xNM0TeektH7xma86pAfNfIizEMK8LKlPCeKaN/SoGObg4zhHxAVZ
-        Wl3emHW+cE+a2XjwIo7jRWlRXtbaLl+4Z93kWy6jKFqSVsXF275hkV6Uxj/GAVx12+1laVlMfKt3+KHZ
-        /QLigWb0yWg9kxD1pGV1OeM2VWNByianvxeAH5ajUQLYLZnOqWwAR7StebW0Jh7gUNblVDoAm6n12uA0
-        wK8O8Pbnh06IxyFlOdUWoKwKBeD3/9oB7dWKoRvNS9+BBpkG+O8BaPAKbE5G+ifoQQAAAAAASUVORK5C
-        YII=
-</value>
-  </data>
   <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>136, 17</value>
   </metadata>
