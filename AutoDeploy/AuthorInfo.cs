@@ -26,5 +26,10 @@ namespace AutoDeploy
         {
             System.Diagnostics.Process.Start("https://github.com/vi000246/FtpAutoDeploy");
         }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/vi000246/FtpAutoDeploy/issues");
+        }
     }
 }
