@@ -367,7 +367,12 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
         private void btnOpenFileRoot_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(tbFileRoot.Text))
-                Process.Start("explorer.exe", tbFileRoot.Text);
+            {
+                if(!Directory.Exists(tbFileRoot.Text))
+                    MessageBox.Show("目錄不存在");
+                else
+                    Process.Start("explorer.exe", tbFileRoot.Text);
+            }
             else
                 MessageBox.Show("請先選擇檔案清單根目錄");
 
@@ -376,7 +381,12 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
         private void btnOpenBackUpRoot_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(tbBackUpPath.Text))
-                Process.Start("explorer.exe", tbBackUpPath.Text);
+            {
+                if (!Directory.Exists(tbBackUpPath.Text))
+                    MessageBox.Show("目錄不存在");
+                else
+                    Process.Start("explorer.exe", tbBackUpPath.Text);
+            }
             else
                 MessageBox.Show("請先選擇檔案備份根路徑");
         }
