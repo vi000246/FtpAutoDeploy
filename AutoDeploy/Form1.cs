@@ -413,6 +413,11 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
         {
             try
             {
+                if (lbDeployGroup.CheckedItems.Count == 0)
+                {
+                    MessageBox.Show("請至少勾選一個項目");
+                    return;
+                }
                 if (MessageBox.Show("確定刪除選中的Deploy群組及底下的上傳清單?", "關閉", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     new ListBoxUtility().LoopListBoxItem<model.Deploy_M>(lbDeployGroup, db.DeleteDeployMasterAndDetail);
