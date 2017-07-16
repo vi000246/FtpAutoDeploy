@@ -73,6 +73,7 @@ namespace AutoDeploy
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.cbUpdateHighLight = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -243,6 +244,7 @@ namespace AutoDeploy
             // gbUploadList
             // 
             this.gbUploadList.AutoSize = true;
+            this.gbUploadList.Controls.Add(this.cbUpdateHighLight);
             this.gbUploadList.Controls.Add(this.btnFastChooseBackUpRoot);
             this.gbUploadList.Controls.Add(this.btnFastChooseFileRoot);
             this.gbUploadList.Controls.Add(this.lbRestFile);
@@ -497,7 +499,7 @@ namespace AutoDeploy
             // 
             this.cbIsBackUp.AutoSize = true;
             this.cbIsBackUp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.cbIsBackUp.Location = new System.Drawing.Point(387, 363);
+            this.cbIsBackUp.Location = new System.Drawing.Point(387, 376);
             this.cbIsBackUp.Name = "cbIsBackUp";
             this.cbIsBackUp.Size = new System.Drawing.Size(132, 16);
             this.cbIsBackUp.TabIndex = 5;
@@ -509,6 +511,16 @@ namespace AutoDeploy
             this.toolTip.AutoPopDelay = 30000;
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
+            // 
+            // cbUpdateHighLight
+            // 
+            this.cbUpdateHighLight.AutoSize = true;
+            this.cbUpdateHighLight.Location = new System.Drawing.Point(387, 354);
+            this.cbUpdateHighLight.Name = "cbUpdateHighLight";
+            this.cbUpdateHighLight.Size = new System.Drawing.Size(120, 16);
+            this.cbUpdateHighLight.TabIndex = 24;
+            this.cbUpdateHighLight.Text = "只上傳反白的路徑";
+            this.cbUpdateHighLight.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -577,6 +589,7 @@ namespace AutoDeploy
         private System.Windows.Forms.ToolStripMenuItem 常用清單設置ToolStripMenuItem;
         private System.Windows.Forms.Button btnFastChooseBackUpRoot;
         private System.Windows.Forms.Button btnFastChooseFileRoot;
+        private System.Windows.Forms.CheckBox cbUpdateHighLight;
     }
 }
 

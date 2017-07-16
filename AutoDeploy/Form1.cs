@@ -42,6 +42,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
 則會將Script/jquery.js傳到FTP目標目錄");
             toolTip.SetToolTip(cbIsBackUp, "若FTP已存在相同檔案，將FTP的檔案備份到指定目錄");
             toolTip.SetToolTip(lbBackUp, "請選擇備份檔放置的目錄");
+            toolTip.SetToolTip(cbUpdateHighLight, "只上傳選取反白的路徑");
             toolTip.SetToolTip(btnBrowseRoot, "瀏覽");
             toolTip.SetToolTip(btnBrowseBackUp, "瀏覽");
             toolTip.SetToolTip(btnFastChooseFileRoot, "選擇常用路徑");
