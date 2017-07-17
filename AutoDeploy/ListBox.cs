@@ -87,15 +87,32 @@ namespace AutoDeploy
         /// 取得檔案清單listbox所有路徑底下的所有檔案
         /// </summary>
         /// <param name="lbFileList"></param>
+        /// <param name="OnlyGetHighLightPath">true:只搜尋有反白的路徑</param>
         /// <returns></returns>
-        public static List<string> GetAllPath(ListBox lbFileList) {
+        public static List<string> GetAllPath(ListBox lbFileList,bool OnlyGetHighLightPath = false) {
             List<string> files = new List<string>();
             file file = new file();
-            foreach (model.Deploy_D item in lbFileList.Items)
+
+            //如果只取selected的path
+            if (OnlyGetHighLightPath)
             {
-                List<string> temp = file.getAllFiles(item.Path);
-                //取得檔案listBox中的所有檔案
-                files = files.Concat(temp).ToList();
+                ListBox.SelectedObjectCollection selectedItems = new ListBox.SelectedObjectCollection(lbFileList);
+                selectedItems = lbFileList.SelectedItems;
+                foreach (model.Deploy_D item in selectedItems)
+                {
+                    List<string> temp = file.getAllFiles(item.Path);
+                    //取得檔案listBox中的所有檔案
+                    files = files.Concat(temp).ToList();
+                }
+            }
+            else
+            {
+                foreach (model.Deploy_D item in lbFileList.Items)
+                {
+                    List<string> temp = file.getAllFiles(item.Path);
+                    //取得檔案listBox中的所有檔案
+                    files = files.Concat(temp).ToList();
+                }
             }
             return files;
         }

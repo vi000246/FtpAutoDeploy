@@ -42,7 +42,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
 則會將Script/jquery.js傳到FTP目標目錄");
             toolTip.SetToolTip(cbIsBackUp, "若FTP已存在相同檔案，將FTP的檔案備份到指定目錄");
             toolTip.SetToolTip(lbBackUp, "請選擇備份檔放置的目錄");
-            toolTip.SetToolTip(cbUpdateHighLight, "只上傳選取反白的路徑");
+            toolTip.SetToolTip(cbUpdateHighLight, "只上傳選取反白的路徑，預設是上傳全部路徑");
             toolTip.SetToolTip(btnBrowseRoot, "瀏覽");
             toolTip.SetToolTip(btnBrowseBackUp, "瀏覽");
             toolTip.SetToolTip(btnFastChooseFileRoot, "選擇常用路徑");
@@ -101,7 +101,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 Invoke(new Action(() =>
                 {
                     serverGroupID = (cbServerList.SelectedItem as model.FTP_M).ID;
-                    files = ListBoxUtility.GetAllPath(lbFileList);
+                    files = ListBoxUtility.GetAllPath(lbFileList, cbUpdateHighLight.Checked);
                 }));
                 
                 //取得combobx選中的FTP群組的FTP列表
@@ -317,7 +317,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
         private void btnPreView_Click(object sender, EventArgs e)
         {
             bool isShow = true;
-            List<string> paths = ListBoxUtility.GetAllPath(lbFileList);
+            List<string> paths = ListBoxUtility.GetAllPath(lbFileList,cbUpdateHighLight.Checked);
             int TotalPath = paths.Count();
             if (TotalPath > 50000)
             {
