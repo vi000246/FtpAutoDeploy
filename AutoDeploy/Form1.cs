@@ -695,6 +695,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 cbIsBackUp.Enabled = enable;
                 tbMemo.Enabled = enable;
                 btnClear.Enabled = enable;
+                cbUpdateHighLight.Enabled = enable;
             }));
 
         }
