@@ -119,6 +119,7 @@ namespace AutoDeploy
             using (var cnn = new SQLiteConnection("Data Source=" + dbPath))
             {
                 cnn.Open();
+                item.FtpGroup = -9999999;//新增出來的Deploy群組 FTP群組預設為-9999999  Name:"---- 請選擇 ----"
                 newId = cnn.Query<int>(@"Insert into Deploy_M (Name,FtpGroup,FtpTargetPath,FileRootPath,BackUpPath,Memo) 
                                             values(@name,@FtpGroup,@FtpTargetPath,@FileRootPath,@BackUpPath,@Memo);
                                             SELECT CAST(last_insert_rowid() as int)", 

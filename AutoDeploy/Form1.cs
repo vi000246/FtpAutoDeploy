@@ -71,7 +71,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 if (lbFileList.Items.Count == 0)
                     throw new ArgumentException("上傳清單不得為空");
 
-                if (cbServerList.SelectedItem == null)
+                if (cbServerList.SelectedItem == null|| (cbServerList.SelectedItem as model.FTP_M).Name== "-------- 請選擇 --------")
                     throw new ArgumentException("請選擇一個伺服器群組");
                 if(string.IsNullOrEmpty(tbFileRoot.Text))
                     throw new ArgumentException("請選擇檔案清單根目錄");
@@ -141,7 +141,9 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
         public void LoadServerCombobox() {
             try
             {
-                cbServerList.DataSource = db.GetDataFromDB<model.FTP_M>();
+                var data = db.GetDataFromDB<model.FTP_M>();
+                data.Insert(0, new model.FTP_M() {ID=-9999999,Name= "-------- 請選擇 --------" });
+                cbServerList.DataSource = data;
                 cbServerList.ValueMember = "ID";
                 cbServerList.DisplayMember = "Name";
             }
@@ -696,6 +698,10 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 tbMemo.Enabled = enable;
                 btnClear.Enabled = enable;
                 cbUpdateHighLight.Enabled = enable;
+                btnFastChooseFileRoot.Enabled = enable;
+                btnFastChooseBackUpRoot.Enabled = enable;
+                btnOpenFileRoot.Enabled = enable;
+                btnOpenFileRoot.Enabled = enable;
             }));
 
         }
