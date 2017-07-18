@@ -701,7 +701,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 btnFastChooseFileRoot.Enabled = enable;
                 btnFastChooseBackUpRoot.Enabled = enable;
                 btnOpenFileRoot.Enabled = enable;
-                btnOpenFileRoot.Enabled = enable;
+                btnOpenBackUpRoot.Enabled = enable;
             }));
 
         }
