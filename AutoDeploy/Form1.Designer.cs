@@ -50,6 +50,9 @@ namespace AutoDeploy
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
             this.gbUploadList = new System.Windows.Forms.GroupBox();
+            this.btnOpenBackUpRoot = new System.Windows.Forms.Button();
+            this.btnOpenFileRoot = new System.Windows.Forms.Button();
+            this.cbUpdateHighLight = new System.Windows.Forms.CheckBox();
             this.btnFastChooseBackUpRoot = new System.Windows.Forms.Button();
             this.btnFastChooseFileRoot = new System.Windows.Forms.Button();
             this.lbRestFile = new System.Windows.Forms.Label();
@@ -73,9 +76,6 @@ namespace AutoDeploy
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.cbUpdateHighLight = new System.Windows.Forms.CheckBox();
-            this.btnOpenFileRoot = new System.Windows.Forms.Button();
-            this.btnOpenBackUpRoot = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -278,6 +278,36 @@ namespace AutoDeploy
             this.gbUploadList.TabIndex = 1;
             this.gbUploadList.TabStop = false;
             this.gbUploadList.Text = "上傳清單";
+            // 
+            // btnOpenBackUpRoot
+            // 
+            this.btnOpenBackUpRoot.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenBackUpRoot.Image")));
+            this.btnOpenBackUpRoot.Location = new System.Drawing.Point(518, 317);
+            this.btnOpenBackUpRoot.Name = "btnOpenBackUpRoot";
+            this.btnOpenBackUpRoot.Size = new System.Drawing.Size(28, 28);
+            this.btnOpenBackUpRoot.TabIndex = 26;
+            this.btnOpenBackUpRoot.UseVisualStyleBackColor = true;
+            this.btnOpenBackUpRoot.Click += new System.EventHandler(this.btnOpenBackUpRoot_Click);
+            // 
+            // btnOpenFileRoot
+            // 
+            this.btnOpenFileRoot.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenFileRoot.Image")));
+            this.btnOpenFileRoot.Location = new System.Drawing.Point(518, 287);
+            this.btnOpenFileRoot.Name = "btnOpenFileRoot";
+            this.btnOpenFileRoot.Size = new System.Drawing.Size(28, 28);
+            this.btnOpenFileRoot.TabIndex = 25;
+            this.btnOpenFileRoot.UseVisualStyleBackColor = true;
+            this.btnOpenFileRoot.Click += new System.EventHandler(this.btnOpenFileRoot_Click);
+            // 
+            // cbUpdateHighLight
+            // 
+            this.cbUpdateHighLight.AutoSize = true;
+            this.cbUpdateHighLight.Location = new System.Drawing.Point(387, 354);
+            this.cbUpdateHighLight.Name = "cbUpdateHighLight";
+            this.cbUpdateHighLight.Size = new System.Drawing.Size(120, 16);
+            this.cbUpdateHighLight.TabIndex = 24;
+            this.cbUpdateHighLight.Text = "只上傳反白的路徑";
+            this.cbUpdateHighLight.UseVisualStyleBackColor = true;
             // 
             // btnFastChooseBackUpRoot
             // 
@@ -515,36 +545,6 @@ namespace AutoDeploy
             this.toolTip.AutoPopDelay = 30000;
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
-            // 
-            // cbUpdateHighLight
-            // 
-            this.cbUpdateHighLight.AutoSize = true;
-            this.cbUpdateHighLight.Location = new System.Drawing.Point(387, 354);
-            this.cbUpdateHighLight.Name = "cbUpdateHighLight";
-            this.cbUpdateHighLight.Size = new System.Drawing.Size(120, 16);
-            this.cbUpdateHighLight.TabIndex = 24;
-            this.cbUpdateHighLight.Text = "只上傳反白的路徑";
-            this.cbUpdateHighLight.UseVisualStyleBackColor = true;
-            // 
-            // btnOpenFileRoot
-            // 
-            this.btnOpenFileRoot.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenFileRoot.Image")));
-            this.btnOpenFileRoot.Location = new System.Drawing.Point(518, 287);
-            this.btnOpenFileRoot.Name = "btnOpenFileRoot";
-            this.btnOpenFileRoot.Size = new System.Drawing.Size(28, 28);
-            this.btnOpenFileRoot.TabIndex = 25;
-            this.btnOpenFileRoot.UseVisualStyleBackColor = true;
-            this.btnOpenFileRoot.Click += new System.EventHandler(this.btnOpenFileRoot_Click);
-            // 
-            // btnOpenBackUpRoot
-            // 
-            this.btnOpenBackUpRoot.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenBackUpRoot.Image")));
-            this.btnOpenBackUpRoot.Location = new System.Drawing.Point(518, 317);
-            this.btnOpenBackUpRoot.Name = "btnOpenBackUpRoot";
-            this.btnOpenBackUpRoot.Size = new System.Drawing.Size(28, 28);
-            this.btnOpenBackUpRoot.TabIndex = 26;
-            this.btnOpenBackUpRoot.UseVisualStyleBackColor = true;
-            this.btnOpenBackUpRoot.Click += new System.EventHandler(this.btnOpenBackUpRoot_Click);
             // 
             // Form1
             // 

@@ -402,7 +402,8 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 string name = dialog.ShowInputGroupNameForm();
                 if (!string.IsNullOrEmpty(name))
                 {
-                    int newID = db.AddDeployGroupByName(new model.Deploy_M { Name=name});
+                    //新增出來的Deploy群組 FTP群組預設為-9999999  Name:"---- 請選擇 ----"
+                    int newID = db.AddDeployGroupByName(new model.Deploy_M { Name=name,FtpGroup = -9999999 });
                 }
                 ShowGroupData();
             }
@@ -581,10 +582,10 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
         {
             try
             {
+
                 var data = db.GetDataFromDB<model.Deploy_M>();
                 //將最新的排序在最上面
                 data = data.OrderByDescending(x => x.ID).ToList<model.Deploy_M>();
-
                 lbDeployGroup.DataSource = data;
                 lbDeployGroup.DisplayMember = "Name";
                 lbDeployGroup.ValueMember = "ID";
