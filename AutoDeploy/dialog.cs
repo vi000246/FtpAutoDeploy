@@ -49,11 +49,6 @@ namespace AutoDeploy
                             MessageBox.Show("名稱不得為空白");
                             e.Cancel = true;
                         }
-                        else if (System.Text.ASCIIEncoding.GetEncoding("big5").GetByteCount(textBox.Text) > 24)
-                        {
-                            MessageBox.Show("名稱過長 英文限24字元 中文限12字元");
-                            e.Cancel = true;
-                        }
                     }
                 };
                 prompt.Controls.Add(textBox);

@@ -337,7 +337,11 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
         {
             string selectedPath = dialog.ShowFastChoose((int)FastChooseType.Project);
             if (!string.IsNullOrEmpty(selectedPath))
+            {
+                ClearCurrentFileList();
                 tbFileRoot.Text = selectedPath;
+            }
+
         }
 
         //備份檔案目錄 開啟常用選單
@@ -345,7 +349,10 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
         {
             string selectedPath = dialog.ShowFastChoose((int)FastChooseType.Backup);
             if (!string.IsNullOrEmpty(selectedPath))
+            {
+                ClearCurrentFileList();
                 tbBackUpPath.Text = selectedPath;
+            }
         }
 
         //更新progressBar進度
@@ -596,6 +603,25 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        //滑鼠移到item時 顯示deploy群組的全名tooltip
+        public int hoveredIndex = 0;
+        private void lbDeployGroup_MouseMove(object sender, MouseEventArgs e)
+        {
+            int newHoveredIndex = lbDeployGroup.IndexFromPoint(e.Location);
+
+            if (hoveredIndex != newHoveredIndex)
+            {
+                hoveredIndex = newHoveredIndex;
+
+                if (hoveredIndex > -1)
+                {
+                    toolTip.Active = false;
+                    toolTip.SetToolTip(lbDeployGroup, ((model.Deploy_M)lbDeployGroup.Items[hoveredIndex]).Name);
+                    toolTip.Active = true;
+                }
             }
         }
         #endregion

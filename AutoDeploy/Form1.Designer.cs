@@ -222,6 +222,7 @@ namespace AutoDeploy
             this.lbDeployGroup.Size = new System.Drawing.Size(188, 361);
             this.lbDeployGroup.TabIndex = 11;
             this.lbDeployGroup.SelectedIndexChanged += new System.EventHandler(this.lbDeployGroup_SelectedIndexChanged);
+            this.lbDeployGroup.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lbDeployGroup_MouseMove);
             // 
             // btnAdd
             // 
