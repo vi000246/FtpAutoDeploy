@@ -61,6 +61,7 @@ namespace AutoDeploy
                         string remotePath = file.BuildFtpRemotePath(path, fileRootPath, FtpTargetPath);
                         if (client.FileExists(remotePath))
                         {
+                            //如果有勾選備份 就將檔案下載下來
                             if (IsBackUp && !string.IsNullOrEmpty(BackUpPath)) {
                                 string deployGroupName = form.GetDeployGroupName();
                                 if (string.IsNullOrEmpty(deployGroupName))
@@ -69,7 +70,8 @@ namespace AutoDeploy
                                     BackUpPath+"\\"+ DateTime.Now.ToString("yyyy-MM-dd") +"\\"+deployGroupName+"\\" +remotePath,
                                     remotePath);
                             }
-
+                            //先把檔案刪掉再上傳到FTP 防止卡住情形
+                            client.DeleteFile(remotePath);
                         }
 
                         //取得目錄名稱 ex.c:/Desktop/test.txt  => c:/Desktop
