@@ -191,18 +191,19 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 string[] entriesPath = (string[])e.Data.GetData(DataFormats.FileDrop, false);
                 foreach (string entryPath in entriesPath)
                 {
+                    int groupid = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
+
                     //判斷拖曳的檔案或資料夾 是否在根目錄內 (判斷是否為子目錄)
                     if (!file.IsSubfolder(tbFileRoot.Text, entryPath))
                     {
                         MessageBox.Show(new Form { TopMost = true }, @"此路徑:" + Environment.NewLine + entryPath + "\n不屬於檔案清單根目錄的路徑");
                     }
                     //如果Path已存在 就不要新增
-                    else if (db.GetDataFromDBByCondition<model.Deploy_D>(new { Path = entryPath }).Count()>0) {
+                    else if (db.GetDataFromDBByCondition<model.Deploy_D>(new { Path = entryPath, GroupID= groupid }).Count()>0) {
                         continue;
                     }
                     else
                     {
-                        int groupid = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
                         //存檔進去的路徑會replace掉檔案清單根目錄
                         db.AddDeployDetail(new model.Deploy_D { GroupID = groupid, Path = entryPath });
                     }
