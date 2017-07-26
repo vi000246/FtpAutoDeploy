@@ -492,6 +492,7 @@ namespace AutoDeploy
             this.lbFileList.DragDrop += new System.Windows.Forms.DragEventHandler(this.lbFileList_DragDrop);
             this.lbFileList.DragEnter += new System.Windows.Forms.DragEventHandler(this.lbFileList_DragEnter);
             this.lbFileList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbFileList_KeyDown);
+            this.lbFileList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lbFileList_MouseDown);
             // 
             // lbChooseServerGroup
             // 

@@ -25,6 +25,7 @@ namespace AutoDeploy
         public file file = new file();
         public int TotalFileCount = 0;
         public int fileUploadCompletedCount = 0;
+        private ContextMenuStrip listboxContextMenu;//檔案清單的右鍵選單
 
         public Form1()
         {
@@ -60,6 +61,12 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
             else
                 SetControlEnable(false);
             ShowConfigData();
+
+            //指派右鍵選單給檔案清單的listbox
+            listboxContextMenu = new ContextMenuStrip();
+            var item = listboxContextMenu.Items.Add("開啟檔案位置");
+            item.Click += OpenSelectedItemPath;
+            lbFileList.ContextMenuStrip = listboxContextMenu;
         }
 
         // 啟動按鈕Click
@@ -283,6 +290,36 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
             }
         }
 
+        //按下右鍵時可開啟檔案目錄
+        private void lbFileList_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right) return;
+            lbFileList.ClearSelected();
+            lbFileList.SelectedIndex = lbFileList.IndexFromPoint(e.X, e.Y);
+            if (lbFileList.SelectedIndex != -1)
+            {
+                listboxContextMenu.Show();
+            }
+        }
+        //右鍵選單的選項點擊事件 開啟指定的目錄
+        private void OpenSelectedItemPath(object sender, EventArgs e)
+        {
+            try
+            {
+                string path = (lbFileList.SelectedItem as model.Deploy_D).Path.ToString();
+                //如果是檔案路徑 就只取Directory 
+                FileAttributes attr = File.GetAttributes(path);
+                if ((attr & FileAttributes.Directory) != FileAttributes.Directory)
+                    path = Path.GetDirectoryName(path);
+                if (!Directory.Exists(path))
+                    MessageBox.Show("目錄不存在");
+                else
+                    Process.Start("explorer.exe", path);
+            }
+            catch (Exception ex) {
+                MessageBox.Show("無法開啟檔案位置");
+            }
+        }
         #endregion
         #region =======================config控制項相關================================
         //瀏覽按鈕點擊事件
