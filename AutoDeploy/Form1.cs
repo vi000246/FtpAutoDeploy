@@ -630,7 +630,10 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
 
                 var data = db.GetDataFromDB<model.Deploy_M>();
                 //將最新的排序在最上面
-                data = data.OrderByDescending(x => x.ID).ToList<model.Deploy_M>();
+                data = data
+                    .Where(x=>string.IsNullOrEmpty(tbSearchList.Text)||
+                              x.Name.IndexOf(tbSearchList.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                    .OrderByDescending(x => x.ID).ToList<model.Deploy_M>();
                 lbDeployGroup.DataSource = data;
                 lbDeployGroup.DisplayMember = "Name";
                 lbDeployGroup.ValueMember = "ID";
@@ -660,6 +663,20 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                     toolTip.SetToolTip(lbDeployGroup, ((model.Deploy_M)lbDeployGroup.Items[hoveredIndex]).Name);
                     toolTip.Active = true;
                 }
+            }
+        }
+
+        //搜尋按鈕
+        private void btnSearchList_Click(object sender, EventArgs e)
+        {
+            ShowGroupData();
+        }
+        //搜尋欄按enter
+        private void tbSearchList_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                ShowGroupData();
             }
         }
         #endregion
@@ -775,7 +792,6 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
             form.StartPosition = FormStartPosition.Manual;
             form.Location = new Point(this.Location.X + (this.Width - form.Width) / 2, this.Location.Y + (this.Height - form.Height) / 2);
         }
-
 
     }
 }

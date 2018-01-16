@@ -41,6 +41,7 @@ namespace AutoDeploy
             this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tbSearchList = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnRename = new System.Windows.Forms.Button();
             this.btnCancelSelect = new System.Windows.Forms.Button();
@@ -76,6 +77,7 @@ namespace AutoDeploy
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnSearchList = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -150,6 +152,8 @@ namespace AutoDeploy
             // groupBox1
             // 
             this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.btnSearchList);
+            this.groupBox1.Controls.Add(this.tbSearchList);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.btnRename);
             this.groupBox1.Controls.Add(this.btnCancelSelect);
@@ -160,15 +164,23 @@ namespace AutoDeploy
             this.groupBox1.Controls.Add(this.btnCopy);
             this.groupBox1.Location = new System.Drawing.Point(6, 24);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(210, 555);
+            this.groupBox1.Size = new System.Drawing.Size(210, 568);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deploy群組";
             // 
+            // tbSearchList
+            // 
+            this.tbSearchList.Location = new System.Drawing.Point(6, 22);
+            this.tbSearchList.Name = "tbSearchList";
+            this.tbSearchList.Size = new System.Drawing.Size(141, 22);
+            this.tbSearchList.TabIndex = 17;
+            this.tbSearchList.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSearchList_KeyPress);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(37, 491);
+            this.pictureBox1.Location = new System.Drawing.Point(35, 504);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(127, 43);
             this.pictureBox1.TabIndex = 16;
@@ -176,7 +188,7 @@ namespace AutoDeploy
             // 
             // btnRename
             // 
-            this.btnRename.Location = new System.Drawing.Point(10, 462);
+            this.btnRename.Location = new System.Drawing.Point(10, 475);
             this.btnRename.Name = "btnRename";
             this.btnRename.Size = new System.Drawing.Size(75, 23);
             this.btnRename.TabIndex = 15;
@@ -186,7 +198,7 @@ namespace AutoDeploy
             // 
             // btnCancelSelect
             // 
-            this.btnCancelSelect.Location = new System.Drawing.Point(112, 426);
+            this.btnCancelSelect.Location = new System.Drawing.Point(112, 446);
             this.btnCancelSelect.Name = "btnCancelSelect";
             this.btnCancelSelect.Size = new System.Drawing.Size(75, 23);
             this.btnCancelSelect.TabIndex = 14;
@@ -196,7 +208,7 @@ namespace AutoDeploy
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(112, 462);
+            this.btnDelete.Location = new System.Drawing.Point(112, 475);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 13;
@@ -206,7 +218,7 @@ namespace AutoDeploy
             // 
             // btnSelectAll
             // 
-            this.btnSelectAll.Location = new System.Drawing.Point(10, 427);
+            this.btnSelectAll.Location = new System.Drawing.Point(10, 446);
             this.btnSelectAll.Name = "btnSelectAll";
             this.btnSelectAll.Size = new System.Drawing.Size(75, 23);
             this.btnSelectAll.TabIndex = 12;
@@ -217,7 +229,7 @@ namespace AutoDeploy
             // lbDeployGroup
             // 
             this.lbDeployGroup.FormattingEnabled = true;
-            this.lbDeployGroup.Location = new System.Drawing.Point(6, 21);
+            this.lbDeployGroup.Location = new System.Drawing.Point(6, 50);
             this.lbDeployGroup.Name = "lbDeployGroup";
             this.lbDeployGroup.Size = new System.Drawing.Size(188, 361);
             this.lbDeployGroup.TabIndex = 11;
@@ -226,7 +238,7 @@ namespace AutoDeploy
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(10, 391);
+            this.btnAdd.Location = new System.Drawing.Point(10, 417);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 9;
@@ -236,7 +248,7 @@ namespace AutoDeploy
             // 
             // btnCopy
             // 
-            this.btnCopy.Location = new System.Drawing.Point(112, 391);
+            this.btnCopy.Location = new System.Drawing.Point(112, 417);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(75, 23);
             this.btnCopy.TabIndex = 10;
@@ -548,6 +560,18 @@ namespace AutoDeploy
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
             // 
+            // btnSearchList
+            // 
+            this.btnSearchList.BackColor = System.Drawing.Color.Transparent;
+            this.btnSearchList.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSearchList.BackgroundImage")));
+            this.btnSearchList.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSearchList.Location = new System.Drawing.Point(153, 22);
+            this.btnSearchList.Name = "btnSearchList";
+            this.btnSearchList.Size = new System.Drawing.Size(34, 22);
+            this.btnSearchList.TabIndex = 27;
+            this.btnSearchList.UseVisualStyleBackColor = false;
+            this.btnSearchList.Click += new System.EventHandler(this.btnSearchList_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -565,6 +589,7 @@ namespace AutoDeploy
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.gbUploadList.ResumeLayout(false);
             this.gbUploadList.PerformLayout();
@@ -618,6 +643,8 @@ namespace AutoDeploy
         private System.Windows.Forms.CheckBox cbUpdateHighLight;
         private System.Windows.Forms.Button btnOpenBackUpRoot;
         private System.Windows.Forms.Button btnOpenFileRoot;
+        private System.Windows.Forms.TextBox tbSearchList;
+        private System.Windows.Forms.Button btnSearchList;
     }
 }
 
