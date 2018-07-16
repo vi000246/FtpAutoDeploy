@@ -583,6 +583,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 form.Memo = tbMemo.Text;
                 form.IsBackup = cbIsBackUp.Checked;
                 form.IsChangeVersionNum = cbVersionNum.Checked;
+                form.IsUpdateHighLight = cbUpdateHighLight.Checked;
                 db.UpdateDeployConfig(form);
                 
             }
@@ -616,6 +617,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                     tbMemo.Text = form.Memo;
                     cbIsBackUp.Checked = form.IsBackup;
                     cbVersionNum.Checked = form.IsChangeVersionNum;
+                    cbUpdateHighLight.Checked = form.IsUpdateHighLight;
                 }
             }
             catch (Exception ex)

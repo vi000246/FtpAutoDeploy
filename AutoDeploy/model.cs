@@ -46,6 +46,7 @@ namespace AutoDeploy
             public string Memo { get; set; }
             public bool IsBackup { get; set; }
             public bool IsChangeVersionNum { get; set; }
+            public bool IsUpdateHighLight { get; set; }
         }
         //檔案清單
         [Table("Deploy_D")]
