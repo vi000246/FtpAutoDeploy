@@ -41,6 +41,7 @@ namespace AutoDeploy
             this.test2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSearchList = new System.Windows.Forms.Button();
             this.tbSearchList = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnRename = new System.Windows.Forms.Button();
@@ -77,7 +78,7 @@ namespace AutoDeploy
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.btnSearchList = new System.Windows.Forms.Button();
+            this.cbVersionNum = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -88,7 +89,7 @@ namespace AutoDeploy
             // 
             this.lbProgress.AutoSize = true;
             this.lbProgress.Font = new System.Drawing.Font("微軟正黑體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lbProgress.Location = new System.Drawing.Point(6, 405);
+            this.lbProgress.Location = new System.Drawing.Point(16, 404);
             this.lbProgress.Name = "lbProgress";
             this.lbProgress.Size = new System.Drawing.Size(73, 19);
             this.lbProgress.TabIndex = 8;
@@ -168,6 +169,18 @@ namespace AutoDeploy
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deploy群組";
+            // 
+            // btnSearchList
+            // 
+            this.btnSearchList.BackColor = System.Drawing.Color.Transparent;
+            this.btnSearchList.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSearchList.BackgroundImage")));
+            this.btnSearchList.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSearchList.Location = new System.Drawing.Point(153, 22);
+            this.btnSearchList.Name = "btnSearchList";
+            this.btnSearchList.Size = new System.Drawing.Size(34, 22);
+            this.btnSearchList.TabIndex = 27;
+            this.btnSearchList.UseVisualStyleBackColor = false;
+            this.btnSearchList.Click += new System.EventHandler(this.btnSearchList_Click);
             // 
             // tbSearchList
             // 
@@ -259,6 +272,7 @@ namespace AutoDeploy
             // gbUploadList
             // 
             this.gbUploadList.AutoSize = true;
+            this.gbUploadList.Controls.Add(this.cbVersionNum);
             this.gbUploadList.Controls.Add(this.btnOpenBackUpRoot);
             this.gbUploadList.Controls.Add(this.btnOpenFileRoot);
             this.gbUploadList.Controls.Add(this.cbUpdateHighLight);
@@ -345,7 +359,7 @@ namespace AutoDeploy
             // lbRestFile
             // 
             this.lbRestFile.AutoSize = true;
-            this.lbRestFile.Location = new System.Drawing.Point(385, 535);
+            this.lbRestFile.Location = new System.Drawing.Point(413, 535);
             this.lbRestFile.Name = "lbRestFile";
             this.lbRestFile.Size = new System.Drawing.Size(65, 12);
             this.lbRestFile.TabIndex = 21;
@@ -355,7 +369,7 @@ namespace AutoDeploy
             // 
             this.progressBar1.Location = new System.Drawing.Point(112, 401);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(407, 23);
+            this.progressBar1.Size = new System.Drawing.Size(266, 23);
             this.progressBar1.TabIndex = 20;
             // 
             // tbMemo
@@ -560,17 +574,15 @@ namespace AutoDeploy
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
             // 
-            // btnSearchList
+            // cbVersionNum
             // 
-            this.btnSearchList.BackColor = System.Drawing.Color.Transparent;
-            this.btnSearchList.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSearchList.BackgroundImage")));
-            this.btnSearchList.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSearchList.Location = new System.Drawing.Point(153, 22);
-            this.btnSearchList.Name = "btnSearchList";
-            this.btnSearchList.Size = new System.Drawing.Size(34, 22);
-            this.btnSearchList.TabIndex = 27;
-            this.btnSearchList.UseVisualStyleBackColor = false;
-            this.btnSearchList.Click += new System.EventHandler(this.btnSearchList_Click);
+            this.cbVersionNum.AutoSize = true;
+            this.cbVersionNum.Location = new System.Drawing.Point(387, 398);
+            this.cbVersionNum.Name = "cbVersionNum";
+            this.cbVersionNum.Size = new System.Drawing.Size(108, 16);
+            this.cbVersionNum.TabIndex = 27;
+            this.cbVersionNum.Text = "自動變更版本號";
+            this.cbVersionNum.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -645,6 +657,7 @@ namespace AutoDeploy
         private System.Windows.Forms.Button btnOpenFileRoot;
         private System.Windows.Forms.TextBox tbSearchList;
         private System.Windows.Forms.Button btnSearchList;
+        private System.Windows.Forms.CheckBox cbVersionNum;
     }
 }
 

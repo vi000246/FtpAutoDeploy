@@ -126,7 +126,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 {
                     using (ftp ftp = new ftp(this, FTPitem.ClientIP, FTPitem.UserName, FTPitem.Password, Convert.ToInt32(FTPitem.Port)))
                     {
-                        ftp.UploadFileToFtp(files, tbFileRoot.Text, tbFtpRoot.Text,tbBackUpPath.Text, cbIsBackUp.Checked);
+                        ftp.UploadFileToFtp(files, tbFileRoot.Text, tbFtpRoot.Text,tbBackUpPath.Text, cbIsBackUp.Checked,cbVersionNum.Checked);
                     }
                 }
                 LogToBox("===================    所有檔案部署完成    ===================");
@@ -582,6 +582,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 form.BackUpPath = tbBackUpPath.Text;
                 form.Memo = tbMemo.Text;
                 form.IsBackup = cbIsBackUp.Checked;
+                form.IsChangeVersionNum = cbVersionNum.Checked;
                 db.UpdateDeployConfig(form);
                 
             }
@@ -614,6 +615,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                     tbBackUpPath.Text = form.BackUpPath;
                     tbMemo.Text = form.Memo;
                     cbIsBackUp.Checked = form.IsBackup;
+                    cbVersionNum.Checked = form.IsChangeVersionNum;
                 }
             }
             catch (Exception ex)
@@ -773,6 +775,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
             {
                 btnStart.Enabled = enable;
                 cbServerList.Enabled = enable;
+                cbVersionNum.Enabled = enable;
                 tbFtpRoot.Enabled = enable;
                 btnBrowseRoot.Enabled = enable;
                 btnBrowseBackUp.Enabled = enable;

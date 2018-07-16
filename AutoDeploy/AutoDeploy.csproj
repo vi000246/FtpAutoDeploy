@@ -127,6 +127,7 @@
     <Compile Include="AuthorInfo.Designer.cs">
       <DependentUpon>AuthorInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChangeVersionNum.cs" />
     <Compile Include="db.cs" />
     <Compile Include="dbDataSet.Designer.cs">
       <AutoGen>True</AutoGen>

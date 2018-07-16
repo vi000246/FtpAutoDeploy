@@ -40,7 +40,7 @@ namespace AutoDeploy
             }
         }
         //上傳檔案至FTP
-        public void UploadFileToFtp(List<string> filePaths,string fileRootPath,string FtpTargetPath, string BackUpPath = "",bool IsBackUp = false) {
+        public void UploadFileToFtp(List<string> filePaths,string fileRootPath,string FtpTargetPath, string BackUpPath = "",bool IsBackUp = false,bool IsChangeVersionNum = false) {
             try
             {
                 client.RetryAttempts = 3;
@@ -57,6 +57,17 @@ namespace AutoDeploy
                 {
                     foreach (var path in filePaths)
                     {
+                        //如果要變更版本號
+                        if (IsChangeVersionNum)
+                        {
+                            string extension = Path.GetExtension(path);
+                            string[] validextensions = { ".css", ".html",".cshtml",".aspx",".js" };
+                            if (validextensions.Contains(extension))
+                            {
+                                new ChangeVersionNum().changeFileVersionNum(path);
+                            }
+                        }
+
                         //建立出FTP要上傳的目錄
                         string remotePath = file.BuildFtpRemotePath(path, fileRootPath, FtpTargetPath);
                         if (client.FileExists(remotePath))
@@ -103,3 +114,4 @@ namespace AutoDeploy
         }
     }
 }
+

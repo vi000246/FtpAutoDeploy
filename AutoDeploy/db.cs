@@ -138,7 +138,8 @@ namespace AutoDeploy
                     FileRootPath = @FileRootPath,
                     BackUpPath = @BackUpPath,
                     Memo = @Memo,
-                    IsBackup = @IsBackup
+                    IsBackup = @IsBackup,
+                    IsChangeVersionNum = @IsChangeVersionNum
                     where Id = @id", 
                     new { id = form.ID,
                         FtpGroup = form.FtpGroup,
@@ -146,7 +147,8 @@ namespace AutoDeploy
                         FileRootPath = form.FileRootPath,
                         BackUpPath = form.BackUpPath,
                         Memo = form.Memo,
-                        IsBackup = form.IsBackup
+                        IsBackup = form.IsBackup,
+                        IsChangeVersionNum = form.IsChangeVersionNum
                     });
             }
             return newId;
