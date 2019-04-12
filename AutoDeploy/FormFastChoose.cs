@@ -98,6 +98,44 @@ namespace AutoDeploy
                 MessageBox.Show(ex.Message);
             }
         }
+        //本地目標目錄 新增按鈕點擊 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string path = dialog.BrowseFolder();
+                if (!string.IsNullOrEmpty(path))
+                {
+                    if (db.GetDataFromDBByCondition<model.FastChoose>(new { Path = path, Type = (int)FastChooseType.Local }).Count() > 0)
+                        throw new ArgumentException("此路徑己存在");
+
+                    model.FastChoose item = new model.FastChoose() { Path = path, Type = (int)FastChooseType.Backup };
+                    db.AddFastChoosePath(item);
+                    RefreshBackupListBox();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        //本地目標目錄 delete點擊
+        private void lbLocalPath_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Delete)
+                {
+                    //從DB刪除資料
+                    new ListBoxUtility().LoopListBoxItem<model.FastChoose>(lbLocalPath, db.DeleteDataFromDB);
+                    RefreshBackupListBox();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         private void List_DragEnter(object sender, DragEventArgs e)
         {

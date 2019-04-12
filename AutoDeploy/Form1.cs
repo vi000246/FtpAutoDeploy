@@ -339,6 +339,12 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
             if(!string.IsNullOrEmpty(path))
                 tbBackUpPath.Text = path;
         }
+        private void btnBrowsLocal_Click(object sender, EventArgs e)
+        {
+            string path = dialog.BrowseFolder();
+            if (!string.IsNullOrEmpty(path))
+                tbLocalRoot.Text = path;
+        }
         //伺服器目標目徑的驗證
         private void tbFtpRoot_Validating(object sender, CancelEventArgs e)
         {
@@ -393,6 +399,16 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
             }
         }
 
+        private void btnFastChooseLocal_Click(object sender, EventArgs e)
+        {
+            string selectedPath = dialog.ShowFastChoose((int)FastChooseType.Local);
+            if (!string.IsNullOrEmpty(selectedPath))
+            {
+                ClearCurrentFileList();
+                tbLocalRoot.Text = selectedPath;
+            }
+        }
+
         //更新progressBar進度
         public void updateProgressBar()
         {
@@ -436,6 +452,19 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
             }
             else
                 MessageBox.Show("請先選擇檔案備份根路徑");
+        }
+        //開啟目錄
+        private void btnOpenLocal_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(tbLocalRoot.Text))
+            {
+                if (!Directory.Exists(tbLocalRoot.Text))
+                    MessageBox.Show("目錄不存在");
+                else
+                    Process.Start("explorer.exe", tbLocalRoot.Text);
+            }
+            else
+                MessageBox.Show("請先選擇本地目標目錄");
         }
         #endregion
         #region ========================Deploy 群組相關===============================
@@ -584,6 +613,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 form.IsBackup = cbIsBackUp.Checked;
                 form.IsChangeVersionNum = cbVersionNum.Checked;
                 form.IsUpdateHighLight = cbUpdateHighLight.Checked;
+                form.IsDeployToLocal = cbDeployToLocal.Checked;
                 db.UpdateDeployConfig(form);
                 
             }
@@ -618,6 +648,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                     cbIsBackUp.Checked = form.IsBackup;
                     cbVersionNum.Checked = form.IsChangeVersionNum;
                     cbUpdateHighLight.Checked = form.IsUpdateHighLight;
+                    cbDeployToLocal.Checked = form.IsDeployToLocal;
                 }
             }
             catch (Exception ex)
@@ -797,6 +828,8 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
             form.StartPosition = FormStartPosition.Manual;
             form.Location = new Point(this.Location.X + (this.Width - form.Width) / 2, this.Location.Y + (this.Height - form.Height) / 2);
         }
+
+
 
     }
 }

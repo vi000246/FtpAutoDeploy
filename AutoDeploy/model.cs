@@ -47,6 +47,7 @@ namespace AutoDeploy
             public bool IsBackup { get; set; }
             public bool IsChangeVersionNum { get; set; }
             public bool IsUpdateHighLight { get; set; }
+            public bool IsDeployToLocal { get; set; }
         }
         //檔案清單
         [Table("Deploy_D")]
@@ -87,6 +88,7 @@ namespace AutoDeploy
     /// </summary>
     public enum FastChooseType {
         Project,
-        Backup
+        Backup,
+        Local
     }
 }

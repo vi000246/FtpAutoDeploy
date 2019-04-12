@@ -140,7 +140,8 @@ namespace AutoDeploy
                     Memo = @Memo,
                     IsBackup = @IsBackup,
                     IsChangeVersionNum = @IsChangeVersionNum,
-                    IsUpdateHighLight = @IsUpdateHighLight
+                    IsUpdateHighLight = @IsUpdateHighLight,
+                    IsDeployToLocal = @IsDeployToLocal
                     where Id = @id", 
                     new { id = form.ID,
                         FtpGroup = form.FtpGroup,
@@ -150,7 +151,8 @@ namespace AutoDeploy
                         Memo = form.Memo,
                         IsBackup = form.IsBackup,
                         IsChangeVersionNum = form.IsChangeVersionNum,
-                        IsUpdateHighLight = form.IsUpdateHighLight
+                        IsUpdateHighLight = form.IsUpdateHighLight,
+                        IsDeployToLocal = form.IsDeployToLocal
                     });
             }
             return newId;
