@@ -52,6 +52,12 @@ namespace AutoDeploy
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
             this.gbUploadList = new System.Windows.Forms.GroupBox();
+            this.cbDeployToLocal = new System.Windows.Forms.CheckBox();
+            this.btnOpenLocal = new System.Windows.Forms.Button();
+            this.btnFastChooseLocal = new System.Windows.Forms.Button();
+            this.btnBrowsLocal = new System.Windows.Forms.Button();
+            this.lbLocalDirectory = new System.Windows.Forms.Label();
+            this.tbLocalRoot = new System.Windows.Forms.TextBox();
             this.cbVersionNum = new System.Windows.Forms.CheckBox();
             this.btnOpenBackUpRoot = new System.Windows.Forms.Button();
             this.btnOpenFileRoot = new System.Windows.Forms.Button();
@@ -79,12 +85,6 @@ namespace AutoDeploy
             this.cbServerList = new System.Windows.Forms.ComboBox();
             this.cbIsBackUp = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.btnOpenLocal = new System.Windows.Forms.Button();
-            this.btnFastChooseLocal = new System.Windows.Forms.Button();
-            this.btnBrowsLocal = new System.Windows.Forms.Button();
-            this.lbLocalDirectory = new System.Windows.Forms.Label();
-            this.tbLocalRoot = new System.Windows.Forms.TextBox();
-            this.cbDeployToLocal = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -107,7 +107,7 @@ namespace AutoDeploy
             this.測試選單ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(776, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(855, 24);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -171,7 +171,7 @@ namespace AutoDeploy
             this.groupBox1.Controls.Add(this.btnCopy);
             this.groupBox1.Location = new System.Drawing.Point(6, 24);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(210, 568);
+            this.groupBox1.Size = new System.Drawing.Size(216, 647);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deploy群組";
@@ -199,7 +199,7 @@ namespace AutoDeploy
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(35, 504);
+            this.pictureBox1.Location = new System.Drawing.Point(34, 583);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(127, 43);
             this.pictureBox1.TabIndex = 16;
@@ -207,7 +207,7 @@ namespace AutoDeploy
             // 
             // btnRename
             // 
-            this.btnRename.Location = new System.Drawing.Point(10, 475);
+            this.btnRename.Location = new System.Drawing.Point(10, 535);
             this.btnRename.Name = "btnRename";
             this.btnRename.Size = new System.Drawing.Size(75, 23);
             this.btnRename.TabIndex = 15;
@@ -217,7 +217,7 @@ namespace AutoDeploy
             // 
             // btnCancelSelect
             // 
-            this.btnCancelSelect.Location = new System.Drawing.Point(112, 446);
+            this.btnCancelSelect.Location = new System.Drawing.Point(112, 475);
             this.btnCancelSelect.Name = "btnCancelSelect";
             this.btnCancelSelect.Size = new System.Drawing.Size(75, 23);
             this.btnCancelSelect.TabIndex = 14;
@@ -227,7 +227,7 @@ namespace AutoDeploy
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(112, 475);
+            this.btnDelete.Location = new System.Drawing.Point(112, 535);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 13;
@@ -237,7 +237,7 @@ namespace AutoDeploy
             // 
             // btnSelectAll
             // 
-            this.btnSelectAll.Location = new System.Drawing.Point(10, 446);
+            this.btnSelectAll.Location = new System.Drawing.Point(10, 475);
             this.btnSelectAll.Name = "btnSelectAll";
             this.btnSelectAll.Size = new System.Drawing.Size(75, 23);
             this.btnSelectAll.TabIndex = 12;
@@ -250,14 +250,14 @@ namespace AutoDeploy
             this.lbDeployGroup.FormattingEnabled = true;
             this.lbDeployGroup.Location = new System.Drawing.Point(6, 50);
             this.lbDeployGroup.Name = "lbDeployGroup";
-            this.lbDeployGroup.Size = new System.Drawing.Size(188, 361);
+            this.lbDeployGroup.Size = new System.Drawing.Size(204, 361);
             this.lbDeployGroup.TabIndex = 11;
             this.lbDeployGroup.SelectedIndexChanged += new System.EventHandler(this.lbDeployGroup_SelectedIndexChanged);
             this.lbDeployGroup.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lbDeployGroup_MouseMove);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(10, 417);
+            this.btnAdd.Location = new System.Drawing.Point(10, 423);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 9;
@@ -267,7 +267,7 @@ namespace AutoDeploy
             // 
             // btnCopy
             // 
-            this.btnCopy.Location = new System.Drawing.Point(112, 417);
+            this.btnCopy.Location = new System.Drawing.Point(112, 423);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(75, 23);
             this.btnCopy.TabIndex = 10;
@@ -313,15 +313,77 @@ namespace AutoDeploy
             this.gbUploadList.Controls.Add(this.cbIsBackUp);
             this.gbUploadList.Location = new System.Drawing.Point(222, 27);
             this.gbUploadList.Name = "gbUploadList";
-            this.gbUploadList.Size = new System.Drawing.Size(557, 656);
+            this.gbUploadList.Size = new System.Drawing.Size(627, 656);
             this.gbUploadList.TabIndex = 1;
             this.gbUploadList.TabStop = false;
             this.gbUploadList.Text = "上傳清單";
             // 
+            // cbDeployToLocal
+            // 
+            this.cbDeployToLocal.AutoSize = true;
+            this.cbDeployToLocal.Location = new System.Drawing.Point(489, 414);
+            this.cbDeployToLocal.Name = "cbDeployToLocal";
+            this.cbDeployToLocal.Size = new System.Drawing.Size(108, 16);
+            this.cbDeployToLocal.TabIndex = 33;
+            this.cbDeployToLocal.Text = "複製到本地路徑";
+            this.cbDeployToLocal.UseVisualStyleBackColor = true;
+            this.cbDeployToLocal.CheckedChanged += new System.EventHandler(this.cbDeployToLocal_CheckedChanged);
+            this.cbDeployToLocal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cbDeployToLocal_MouseDown);
+            // 
+            // btnOpenLocal
+            // 
+            this.btnOpenLocal.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenLocal.Image")));
+            this.btnOpenLocal.Location = new System.Drawing.Point(584, 327);
+            this.btnOpenLocal.Name = "btnOpenLocal";
+            this.btnOpenLocal.Size = new System.Drawing.Size(28, 28);
+            this.btnOpenLocal.TabIndex = 32;
+            this.btnOpenLocal.UseVisualStyleBackColor = true;
+            this.btnOpenLocal.Click += new System.EventHandler(this.btnOpenLocal_Click);
+            // 
+            // btnFastChooseLocal
+            // 
+            this.btnFastChooseLocal.Image = ((System.Drawing.Image)(resources.GetObject("btnFastChooseLocal.Image")));
+            this.btnFastChooseLocal.Location = new System.Drawing.Point(550, 327);
+            this.btnFastChooseLocal.Name = "btnFastChooseLocal";
+            this.btnFastChooseLocal.Size = new System.Drawing.Size(28, 28);
+            this.btnFastChooseLocal.TabIndex = 31;
+            this.btnFastChooseLocal.UseVisualStyleBackColor = true;
+            this.btnFastChooseLocal.Click += new System.EventHandler(this.btnFastChooseLocal_Click);
+            // 
+            // btnBrowsLocal
+            // 
+            this.btnBrowsLocal.BackColor = System.Drawing.Color.Transparent;
+            this.btnBrowsLocal.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBrowsLocal.BackgroundImage")));
+            this.btnBrowsLocal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnBrowsLocal.Location = new System.Drawing.Point(516, 327);
+            this.btnBrowsLocal.Name = "btnBrowsLocal";
+            this.btnBrowsLocal.Size = new System.Drawing.Size(28, 28);
+            this.btnBrowsLocal.TabIndex = 30;
+            this.btnBrowsLocal.UseVisualStyleBackColor = false;
+            this.btnBrowsLocal.Click += new System.EventHandler(this.btnBrowsLocal_Click);
+            // 
+            // lbLocalDirectory
+            // 
+            this.lbLocalDirectory.AutoSize = true;
+            this.lbLocalDirectory.Cursor = System.Windows.Forms.Cursors.Help;
+            this.lbLocalDirectory.Location = new System.Drawing.Point(18, 336);
+            this.lbLocalDirectory.Name = "lbLocalDirectory";
+            this.lbLocalDirectory.Size = new System.Drawing.Size(77, 12);
+            this.lbLocalDirectory.TabIndex = 29;
+            this.lbLocalDirectory.Text = "本地目標目錄";
+            // 
+            // tbLocalRoot
+            // 
+            this.tbLocalRoot.Enabled = false;
+            this.tbLocalRoot.Location = new System.Drawing.Point(109, 333);
+            this.tbLocalRoot.Name = "tbLocalRoot";
+            this.tbLocalRoot.Size = new System.Drawing.Size(391, 22);
+            this.tbLocalRoot.TabIndex = 28;
+            // 
             // cbVersionNum
             // 
             this.cbVersionNum.AutoSize = true;
-            this.cbVersionNum.Location = new System.Drawing.Point(381, 498);
+            this.cbVersionNum.Location = new System.Drawing.Point(489, 498);
             this.cbVersionNum.Name = "cbVersionNum";
             this.cbVersionNum.Size = new System.Drawing.Size(108, 16);
             this.cbVersionNum.TabIndex = 27;
@@ -331,7 +393,7 @@ namespace AutoDeploy
             // btnOpenBackUpRoot
             // 
             this.btnOpenBackUpRoot.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenBackUpRoot.Image")));
-            this.btnOpenBackUpRoot.Location = new System.Drawing.Point(518, 367);
+            this.btnOpenBackUpRoot.Location = new System.Drawing.Point(584, 367);
             this.btnOpenBackUpRoot.Name = "btnOpenBackUpRoot";
             this.btnOpenBackUpRoot.Size = new System.Drawing.Size(28, 28);
             this.btnOpenBackUpRoot.TabIndex = 26;
@@ -341,7 +403,7 @@ namespace AutoDeploy
             // btnOpenFileRoot
             // 
             this.btnOpenFileRoot.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenFileRoot.Image")));
-            this.btnOpenFileRoot.Location = new System.Drawing.Point(518, 286);
+            this.btnOpenFileRoot.Location = new System.Drawing.Point(584, 286);
             this.btnOpenFileRoot.Name = "btnOpenFileRoot";
             this.btnOpenFileRoot.Size = new System.Drawing.Size(28, 28);
             this.btnOpenFileRoot.TabIndex = 25;
@@ -351,7 +413,7 @@ namespace AutoDeploy
             // cbUpdateHighLight
             // 
             this.cbUpdateHighLight.AutoSize = true;
-            this.cbUpdateHighLight.Location = new System.Drawing.Point(380, 443);
+            this.cbUpdateHighLight.Location = new System.Drawing.Point(489, 443);
             this.cbUpdateHighLight.Name = "cbUpdateHighLight";
             this.cbUpdateHighLight.Size = new System.Drawing.Size(120, 16);
             this.cbUpdateHighLight.TabIndex = 24;
@@ -361,7 +423,7 @@ namespace AutoDeploy
             // btnFastChooseBackUpRoot
             // 
             this.btnFastChooseBackUpRoot.Image = ((System.Drawing.Image)(resources.GetObject("btnFastChooseBackUpRoot.Image")));
-            this.btnFastChooseBackUpRoot.Location = new System.Drawing.Point(484, 367);
+            this.btnFastChooseBackUpRoot.Location = new System.Drawing.Point(550, 367);
             this.btnFastChooseBackUpRoot.Name = "btnFastChooseBackUpRoot";
             this.btnFastChooseBackUpRoot.Size = new System.Drawing.Size(28, 28);
             this.btnFastChooseBackUpRoot.TabIndex = 23;
@@ -371,7 +433,7 @@ namespace AutoDeploy
             // btnFastChooseFileRoot
             // 
             this.btnFastChooseFileRoot.Image = ((System.Drawing.Image)(resources.GetObject("btnFastChooseFileRoot.Image")));
-            this.btnFastChooseFileRoot.Location = new System.Drawing.Point(484, 286);
+            this.btnFastChooseFileRoot.Location = new System.Drawing.Point(550, 287);
             this.btnFastChooseFileRoot.Name = "btnFastChooseFileRoot";
             this.btnFastChooseFileRoot.Size = new System.Drawing.Size(28, 28);
             this.btnFastChooseFileRoot.TabIndex = 22;
@@ -381,7 +443,7 @@ namespace AutoDeploy
             // lbRestFile
             // 
             this.lbRestFile.AutoSize = true;
-            this.lbRestFile.Location = new System.Drawing.Point(413, 626);
+            this.lbRestFile.Location = new System.Drawing.Point(513, 626);
             this.lbRestFile.Name = "lbRestFile";
             this.lbRestFile.Size = new System.Drawing.Size(65, 12);
             this.lbRestFile.TabIndex = 21;
@@ -391,7 +453,7 @@ namespace AutoDeploy
             // 
             this.progressBar1.Location = new System.Drawing.Point(109, 494);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(266, 23);
+            this.progressBar1.Size = new System.Drawing.Size(357, 23);
             this.progressBar1.TabIndex = 20;
             // 
             // tbMemo
@@ -400,13 +462,13 @@ namespace AutoDeploy
             this.tbMemo.Location = new System.Drawing.Point(109, 416);
             this.tbMemo.Multiline = true;
             this.tbMemo.Name = "tbMemo";
-            this.tbMemo.Size = new System.Drawing.Size(266, 59);
+            this.tbMemo.Size = new System.Drawing.Size(357, 59);
             this.tbMemo.TabIndex = 19;
             // 
             // lbmemo
             // 
             this.lbmemo.AutoSize = true;
-            this.lbmemo.Location = new System.Drawing.Point(20, 425);
+            this.lbmemo.Location = new System.Drawing.Point(18, 425);
             this.lbmemo.Name = "lbmemo";
             this.lbmemo.Size = new System.Drawing.Size(32, 12);
             this.lbmemo.TabIndex = 18;
@@ -418,7 +480,7 @@ namespace AutoDeploy
             this.lbLog.ItemHeight = 12;
             this.lbLog.Location = new System.Drawing.Point(0, 523);
             this.lbLog.Name = "lbLog";
-            this.lbLog.Size = new System.Drawing.Size(509, 100);
+            this.lbLog.Size = new System.Drawing.Size(612, 100);
             this.lbLog.TabIndex = 7;
             // 
             // btnPreView
@@ -428,7 +490,7 @@ namespace AutoDeploy
             this.btnPreView.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPreView.Font = new System.Drawing.Font("Microsoft JhengHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnPreView.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPreView.Location = new System.Drawing.Point(300, 237);
+            this.btnPreView.Location = new System.Drawing.Point(380, 237);
             this.btnPreView.Name = "btnPreView";
             this.btnPreView.Size = new System.Drawing.Size(75, 39);
             this.btnPreView.TabIndex = 17;
@@ -441,7 +503,7 @@ namespace AutoDeploy
             this.btnBrowseRoot.BackColor = System.Drawing.Color.Transparent;
             this.btnBrowseRoot.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBrowseRoot.BackgroundImage")));
             this.btnBrowseRoot.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnBrowseRoot.Location = new System.Drawing.Point(449, 286);
+            this.btnBrowseRoot.Location = new System.Drawing.Point(516, 286);
             this.btnBrowseRoot.Name = "btnBrowseRoot";
             this.btnBrowseRoot.Size = new System.Drawing.Size(28, 28);
             this.btnBrowseRoot.TabIndex = 16;
@@ -452,7 +514,7 @@ namespace AutoDeploy
             // 
             this.lbFileRoot.AutoSize = true;
             this.lbFileRoot.Cursor = System.Windows.Forms.Cursors.Help;
-            this.lbFileRoot.Location = new System.Drawing.Point(20, 296);
+            this.lbFileRoot.Location = new System.Drawing.Point(18, 295);
             this.lbFileRoot.Name = "lbFileRoot";
             this.lbFileRoot.Size = new System.Drawing.Size(89, 12);
             this.lbFileRoot.TabIndex = 15;
@@ -463,14 +525,14 @@ namespace AutoDeploy
             this.tbFileRoot.Enabled = false;
             this.tbFileRoot.Location = new System.Drawing.Point(112, 292);
             this.tbFileRoot.Name = "tbFileRoot";
-            this.tbFileRoot.Size = new System.Drawing.Size(332, 22);
+            this.tbFileRoot.Size = new System.Drawing.Size(388, 22);
             this.tbFileRoot.TabIndex = 14;
             // 
             // tbFtpRoot
             // 
             this.tbFtpRoot.Location = new System.Drawing.Point(113, 258);
             this.tbFtpRoot.Name = "tbFtpRoot";
-            this.tbFtpRoot.Size = new System.Drawing.Size(167, 22);
+            this.tbFtpRoot.Size = new System.Drawing.Size(247, 22);
             this.tbFtpRoot.TabIndex = 13;
             this.tbFtpRoot.Validating += new System.ComponentModel.CancelEventHandler(this.tbFtpRoot_Validating);
             // 
@@ -489,7 +551,7 @@ namespace AutoDeploy
             this.btnBrowseBackUp.BackColor = System.Drawing.Color.Transparent;
             this.btnBrowseBackUp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBrowseBackUp.BackgroundImage")));
             this.btnBrowseBackUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnBrowseBackUp.Location = new System.Drawing.Point(449, 368);
+            this.btnBrowseBackUp.Location = new System.Drawing.Point(515, 367);
             this.btnBrowseBackUp.Name = "btnBrowseBackUp";
             this.btnBrowseBackUp.Size = new System.Drawing.Size(28, 28);
             this.btnBrowseBackUp.TabIndex = 11;
@@ -502,14 +564,14 @@ namespace AutoDeploy
             this.tbBackUpPath.ForeColor = System.Drawing.SystemColors.WindowText;
             this.tbBackUpPath.Location = new System.Drawing.Point(109, 373);
             this.tbBackUpPath.Name = "tbBackUpPath";
-            this.tbBackUpPath.Size = new System.Drawing.Size(335, 22);
+            this.tbBackUpPath.Size = new System.Drawing.Size(391, 22);
             this.tbBackUpPath.TabIndex = 10;
             // 
             // lbBackUp
             // 
             this.lbBackUp.AutoSize = true;
             this.lbBackUp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.lbBackUp.Location = new System.Drawing.Point(11, 376);
+            this.lbBackUp.Location = new System.Drawing.Point(18, 376);
             this.lbBackUp.Name = "lbBackUp";
             this.lbBackUp.Size = new System.Drawing.Size(92, 12);
             this.lbBackUp.TabIndex = 9;
@@ -520,7 +582,7 @@ namespace AutoDeploy
             this.btnClear.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnClear.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnClear.Location = new System.Drawing.Point(381, 237);
+            this.btnClear.Location = new System.Drawing.Point(464, 237);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 39);
             this.btnClear.TabIndex = 7;
@@ -533,10 +595,10 @@ namespace AutoDeploy
             this.lbFileList.AllowDrop = true;
             this.lbFileList.FormattingEnabled = true;
             this.lbFileList.ItemHeight = 12;
-            this.lbFileList.Location = new System.Drawing.Point(6, 21);
+            this.lbFileList.Location = new System.Drawing.Point(13, 21);
             this.lbFileList.Name = "lbFileList";
             this.lbFileList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbFileList.Size = new System.Drawing.Size(532, 208);
+            this.lbFileList.Size = new System.Drawing.Size(608, 208);
             this.lbFileList.TabIndex = 0;
             this.lbFileList.DragDrop += new System.Windows.Forms.DragEventHandler(this.lbFileList_DragDrop);
             this.lbFileList.DragEnter += new System.Windows.Forms.DragEventHandler(this.lbFileList_DragEnter);
@@ -564,7 +626,7 @@ namespace AutoDeploy
             this.btnStart.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnStart.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnStart.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnStart.Location = new System.Drawing.Point(462, 237);
+            this.btnStart.Location = new System.Drawing.Point(545, 237);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(76, 39);
             this.btnStart.TabIndex = 6;
@@ -577,14 +639,14 @@ namespace AutoDeploy
             this.cbServerList.FormattingEnabled = true;
             this.cbServerList.Location = new System.Drawing.Point(113, 232);
             this.cbServerList.Name = "cbServerList";
-            this.cbServerList.Size = new System.Drawing.Size(167, 20);
+            this.cbServerList.Size = new System.Drawing.Size(247, 20);
             this.cbServerList.TabIndex = 2;
             // 
             // cbIsBackUp
             // 
             this.cbIsBackUp.AutoSize = true;
             this.cbIsBackUp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.cbIsBackUp.Location = new System.Drawing.Point(380, 472);
+            this.cbIsBackUp.Location = new System.Drawing.Point(489, 472);
             this.cbIsBackUp.Name = "cbIsBackUp";
             this.cbIsBackUp.Size = new System.Drawing.Size(132, 16);
             this.cbIsBackUp.TabIndex = 5;
@@ -597,73 +659,11 @@ namespace AutoDeploy
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
             // 
-            // btnOpenLocal
-            // 
-            this.btnOpenLocal.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenLocal.Image")));
-            this.btnOpenLocal.Location = new System.Drawing.Point(518, 327);
-            this.btnOpenLocal.Name = "btnOpenLocal";
-            this.btnOpenLocal.Size = new System.Drawing.Size(28, 28);
-            this.btnOpenLocal.TabIndex = 32;
-            this.btnOpenLocal.UseVisualStyleBackColor = true;
-            this.btnOpenLocal.Click += new System.EventHandler(this.btnOpenLocal_Click);
-            // 
-            // btnFastChooseLocal
-            // 
-            this.btnFastChooseLocal.Image = ((System.Drawing.Image)(resources.GetObject("btnFastChooseLocal.Image")));
-            this.btnFastChooseLocal.Location = new System.Drawing.Point(484, 327);
-            this.btnFastChooseLocal.Name = "btnFastChooseLocal";
-            this.btnFastChooseLocal.Size = new System.Drawing.Size(28, 28);
-            this.btnFastChooseLocal.TabIndex = 31;
-            this.btnFastChooseLocal.UseVisualStyleBackColor = true;
-            this.btnFastChooseLocal.Click += new System.EventHandler(this.btnFastChooseLocal_Click);
-            // 
-            // btnBrowsLocal
-            // 
-            this.btnBrowsLocal.BackColor = System.Drawing.Color.Transparent;
-            this.btnBrowsLocal.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBrowsLocal.BackgroundImage")));
-            this.btnBrowsLocal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnBrowsLocal.Location = new System.Drawing.Point(449, 327);
-            this.btnBrowsLocal.Name = "btnBrowsLocal";
-            this.btnBrowsLocal.Size = new System.Drawing.Size(28, 28);
-            this.btnBrowsLocal.TabIndex = 30;
-            this.btnBrowsLocal.UseVisualStyleBackColor = false;
-            this.btnBrowsLocal.Click += new System.EventHandler(this.btnBrowsLocal_Click);
-            // 
-            // lbLocalDirectory
-            // 
-            this.lbLocalDirectory.AutoSize = true;
-            this.lbLocalDirectory.Cursor = System.Windows.Forms.Cursors.Help;
-            this.lbLocalDirectory.Location = new System.Drawing.Point(17, 337);
-            this.lbLocalDirectory.Name = "lbLocalDirectory";
-            this.lbLocalDirectory.Size = new System.Drawing.Size(77, 12);
-            this.lbLocalDirectory.TabIndex = 29;
-            this.lbLocalDirectory.Text = "本地目標目錄";
-            // 
-            // tbLocalRoot
-            // 
-            this.tbLocalRoot.Enabled = false;
-            this.tbLocalRoot.Location = new System.Drawing.Point(109, 333);
-            this.tbLocalRoot.Name = "tbLocalRoot";
-            this.tbLocalRoot.Size = new System.Drawing.Size(335, 22);
-            this.tbLocalRoot.TabIndex = 28;
-            // 
-            // cbDeployToLocal
-            // 
-            this.cbDeployToLocal.AutoSize = true;
-            this.cbDeployToLocal.Location = new System.Drawing.Point(380, 416);
-            this.cbDeployToLocal.Name = "cbDeployToLocal";
-            this.cbDeployToLocal.Size = new System.Drawing.Size(108, 16);
-            this.cbDeployToLocal.TabIndex = 33;
-            this.cbDeployToLocal.Text = "複製到本地路徑";
-            this.cbDeployToLocal.UseVisualStyleBackColor = true;
-            this.cbDeployToLocal.CheckedChanged += new System.EventHandler(this.cbDeployToLocal_CheckedChanged);
-            this.cbDeployToLocal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cbDeployToLocal_MouseDown);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(776, 674);
+            this.ClientSize = new System.Drawing.Size(855, 674);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbUploadList);
             this.Controls.Add(this.menuStrip1);

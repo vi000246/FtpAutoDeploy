@@ -439,14 +439,15 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 tbLocalRoot.Text = selectedPath;
             }
         }
+
         private void cbDeployToLocal_MouseDown(object sender, MouseEventArgs e)
         {
-            
+            ClearCurrentFileList();
         }
+        //因為在cs設定Checked屬性時也會觸發，因此另外寫一個mouseDown事件
         private void cbDeployToLocal_CheckedChanged(object sender, EventArgs e)
         {
             SetControlEnable(true);
-            ClearCurrentFileList();
         }
         //更新progressBar進度
         public void updateProgressBar()
