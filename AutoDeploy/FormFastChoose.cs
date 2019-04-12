@@ -109,7 +109,7 @@ namespace AutoDeploy
                     if (db.GetDataFromDBByCondition<model.FastChoose>(new { Path = path, Type = (int)FastChooseType.Local }).Count() > 0)
                         throw new ArgumentException("此路徑己存在");
 
-                    model.FastChoose item = new model.FastChoose() { Path = path, Type = (int)FastChooseType.Backup };
+                    model.FastChoose item = new model.FastChoose() { Path = path, Type = (int)FastChooseType.Local };
                     db.AddFastChoosePath(item);
                     RefreshBackupListBox();
                 }
