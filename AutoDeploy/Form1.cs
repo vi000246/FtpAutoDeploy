@@ -44,12 +44,16 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
             toolTip.SetToolTip(cbIsBackUp, "若FTP已存在相同檔案，將FTP的檔案備份到指定目錄");
             toolTip.SetToolTip(lbBackUp, "請選擇備份檔放置的目錄");
             toolTip.SetToolTip(cbUpdateHighLight, "只上傳選取反白的路徑，預設是上傳全部路徑");
+            toolTip.SetToolTip(cbDeployToLocal, "將檔案複製到本機的目標路徑");
             toolTip.SetToolTip(btnBrowseRoot, "瀏覽");
             toolTip.SetToolTip(btnBrowseBackUp, "瀏覽");
+            toolTip.SetToolTip(btnBrowsLocal, "瀏覽");
             toolTip.SetToolTip(btnFastChooseFileRoot, "選擇常用路徑");
             toolTip.SetToolTip(btnFastChooseBackUpRoot, "選擇常用路徑");
+            toolTip.SetToolTip(btnFastChooseLocal, "選擇常用路徑");
             toolTip.SetToolTip(btnOpenFileRoot, "開啟檔案清單根目錄");
             toolTip.SetToolTip(btnOpenBackUpRoot, "開啟檔案備份目錄");
+            toolTip.SetToolTip(btnOpenLocal, "開啟本地目標目錄");
         }
 
         private void Form1_Load(object sender, EventArgs e)
