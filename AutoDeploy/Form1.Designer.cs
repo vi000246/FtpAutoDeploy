@@ -499,6 +499,7 @@ namespace AutoDeploy
             // tbBackUpPath
             // 
             this.tbBackUpPath.Enabled = false;
+            this.tbBackUpPath.ForeColor = System.Drawing.SystemColors.WindowText;
             this.tbBackUpPath.Location = new System.Drawing.Point(109, 373);
             this.tbBackUpPath.Name = "tbBackUpPath";
             this.tbBackUpPath.Size = new System.Drawing.Size(335, 22);
@@ -587,7 +588,7 @@ namespace AutoDeploy
             this.cbIsBackUp.Name = "cbIsBackUp";
             this.cbIsBackUp.Size = new System.Drawing.Size(132, 16);
             this.cbIsBackUp.TabIndex = 5;
-            this.cbIsBackUp.Text = "是否備份遠端原始檔";
+            this.cbIsBackUp.Text = "是否備份目標原始檔";
             this.cbIsBackUp.UseVisualStyleBackColor = true;
             // 
             // toolTip
@@ -656,6 +657,7 @@ namespace AutoDeploy
             this.cbDeployToLocal.Text = "複製到本地路徑";
             this.cbDeployToLocal.UseVisualStyleBackColor = true;
             this.cbDeployToLocal.CheckedChanged += new System.EventHandler(this.cbDeployToLocal_CheckedChanged);
+            this.cbDeployToLocal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cbDeployToLocal_MouseDown);
             // 
             // Form1
             // 

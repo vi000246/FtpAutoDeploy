@@ -41,10 +41,13 @@ Example:
 要傳的檔:C:/Projects/Build/DemoWebSite/Script/jquery.js
 Deploy專案根目錄:C:/Projects/Build/DemoWebSite
 則會將Script/jquery.js傳到FTP目標目錄");
-            toolTip.SetToolTip(cbIsBackUp, "若FTP已存在相同檔案，將FTP的檔案備份到指定目錄");
+            toolTip.SetToolTip(cbIsBackUp, "若FTP/目標資料夾已存在相同檔案，將FTP/目標資料夾的檔案備份到指定目錄");
             toolTip.SetToolTip(lbBackUp, "請選擇備份檔放置的目錄");
+            toolTip.SetToolTip(tbLocalRoot, "請選擇要複製的本機目的資料夾");
             toolTip.SetToolTip(cbUpdateHighLight, "只上傳選取反白的路徑，預設是上傳全部路徑");
-            toolTip.SetToolTip(cbDeployToLocal, "將檔案複製到本機的目標路徑");
+            toolTip.SetToolTip(cbDeployToLocal, @"將檔案複製到本機的目標路徑,勾選此選項後，將不受檔案清單根目錄的限制，在清單中的檔案都能直接複製到目標資料夾，
+但無法將整個目錄結構都一併複製，只能複製檔案"
+                                                );
             toolTip.SetToolTip(btnBrowseRoot, "瀏覽");
             toolTip.SetToolTip(btnBrowseBackUp, "瀏覽");
             toolTip.SetToolTip(btnBrowsLocal, "瀏覽");
@@ -86,7 +89,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 if (!cbDeployToLocal.Checked && 
                     (cbServerList.SelectedItem == null|| (cbServerList.SelectedItem as model.FTP_M).Name== "-------- 請選擇 --------"))
                     throw new ArgumentException("請選擇一個伺服器群組");
-                if(string.IsNullOrEmpty(tbFileRoot.Text))
+                if(!cbDeployToLocal.Checked && string.IsNullOrEmpty(tbFileRoot.Text))
                     throw new ArgumentException("請選擇檔案清單根目錄");
                 if (cbIsBackUp.Checked && string.IsNullOrEmpty(tbBackUpPath.Text))
                     throw new ArgumentException("請輸入備份檔存放路徑");
@@ -116,7 +119,8 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 //跨執行緒存取UI thread的control
                 Invoke(new Action(() =>
                 {
-                    serverGroupID = (cbServerList.SelectedItem as model.FTP_M).ID;
+                    var FTP_M = (cbServerList.SelectedItem as model.FTP_M);
+                    serverGroupID = FTP_M == null ? serverGroupID : FTP_M.ID;
                     files = ListBoxUtility.GetAllPath(lbFileList, cbUpdateHighLight.Checked);
                 }));
 
@@ -153,7 +157,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 }
                 else
                 {
-                    new deployToLocal().UploadFileToLocal(files, tbFileRoot.Text, tbLocalRoot.Text, tbBackUpPath.Text,
+                    new deployToLocal(this).UploadFileToLocal(files, tbFileRoot.Text, tbLocalRoot.Text, tbBackUpPath.Text,
                         cbIsBackUp.Checked, cbVersionNum.Checked);
                 }
 
@@ -209,16 +213,16 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
             try
             {
                 CheckIsSelectDeployGroup();
-                //如果還沒選擇檔案清單 就跳出 Browse Dialog讓使用者選
-                if (string.IsNullOrEmpty(tbFileRoot.Text))
+                //在FTP deploy模式中，如果還沒選擇檔案清單 就跳出 Browse Dialog讓使用者選
+                if (!cbDeployToLocal.Checked && string.IsNullOrEmpty(tbFileRoot.Text))
                 {
                     //讓messageBox顯示在最上層
                     MessageBox.Show(new Form() { TopMost = true }, "請先選擇要Deploy的專案根路徑");
                     string path = dialog.BrowseFolder();
                     tbFileRoot.Text = path;
                 }
-                //如果沒選擇專案根目錄 就中止
-                if (string.IsNullOrEmpty(tbFileRoot.Text))
+                //在FTP deploy模式中，如果沒選擇專案根目錄 就中止
+                if (!cbDeployToLocal.Checked && string.IsNullOrEmpty(tbFileRoot.Text))
                     return;
 
                 // GetData() 回傳 string[]，內容為物件路徑，允許使用者一次拖曳多個物件
@@ -227,8 +231,8 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 {
                     int groupid = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
 
-                    //判斷拖曳的檔案或資料夾 是否在根目錄內 (判斷是否為子目錄)
-                    if (!file.IsSubfolder(tbFileRoot.Text, entryPath))
+                    //在FTP deploy模式中，判斷拖曳的檔案或資料夾 是否在根目錄內 (判斷是否為子目錄)
+                    if (!cbDeployToLocal.Checked && !file.IsSubfolder(tbFileRoot.Text, entryPath))
                     {
                         MessageBox.Show(new Form { TopMost = true }, @"此路徑:" + Environment.NewLine + entryPath + "\n不屬於檔案清單根目錄的路徑");
                     }
@@ -435,11 +439,14 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 tbLocalRoot.Text = selectedPath;
             }
         }
-
-        //deploy本地目錄 checkbox點擊事件
+        private void cbDeployToLocal_MouseDown(object sender, MouseEventArgs e)
+        {
+            
+        }
         private void cbDeployToLocal_CheckedChanged(object sender, EventArgs e)
         {
             SetControlEnable(true);
+            ClearCurrentFileList();
         }
         //更新progressBar進度
         public void updateProgressBar()
@@ -528,6 +535,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                     lastDeployGroupIdSelected = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
                 ShowDetailData();
                 ShowConfigData();
+                SetControlEnable(true);
             }
             catch (Exception ex)
             {
@@ -864,11 +872,18 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                     if (cbDeployToLocal.Checked)
                     {
                         cbServerList.Enabled = false;
+                        cbServerList.SelectedIndex = -1;
                         tbFtpRoot.Enabled = false;
+                        tbFtpRoot.Clear();
+                        tbFileRoot.Clear();
+                        btnBrowseRoot.Enabled = false;
+                        btnOpenFileRoot.Enabled = false;
+                        btnFastChooseFileRoot.Enabled = false;
                     }
                     else
                     {
                         tbLocalRoot.Enabled = false;
+                        tbLocalRoot.Clear();
                         btnOpenLocal.Enabled = false;
                         btnBrowsLocal.Enabled = false;
                         btnFastChooseLocal.Enabled = false;
@@ -876,12 +891,6 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 }
 
             }));
-
-        }
-
-        //依據是否上傳至本地的checkbox，disable相關的控制項
-        private void SetDeployLocalEnable(bool enable)
-        {
 
         }
 

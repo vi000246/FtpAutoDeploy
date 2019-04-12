@@ -12,7 +12,7 @@ namespace AutoDeploy
     {
         public readonly Form1 form;
 
-        public deployToLocal()
+        public deployToLocal(Form1 form)
         {
             this.form = form;//這樣才能access Form的控制項
             form.LogToBox("===================  開始複製檔案  ===================");
@@ -48,16 +48,19 @@ namespace AutoDeploy
                         string deployGroupName = form.GetDeployGroupName();
                         if (string.IsNullOrEmpty(deployGroupName))
                             throw new ArgumentException("程式錯誤: 無法取得Deploy群組的名稱");
-                        string backupPath = BackUpPath + "\\" + DateTime.Now.ToString("yyyy-MM-dd") + "\\" +
-                                            deployGroupName +
-                                            "\\";
+                        string backupPath = BackUpPath + "\\" + DateTime.Now.ToString("yyyy-MM-dd") + "\\" + deployGroupName + "\\";
+                        bool exists = Directory.Exists(backupPath);
+
+                        if (!exists)
+                            Directory.CreateDirectory(backupPath);
                         File.Copy(path, backupPath +"\\" + Path.GetFileName(path),true);
                     }
 
                     //開始複製檔案到目標目錄
-                    LocalTargetPath = LocalTargetPath + "\\" + Path.GetFileName(path);
-                    File.Copy(path, LocalTargetPath, true);
-                    form.LogToBox("複製成功" + " 檔案: " + path.Replace(fileRootPath, ""));
+                    string filename = Path.GetFileName(path);
+                    string destPath = LocalTargetPath + "\\" + Path.GetFileName(path);
+                    File.Copy(path, destPath, true);
+                    form.LogToBox("複製成功" + " 檔案: " + filename);
                     form.updateProgressBar();
                 }
             }
