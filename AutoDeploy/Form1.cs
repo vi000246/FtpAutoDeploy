@@ -56,11 +56,12 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
         {
             ShowGroupData();
             ShowDetailData();
+            ShowConfigData();
             if (lbDeployGroup.SelectedItem != null)
                 lastDeployGroupIdSelected = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
             else
                 SetControlEnable(false);
-            ShowConfigData();
+            
 
             //指派右鍵選單給檔案清單的listbox
             listboxContextMenu = new ContextMenuStrip();
@@ -409,6 +410,11 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
             }
         }
 
+        //deploy本地目錄 checkbox點擊事件
+        private void cbDeployToLocal_CheckedChanged(object sender, EventArgs e)
+        {
+            SetControlEnable(true);
+        }
         //更新progressBar進度
         public void updateProgressBar()
         {
@@ -812,24 +818,50 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 tbFtpRoot.Enabled = enable;
                 btnBrowseRoot.Enabled = enable;
                 btnBrowseBackUp.Enabled = enable;
+                btnBrowsLocal.Enabled = enable;
                 cbIsBackUp.Enabled = enable;
                 tbMemo.Enabled = enable;
                 btnClear.Enabled = enable;
                 cbUpdateHighLight.Enabled = enable;
                 btnFastChooseFileRoot.Enabled = enable;
                 btnFastChooseBackUpRoot.Enabled = enable;
+                btnFastChooseLocal.Enabled = enable;
                 btnOpenFileRoot.Enabled = enable;
                 btnOpenBackUpRoot.Enabled = enable;
+                btnOpenLocal.Enabled = enable;
+
+                //如果是deploy到本地目錄，就disable FTP相關控制項,反之disable本地目錄相關控制項
+                if (enable)
+                {
+                    if (cbDeployToLocal.Checked)
+                    {
+                        cbServerList.Enabled = false;
+                        tbFtpRoot.Enabled = false;
+                    }
+                    else
+                    {
+                        tbLocalRoot.Enabled = false;
+                        btnOpenLocal.Enabled = false;
+                        btnBrowsLocal.Enabled = false;
+                        btnFastChooseLocal.Enabled = false;
+                    }
+                }
+
             }));
 
         }
+
+        //依據是否上傳至本地的checkbox，disable相關的控制項
+        private void SetDeployLocalEnable(bool enable)
+        {
+
+        }
+
         //將視窗設為置中
         private void SetCenter(Form form) {
             form.StartPosition = FormStartPosition.Manual;
             form.Location = new Point(this.Location.X + (this.Width - form.Width) / 2, this.Location.Y + (this.Height - form.Height) / 2);
         }
-
-
 
     }
 }

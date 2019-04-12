@@ -655,6 +655,7 @@ namespace AutoDeploy
             this.cbDeployToLocal.TabIndex = 33;
             this.cbDeployToLocal.Text = "複製到本地路徑";
             this.cbDeployToLocal.UseVisualStyleBackColor = true;
+            this.cbDeployToLocal.CheckedChanged += new System.EventHandler(this.cbDeployToLocal_CheckedChanged);
             // 
             // Form1
             // 

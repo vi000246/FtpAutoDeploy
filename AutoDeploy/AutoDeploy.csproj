@@ -134,6 +134,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="deployToLocal.cs" />
     <Compile Include="dialog.cs" />
     <Compile Include="file.cs" />
     <Compile Include="FormFastChoose.cs">
