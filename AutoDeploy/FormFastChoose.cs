@@ -155,7 +155,19 @@ namespace AutoDeploy
         //拖曳folder 進入listBox事件
         private void List_DragDrop(object sender, DragEventArgs e)
         {
-            int type = (sender as ListBox).Name == "lbProjectPath" ? (int)FastChooseType.Project : (int)FastChooseType.Backup;
+            int type = 0;
+            switch ((sender as ListBox).Name)
+            {
+                case "lbProjectPath":
+                    type = (int) FastChooseType.Project;
+                    break;
+                case "lbLocalPath":
+                    type = (int)FastChooseType.Local;
+                    break;
+                case "lbBackupPath":
+                    type = (int)FastChooseType.Backup;
+                    break;
+            }
 
             string[] entriesPath = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             foreach (string entryPath in entriesPath)
@@ -169,8 +181,10 @@ namespace AutoDeploy
             //重整listBox
             if (type == (int)FastChooseType.Project)
                 RefreshProjectListBox();
-            else
+            else if(type == (int)FastChooseType.Backup)
                 RefreshBackupListBox();
+            else
+                RefreshLocalListBox();
 
         }
 
@@ -189,7 +203,14 @@ namespace AutoDeploy
             lbBackupPath.DisplayMember = "Path";
             lbBackupPath.ValueMember = "Path";
         }
-
+        //重新整理常用本地路徑
+        private void RefreshLocalListBox()
+        {
+            lbLocalPath.DataSource = db.
+                GetDataFromDBByCondition<model.FastChoose>(new { Type = (int)FastChooseType.Local });
+            lbLocalPath.DisplayMember = "Path";
+            lbLocalPath.ValueMember = "Path";
+        }
 
     }
 }
