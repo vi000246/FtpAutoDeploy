@@ -83,12 +83,16 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 if (lbFileList.Items.Count == 0)
                     throw new ArgumentException("上傳清單不得為空");
 
-                if (cbServerList.SelectedItem == null|| (cbServerList.SelectedItem as model.FTP_M).Name== "-------- 請選擇 --------")
+                if (!cbDeployToLocal.Checked && 
+                    (cbServerList.SelectedItem == null|| (cbServerList.SelectedItem as model.FTP_M).Name== "-------- 請選擇 --------"))
                     throw new ArgumentException("請選擇一個伺服器群組");
                 if(string.IsNullOrEmpty(tbFileRoot.Text))
                     throw new ArgumentException("請選擇檔案清單根目錄");
                 if (cbIsBackUp.Checked && string.IsNullOrEmpty(tbBackUpPath.Text))
                     throw new ArgumentException("請輸入備份檔存放路徑");
+                if(cbDeployToLocal.Checked && string.IsNullOrEmpty(tbLocalRoot.Text))
+                    throw new ArgumentException("請選擇本地目標目錄");
+
                 //儲存目前的設置
                 UpdateDeployConfig(lastDeployGroupIdSelected);
 
@@ -115,25 +119,45 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                     serverGroupID = (cbServerList.SelectedItem as model.FTP_M).ID;
                     files = ListBoxUtility.GetAllPath(lbFileList, cbUpdateHighLight.Checked);
                 }));
-                
-                //取得combobx選中的FTP群組的FTP列表
-                List<model.FTP_D> FTPList = db.GetDataFromDBByCondition<model.FTP_D>(new { GroupID = serverGroupID });
-                if (FTPList.Count() == 0)
-                    throw new ArgumentException("此FTP群組內沒有設置FTP Server");
-                TotalFileCount = FTPList.Count() * files.Count();
-                fileUploadCompletedCount = 0;//重設progress bar
-                Invoke(new Action(() =>
-                {
-                    lbRestFile.Text = string.Format("檔案剩餘：{0}", TotalFileCount.ToString());
-                }));
 
-                foreach (var FTPitem in FTPList)
+                List<model.FTP_D> FTPList = new List<model.FTP_D>();
+                //計算總檔案數
+                if (!cbDeployToLocal.Checked)
                 {
-                    using (ftp ftp = new ftp(this, FTPitem.ClientIP, FTPitem.UserName, FTPitem.Password, Convert.ToInt32(FTPitem.Port)))
+                    //取得combobx選中的FTP群組的FTP列表
+                    FTPList = db.GetDataFromDBByCondition<model.FTP_D>(new {GroupID = serverGroupID});
+                    if (FTPList.Count() == 0)
+                        throw new ArgumentException("此FTP群組內沒有設置FTP Server");
+                    TotalFileCount = FTPList.Count() * files.Count();
+                }
+                else
+                {
+                    TotalFileCount = files.Count;
+                }
+
+                fileUploadCompletedCount = 0;//重設progress bar
+                Invoke(new Action(() => { lbRestFile.Text = string.Format("檔案剩餘：{0}", TotalFileCount.ToString()); }));
+
+                //依據checkbox，選擇deploy至FTP或是本地
+                if (!cbDeployToLocal.Checked)
+                {
+                    foreach (var FTPitem in FTPList)
                     {
-                        ftp.UploadFileToFtp(files, tbFileRoot.Text, tbFtpRoot.Text,tbBackUpPath.Text, cbIsBackUp.Checked,cbVersionNum.Checked);
+                        using (ftp ftp = new ftp(this, FTPitem.ClientIP, FTPitem.UserName, FTPitem.Password,
+                            Convert.ToInt32(FTPitem.Port)))
+                        {
+                            ftp.UploadFileToFtp(files, tbFileRoot.Text, tbFtpRoot.Text, tbBackUpPath.Text,
+                                cbIsBackUp.Checked, cbVersionNum.Checked);
+                        }
                     }
                 }
+                else
+                {
+                    new deployToLocal().UploadFileToLocal(files, tbFileRoot.Text, tbLocalRoot.Text, tbBackUpPath.Text,
+                        cbIsBackUp.Checked, cbVersionNum.Checked);
+                }
+
+
                 LogToBox("===================    所有檔案部署完成    ===================");
             }
             catch (Exception ex)
@@ -146,8 +170,6 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
             }
 
         }
-
-
 
         //載入伺服器選單的combobox
         public void LoadServerCombobox() {
@@ -619,6 +641,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 form.FileRootPath = tbFileRoot.Text;
                 form.FtpTargetPath = tbFtpRoot.Text;
                 form.BackUpPath = tbBackUpPath.Text;
+                form.LocalPath = tbLocalRoot.Text;
                 form.Memo = tbMemo.Text;
                 form.IsBackup = cbIsBackUp.Checked;
                 form.IsChangeVersionNum = cbVersionNum.Checked;
@@ -655,6 +678,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                     tbFtpRoot.Text = form.FtpTargetPath;
                     tbBackUpPath.Text = form.BackUpPath;
                     tbMemo.Text = form.Memo;
+                    tbLocalRoot.Text = form.LocalPath;
                     cbIsBackUp.Checked = form.IsBackup;
                     cbVersionNum.Checked = form.IsChangeVersionNum;
                     cbUpdateHighLight.Checked = form.IsUpdateHighLight;

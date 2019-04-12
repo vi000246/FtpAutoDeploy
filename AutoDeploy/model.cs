@@ -43,6 +43,7 @@ namespace AutoDeploy
             public string FtpTargetPath { get; set; }
             public string FileRootPath { get; set; }
             public string BackUpPath { get; set; }
+            public string LocalPath { get; set; }
             public string Memo { get; set; }
             public bool IsBackup { get; set; }
             public bool IsChangeVersionNum { get; set; }

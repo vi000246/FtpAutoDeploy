@@ -60,12 +60,7 @@ namespace AutoDeploy
                         //如果要變更版本號
                         if (IsChangeVersionNum)
                         {
-                            string extension = Path.GetExtension(path);
-                            string[] validextensions = { ".css", ".html",".cshtml",".aspx",".js" };
-                            if (validextensions.Contains(extension))
-                            {
-                                new ChangeVersionNum().changeFileVersionNum(path);
-                            }
+                            new ChangeVersionNum().changeFileVersionNum(path);
                         }
 
                         //建立出FTP要上傳的目錄
