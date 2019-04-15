@@ -322,9 +322,10 @@ namespace AutoDeploy
             // cbDeployToLocal
             // 
             this.cbDeployToLocal.AutoSize = true;
+            this.cbDeployToLocal.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.cbDeployToLocal.Location = new System.Drawing.Point(451, 416);
             this.cbDeployToLocal.Name = "cbDeployToLocal";
-            this.cbDeployToLocal.Size = new System.Drawing.Size(108, 16);
+            this.cbDeployToLocal.Size = new System.Drawing.Size(115, 16);
             this.cbDeployToLocal.TabIndex = 33;
             this.cbDeployToLocal.Text = "複製到本地路徑";
             this.cbDeployToLocal.UseVisualStyleBackColor = true;

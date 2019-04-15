@@ -877,6 +877,14 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                         tbFtpRoot.Enabled = false;
                         tbFtpRoot.Clear();
                         tbFileRoot.Clear();
+                        lbFileRoot.Font = new Font(lbFileRoot.Font, FontStyle.Strikeout);
+                        lbFileRoot.ForeColor = Color.DimGray;
+                        lbChooseServerGroup.Font = new Font(lbChooseServerGroup.Font, FontStyle.Strikeout);
+                        lbChooseServerGroup.ForeColor = Color.DimGray;
+                        lbFTPDirectory.Font = new Font(lbFTPDirectory.Font, FontStyle.Strikeout);
+                        lbFTPDirectory.ForeColor = Color.DimGray;
+                        lbLocalDirectory.Font = new Font(lbLocalDirectory.Font, FontStyle.Regular);
+                        lbLocalDirectory.ForeColor = Color.Black;
                         btnBrowseRoot.Enabled = false;
                         btnOpenFileRoot.Enabled = false;
                         btnFastChooseFileRoot.Enabled = false;
@@ -888,6 +896,14 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                         btnOpenLocal.Enabled = false;
                         btnBrowsLocal.Enabled = false;
                         btnFastChooseLocal.Enabled = false;
+                        lbLocalDirectory.Font = new Font(lbLocalDirectory.Font, FontStyle.Strikeout);
+                        lbLocalDirectory.ForeColor = Color.DimGray;
+                        lbFileRoot.Font = new Font(lbFileRoot.Font,FontStyle.Regular);
+                        lbFileRoot.ForeColor = Color.Black;
+                        lbChooseServerGroup.Font = new Font(lbChooseServerGroup.Font, FontStyle.Regular);
+                        lbChooseServerGroup.ForeColor = Color.Black;
+                        lbFTPDirectory.Font = new Font(lbFTPDirectory.Font, FontStyle.Regular);
+                        lbFTPDirectory.ForeColor = Color.Black;
                     }
                 }
 
