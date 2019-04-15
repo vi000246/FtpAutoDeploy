@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -148,10 +149,15 @@ namespace AutoDeploy
             }
         }
         //顯示預覽視窗
-        public static void ShowPreview(List<string> paths,string fileRootPath,string FtpTargetPath) {
+        public static void ShowPreview(List<string> paths,string fileRootPath,string FtpTargetPath,bool isDeployToLocal) {
             //處理path 轉成上傳至FTP的path
             List<string> newPaths = new List<string>();
-            paths.ForEach(x=> newPaths.Add(file.BuildFtpRemotePath(x, fileRootPath, FtpTargetPath)));
+            if(!isDeployToLocal)
+                paths.ForEach(x=> newPaths.Add(file.BuildFtpRemotePath(x, fileRootPath, FtpTargetPath)));
+            else
+            {
+                paths.ForEach(x=>newPaths.Add(Path.GetFileName(x)));
+            }
 
             Form prompt = new Form()
             {

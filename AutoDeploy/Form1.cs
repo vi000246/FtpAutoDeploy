@@ -404,7 +404,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
                 }
             }
             if(isShow)
-                dialog.ShowPreview(paths,tbFileRoot.Text,tbFtpRoot.Text);
+                dialog.ShowPreview(paths,tbFileRoot.Text,tbFtpRoot.Text,cbDeployToLocal.Checked);
         }
 
         //上傳檔案根目錄 開啟常用選單
