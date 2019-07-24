@@ -425,7 +425,8 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
             string selectedPath = dialog.ShowFastChoose((int)FastChooseType.Backup);
             if (!string.IsNullOrEmpty(selectedPath))
             {
-                ClearCurrentFileList();
+                if(!cbDeployToLocal.Checked)
+                    ClearCurrentFileList();
                 tbBackUpPath.Text = selectedPath;
             }
         }
@@ -435,7 +436,8 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
             string selectedPath = dialog.ShowFastChoose((int)FastChooseType.Local);
             if (!string.IsNullOrEmpty(selectedPath))
             {
-                ClearCurrentFileList();
+                if(!cbDeployToLocal.Checked)
+                    ClearCurrentFileList();
                 tbLocalRoot.Text = selectedPath;
             }
         }
@@ -587,6 +589,7 @@ aaa、\aaa 、\aaa\ 、aaa\ 、\aaa\bbb、 aaa\bbb 、 aaa\bbb\ 、 \aaa\bbb\
             {
                 CheckIsSelectDeployGroup();
                 int groupId = (lbDeployGroup.SelectedItem as model.Deploy_M).ID;
+                UpdateDeployConfig(groupId);//複製前先更新目前的config
                 //取得被複製的群組及子群組的資料
                 var OriginGroupM = db.GetDataFromDB<model.Deploy_M>(groupId);
                 var OriginGroupD = db.GetDataFromDBByCondition<model.Deploy_D>(new { GroupID = groupId });
