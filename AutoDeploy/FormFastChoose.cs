@@ -21,13 +21,14 @@ namespace AutoDeploy
         {
             RefreshProjectListBox();
             RefreshBackupListBox();
+            RefreshLocalListBox();
         }
         //常用檔案清單根目錄 新增按鈕點擊
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                string path = dialog.BrowseFolder();
+                string path = dialog.SelectFolderPath();
                 if (!string.IsNullOrEmpty(path))
                 {
                     if (db.GetDataFromDBByCondition<model.FastChoose>(new { Path = path, Type = (int)FastChooseType.Project }).Count() > 0)
@@ -65,7 +66,7 @@ namespace AutoDeploy
         {
             try
             {
-                string path = dialog.BrowseFolder();
+                string path = dialog.SelectFolderPath();
                 if (!string.IsNullOrEmpty(path))
                 {
                     if (db.GetDataFromDBByCondition<model.FastChoose>(new { Path = path, Type = (int)FastChooseType.Backup }).Count() > 0)
@@ -103,7 +104,7 @@ namespace AutoDeploy
         {
             try
             {
-                string path = dialog.BrowseFolder();
+                string path = dialog.SelectFolderPath();
                 if (!string.IsNullOrEmpty(path))
                 {
                     if (db.GetDataFromDBByCondition<model.FastChoose>(new { Path = path, Type = (int)FastChooseType.Local }).Count() > 0)
@@ -111,7 +112,7 @@ namespace AutoDeploy
 
                     model.FastChoose item = new model.FastChoose() { Path = path, Type = (int)FastChooseType.Local };
                     db.AddFastChoosePath(item);
-                    RefreshBackupListBox();
+                    RefreshLocalListBox();
                 }
             }
             catch (Exception ex)
@@ -128,7 +129,7 @@ namespace AutoDeploy
                 {
                     //從DB刪除資料
                     new ListBoxUtility().LoopListBoxItem<model.FastChoose>(lbLocalPath, db.DeleteDataFromDB);
-                    RefreshBackupListBox();
+                    RefreshLocalListBox();
                 }
             }
             catch (Exception ex)
@@ -183,6 +184,8 @@ namespace AutoDeploy
                 RefreshProjectListBox();
             else if(type == (int)FastChooseType.Backup)
                 RefreshBackupListBox();
+            else if (type == (int) FastChooseType.Local)
+                RefreshLocalListBox();
             else
                 RefreshLocalListBox();
 

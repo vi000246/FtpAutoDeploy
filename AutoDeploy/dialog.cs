@@ -254,5 +254,20 @@ namespace AutoDeploy
             }
             return folderPath;
         }
+        public static string SelectFolderPath()
+        {
+            FolderBrowserDialogEx cfbd = new FolderBrowserDialogEx();
+            // These are identical to FolderBrowserDialog:
+            cfbd.ShowNewFolderButton = true;
+            cfbd.ShowEditBox = true;
+            cfbd.ShowFullPathInEditBox = true;
+            cfbd.RootFolder = Environment.SpecialFolder.Desktop;
+            if (cfbd.ShowDialog() == DialogResult.OK)
+            {
+                return cfbd.SelectedPath;
+            }
+
+            return "";
+        }
     }
 }

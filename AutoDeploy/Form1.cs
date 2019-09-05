@@ -218,7 +218,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
                 {
                     //讓messageBox顯示在最上層
                     MessageBox.Show(new Form() { TopMost = true }, "請先選擇要Deploy的專案根路徑");
-                    string path = dialog.BrowseFolder();
+                    string path = dialog.SelectFolderPath();
                     tbFileRoot.Text = path;
                 }
                 //在FTP deploy模式中，如果沒選擇專案根目錄 就中止
@@ -356,7 +356,7 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
         //瀏覽按鈕點擊事件
         private void btnBrowseRoot_Click(object sender, EventArgs e)
         {
-            string path = dialog.BrowseFolder();
+            string path = dialog.SelectFolderPath();
             //如果切換根目錄 則會清除所有的檔案清單
             if (!string.IsNullOrEmpty(path))
             {
@@ -366,16 +366,17 @@ Deploy專案根目錄:C:/Projects/Build/DemoWebSite
         }
         private void btnBrowseBackUp_Click(object sender, EventArgs e)
         {
-            string path = dialog.BrowseFolder();
+            string path = dialog.SelectFolderPath();
             if(!string.IsNullOrEmpty(path))
                 tbBackUpPath.Text = path;
         }
         private void btnBrowsLocal_Click(object sender, EventArgs e)
         {
-            string path = dialog.BrowseFolder();
+            string path = dialog.SelectFolderPath();
             if (!string.IsNullOrEmpty(path))
                 tbLocalRoot.Text = path;
         }
+
         //伺服器目標目徑的驗證
         private void tbFtpRoot_Validating(object sender, CancelEventArgs e)
         {
